@@ -33,8 +33,6 @@ import TaskList from '@tiptap/extension-task-list'
 import MenuBar from './components/MenuBar';
 import BubbleMenu from "./components/BubbleMenu";
 import FloatingMenu from "./components/FloatingMenu";
-import history from "./common/history";
-import { nanoid } from "nanoid";
 import { buildWebrtcProvider, getInitialUser } from "./common/collab-utils";
 
 
@@ -42,12 +40,13 @@ import { buildWebrtcProvider, getInitialUser } from "./common/collab-utils";
 
 
 const ydoc = new Y.Doc()
+const provider=buildWebrtcProvider(ydoc);
+
 
 export default () => {
   const [status, setStatus] = useState('connecting')
   const [currentUser, setCurrentUser] = useState(getInitialUser)  
-  const [provider, setProvider] =useState<WebrtcProvider>(()=>buildWebrtcProvider(ydoc));
-
+ 
 
   const editor = useEditor({
     extensions: [
@@ -99,6 +98,7 @@ export default () => {
   useEffect(() => {
     // Update status changes
     provider.on('status', event => {
+      console.log(event)
       setStatus(event.status)
     })
   }, [])
@@ -133,7 +133,7 @@ export default () => {
       {
         editor && <div className="editor__footer">
         <div className={`editor__status editor__status--${status}`}>
-          {status === 'connected'
+          {(editor!.storage.collaborationCursor.users.length>1||(status === 'connected'))
             ? `${editor!.storage.collaborationCursor.users.length} user${editor!.storage.collaborationCursor.users.length === 1 ? '' : 's'} online.`
             : 'offline'}
         </div>

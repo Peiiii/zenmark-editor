@@ -6,7 +6,7 @@
     "dev": "vite --host --port 3000",
     "build": "tsc && vite build",
     "preview": "vite preview --host --port 3000",
-    "oss:upload": "ossutil64 cp -r build/tiptap-editor oss://apps-eiooie-com/tiptap-editor"
+    "oss:upload": "ossutil64 cp -r -u build/tiptap-editor oss://apps-eiooie-com/tiptap-editor"
   },
   "dependencies": {
     "@tiptap/extension-character-count": "^2.0.0-beta.209",
