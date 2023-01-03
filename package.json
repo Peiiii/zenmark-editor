@@ -4,9 +4,12 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite --host --port 3000",
-    "build": "tsc && vite build",
+    "build":"yarn build:app && yarn build:wc",
+    "build:app": "tsc && vite build",
+    "build:wc": "tsc && vite --config wc.vite.config.ts build",
     "preview": "vite preview --host --port 3000",
-    "oss:upload": "ossutil64 cp -r -u build/tiptap-editor oss://apps-eiooie-com/tiptap-editor"
+    "oss:upload": "ossutil64 cp -r -u build/tiptap-editor oss://apps-eiooie-com/tiptap-editor && ossutil64 cp -r -u build/wc/tiptap-editor oss://apps-eiooie-com/wc/tiptap-editor",
+    "update":"pkx gitops update"
   },
   "dependencies": {
     "@tiptap/extension-character-count": "^2.0.0-beta.209",
@@ -43,6 +46,7 @@
     "prosemirror-view": "^1.29.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-to-webcomponent": "^2.0.0-alpha.0",
     "react-toastify": "^9.1.1",
     "remixicon": "^2.5.0",
     "y-prosemirror": "^1.2.0",
@@ -55,6 +59,7 @@
     "@vitejs/plugin-react": "^3.0.0",
     "sass": "^1.57.1",
     "typescript": "^4.9.3",
-    "vite": "^4.0.0"
+    "vite": "^4.0.0",
+    "vite-plugin-css-injected-by-js": "^2.2.0"
   }
 }

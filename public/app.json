@@ -1,0 +1,8 @@
+{
+    "name": "Tiptap Editor",
+    "webcomponent":{
+       "main":{
+            "entry":"/wc/tiptap-editor/tiptap-editor.iife.js"
+       }
+    }
+}

@@ -8,7 +8,6 @@ import React, {
   useState,
 } from 'react'
 import * as Y from 'yjs'
-import { WebrtcProvider } from 'y-webrtc'
 import Document from '@tiptap/extension-document'
 import Paragraph from '@tiptap/extension-paragraph'
 import Text from '@tiptap/extension-text';
@@ -34,6 +33,7 @@ import MenuBar from './components/MenuBar';
 import BubbleMenu from "./components/BubbleMenu";
 import FloatingMenu from "./components/FloatingMenu";
 import { buildWebrtcProvider, getInitialUser } from "./common/collab-utils";
+import { MessageContainer } from "./common/utils";
 
 
 
@@ -120,6 +120,7 @@ export default () => {
 
   return (
     <div className="editor">
+      
       {editor && <MenuBar editor={editor} />}
       {editor && <BubbleMenu editor={editor} />}
       {/* {editor && <FloatingMenu editor={editor} />} */}
@@ -142,6 +143,7 @@ export default () => {
         </div>
       </div>
       }
+      {MessageContainer}
     </div>
   )
 }

@@ -17,12 +17,14 @@ export const MessageContainer = <ToastContainer
 <ToastContainer />;
 (window as any).toast = toast;
 const makeMessage = () => {
-    if(!document.getElementById("message-container")){
-        const dom=document.createElement("div");
-        dom.id="message-container";
-        document.body.appendChild(dom);
-        createRoot(dom).render(MessageContainer);
-    }
+    // if(!document.getElementById("message-container")){
+    //     const dom=document.createElement("div");
+    //     dom.id="message-container";
+    //     if(document.body){
+    //         document.body.appendChild(dom);
+    //         createRoot(dom).render(MessageContainer);
+    //     }
+    // }
     const config: ToastOptions = {
         position: "bottom-right",
         autoClose: 2000,

@@ -1129,6 +1129,11 @@ react-refresh@^0.14.0:
   resolved "https://registry.npmmirror.com/react-refresh/-/react-refresh-0.14.0.tgz#4e02825378a5f227079554d4284889354e5f553e"
   integrity sha512-wViHqhAd8OHeLS/IRMJjTSDHF3U9eWi62F/MledQGPdJGDhodXJ9PBLNGr6WWL7qlH12Mt3TyTpbS+hGXMjCzQ==
 
+react-to-webcomponent@^2.0.0-alpha.0:
+  version "2.0.0-alpha.0"
+  resolved "https://registry.npmmirror.com/react-to-webcomponent/-/react-to-webcomponent-2.0.0-alpha.0.tgz#33d95bcec0ae3aba84b12613b47d5ceb5af5eb38"
+  integrity sha512-TFTtKPf3Wpa9b/zcgGAlZIYtVuM0rFVb49MYlZcM8Hipg7srB2/XoCE2792LU/EXP26ZLsXFmUVjwOy2pFrotQ==
+
 react-toastify@^9.1.1:
   version "9.1.1"
   resolved "https://registry.npmmirror.com/react-toastify/-/react-toastify-9.1.1.tgz#9280caea4a13dc1739c350d90660a630807bf10b"
@@ -1284,6 +1289,11 @@ util-deprecate@^1.0.1:
   version "1.0.2"
   resolved "https://registry.npmmirror.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
   integrity sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==
+
+vite-plugin-css-injected-by-js@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.npmmirror.com/vite-plugin-css-injected-by-js/-/vite-plugin-css-injected-by-js-2.2.0.tgz#5ff95fbee027698e399a30437335214dc09bb989"
+  integrity sha512-SRGuyY1WUHj7cPzv7AIE0bG5Cb+vioxuq3CkFc1j0b8z5Cy3rXLG8SwxjriylFcZAY7tH2jU4i1bsCJRE/ou6g==
 
 vite@^4.0.0:
   version "4.0.3"
