@@ -1,14 +1,21 @@
 ul[data-type="taskList"] {
     list-style: none;
     padding: 0;
-  
+
     li {
       display: flex;
-      align-items: center;
+      align-items: flex-start !important;
+      
+
       > label {
         flex: 0 0 auto;
         margin-right: 0.5rem;
         user-select: none;
+        padding-top: 1px;
+      }
+
+      p{
+        margin: 0 !important;
       }
   
       > div {
@@ -19,4 +26,5 @@ ul[data-type="taskList"] {
     input[type="checkbox"] {
       cursor: pointer;
     }
+    
   }
