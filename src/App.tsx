@@ -34,6 +34,7 @@ import BubbleMenu from "./components/BubbleMenu";
 import FloatingMenu from "./components/FloatingMenu";
 import { buildWebrtcProvider, getInitialUser } from "./common/collab-utils";
 import { MessageContainer } from "./common/utils";
+import { Suggestion } from "./extensions/Suggestion";
 
 
 
@@ -46,7 +47,7 @@ const provider=buildWebrtcProvider(ydoc);
 export default () => {
   const [status, setStatus] = useState('connecting')
   const [currentUser, setCurrentUser] = useState(getInitialUser)  
- 
+
 
   const editor = useEditor({
     extensions: [
@@ -72,6 +73,7 @@ export default () => {
       CodeBlockHighlight,
       SaveFile,
       Invite,
+      Suggestion,
       TextAlign.configure({
         types: ['heading', 'paragraph'],
       }),
@@ -80,7 +82,7 @@ export default () => {
           if (node.type.name === 'heading') {
             return "What's the title?"
           }
-          return 'Can you add some further context?';
+          return 'Try input / for commands?';
         },
       }),
       

@@ -4,12 +4,12 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite --host --port 3000",
-    "build":"yarn build:app && yarn build:wc",
+    "build": "yarn build:app && yarn build:wc",
     "build:app": "tsc && vite build",
     "build:wc": "tsc && vite --config wc.vite.config.ts build",
     "preview": "vite preview --host --port 3000",
     "oss:upload": "ossutil64 cp -r -u build/tiptap-editor oss://apps-eiooie-com/tiptap-editor && ossutil64 cp -r -u build/wc/tiptap-editor oss://apps-eiooie-com/wc/tiptap-editor",
-    "update":"pkx gitops update"
+    "update": "pkx gitops update"
   },
   "dependencies": {
     "@tiptap/extension-character-count": "^2.0.0-beta.209",
@@ -31,6 +31,8 @@
     "@tiptap/extension-typography": "^2.0.0-beta.209",
     "@tiptap/react": "^2.0.0-beta.209",
     "@tiptap/starter-kit": "^2.0.0-beta.209",
+    "@tiptap/suggestion": "^2.0.0-beta.209",
+    "fuse.js": "^6.6.2",
     "highlight.js": "^11.7.0",
     "lowlight": "^2.8.0",
     "nanoid": "^4.0.0",

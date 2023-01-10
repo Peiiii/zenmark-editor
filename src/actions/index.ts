@@ -1,11 +1,13 @@
-import { Editor } from "@tiptap/react";
+import { Editor, Range } from "@tiptap/react";
 import { fs } from "../common/fs";
-import {history} from "../common/history";
+import { history } from "../common/history";
 interface Action {
     icon: string;
     title?: string;
     action?: (editor: Editor) => any;
+    command?: (state: { editor: Editor, range: Range }) => void;
     isActive?: (editor: Editor) => boolean;
+    discription?: string;
 }
 
 export const Bold: Action = {
@@ -13,12 +15,19 @@ export const Bold: Action = {
     title: 'Bold',
     action: (editor) => editor.chain().focus().toggleBold().run(),
     isActive: (editor) => editor.isActive('bold'),
+    command: ({ editor, range }) => {
+        editor.chain().focus().deleteRange(range).setMark("bold").run();
+    }
+
 };
 export const Italic = {
     icon: 'italic',
     title: 'Italic',
     action: (editor) => editor.chain().focus().toggleItalic().run(),
     isActive: (editor) => editor.isActive('italic'),
+    command: ({ editor, range }) => {
+        editor.chain().focus().deleteRange(range).setMark("italic").run();
+    }
 };
 
 export const Strikethrough = {
@@ -26,18 +35,27 @@ export const Strikethrough = {
     title: 'Strike',
     action: (editor) => editor.chain().focus().toggleStrike().run(),
     isActive: (editor) => editor.isActive('strike'),
+    command: ({ editor, range }) => {
+        editor.chain().focus().deleteRange(range).setMark("strike").run();
+    }
 };
 export const CodeView = {
     icon: 'code-view',
     title: 'Code',
     action: (editor) => editor.chain().focus().toggleCode().run(),
     isActive: (editor) => editor.isActive('code'),
+    command: ({ editor, range }) => {
+        editor.chain().focus().deleteRange(range).setMark("code").run();
+    }
 }
 export const MarkPenLine = {
     icon: 'mark-pen-line',
     title: 'Highlight',
     action: (editor) => editor.chain().focus().toggleHighlight().run(),
     isActive: (editor) => editor.isActive('highlight'),
+    command: ({ editor, range }) => {
+        editor.chain().focus().deleteRange(range).setMark("highlight").run();
+    }
 };
 export const Divider = {
     type: 'divider',
@@ -47,24 +65,49 @@ export const H1 = {
     title: 'Heading 1',
     action: (editor) => editor.chain().focus().toggleHeading({ level: 1 }).run(),
     isActive: (editor) => editor.isActive('heading', { level: 1 }),
+    command: ({ editor, range }) => {
+        editor
+            .chain()
+            .focus()
+            .deleteRange(range)
+            .setNode("heading", { level: 1 })
+            .run();
+    }
 };
 export const H2 = {
     icon: 'h-2',
     title: 'Heading 2',
     action: (editor) => editor.chain().focus().toggleHeading({ level: 2 }).run(),
     isActive: (editor) => editor.isActive('heading', { level: 2 }),
+    command: ({ editor, range }) => {
+        editor
+            .chain()
+            .focus()
+            .deleteRange(range)
+            .setNode("heading", { level: 2 })
+            .run();
+    }
 };
 export const Paragraph = {
     icon: 'paragraph',
     title: 'Paragraph',
     action: (editor) => editor.chain().focus().setParagraph().run(),
     isActive: (editor) => editor.isActive('paragraph'),
+    command: ({ editor, range }) => {
+        editor
+            .chain()
+            .focus()
+            .deleteRange(range)
+            .setNode("paragraph", { level: 2 })
+            .run();
+    }
 };
 export const ListUnordered = {
     icon: 'list-unordered',
     title: 'Bullet List',
     action: (editor) => editor.chain().focus().toggleBulletList().run(),
     isActive: (editor) => editor.isActive('bulletList'),
+
 };
 export const ListOrdered = {
     icon: 'list-ordered',
@@ -83,6 +126,9 @@ export const CodeBoxLine = {
     title: 'Code Block',
     action: (editor) => editor.chain().focus().toggleCodeBlock().run(),
     isActive: (editor) => editor.isActive('codeBlock'),
+    command: ({ editor, range }) => {
+        editor.chain().focus().deleteRange(range).setNode("codeBlock").run();
+    }
 };
 
 export const DoubleQuotes1 = {
@@ -90,11 +136,18 @@ export const DoubleQuotes1 = {
     title: 'Blockquote',
     action: (editor) => editor.chain().focus().toggleBlockquote().run(),
     isActive: (editor) => editor.isActive('blockquote'),
+    command: ({ editor, range }) => {
+        editor.chain().focus().deleteRange(range).toggleBlockquote().run();
+    }
 };
 export const Separator = {
     icon: 'separator',
     title: 'Horizontal Rule',
+    description:"separator",
     action: (editor) => editor.chain().focus().setHorizontalRule().run(),
+    command: ({ editor, range }) => {
+        editor.chain().focus().deleteRange(range).setHorizontalRule().run();
+    }
 };
 
 export const TextWrap = {
@@ -149,16 +202,21 @@ export const AddImage: Action = {
     title: "Add Image",
     action: (editor) => {
         const url = window.prompt('URL')
-
         if (url) {
             editor.chain().focus().setImage({ src: url }).run()
         }
     },
-    isActive: (editor) => editor.isActive("image")
+    isActive: (editor) => editor.isActive("image"),
+    command: ({ editor, range }) => {
+        const url = window.prompt('URL')
+        if (url) {
+            editor.chain().focus().setImage({ src: url }).run()
+        }
+    }
 };
 
-export const SaveFile:Action={
-    icon:"save-line",
+export const SaveFile: Action = {
+    icon: "save-line",
     title: "Save File",
     action: (editor) => {
         (editor.commands as any).saveFile();
@@ -166,8 +224,8 @@ export const SaveFile:Action={
     isActive: (editor) => false,
 }
 
-export const Invite:Action={
-    icon:"chat-new-line",
+export const Invite: Action = {
+    icon: "chat-new-line",
     title: "Invite Collaborator",
     action: (editor) => (editor.commands as any).copyCollabUrl()
 }
