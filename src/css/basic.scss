@@ -96,7 +96,7 @@
 
   &__header {
     align-items: center;
-    border-bottom: 3px solid #0d0d0d;
+    border-bottom: 1px solid gainsboro;
     display: flex;
     flex: 0 0 auto;
     flex-wrap: wrap;
@@ -117,7 +117,7 @@
 
   &__footer {
     align-items: center;
-    border-top: 3px solid #0d0d0d;
+    border-top: 1px solid gainsboro;
     color: #0d0d0d;
     display: flex;
     flex: 0 0 auto;
