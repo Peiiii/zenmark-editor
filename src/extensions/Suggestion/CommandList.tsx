@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class CommandList extends Component {
+class CommandList extends Component<any,any>{
   state = {
     selectedIndex: 0
   };
