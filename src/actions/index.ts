@@ -210,7 +210,7 @@ export const AddImage: Action = {
     command: ({ editor, range }) => {
         const url = window.prompt('URL')
         if (url) {
-            editor.chain().focus().setImage({ src: url }).run()
+            editor.chain().focus().deleteRange(range).setImage({ src: url }).run()
         }
     }
 };
