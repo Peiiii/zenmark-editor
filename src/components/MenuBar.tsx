@@ -6,7 +6,7 @@ import MenuItem from './MenuItem'
 import { Actions } from "../actions";
 
 export default ({ editor }) => {
-  const items = [
+  const items:any[] = [
     Actions.Bold,
     Actions.Italic,
     Actions.Strikethrough,
@@ -30,6 +30,7 @@ export default ({ editor }) => {
     Actions.AlignRight,
     Actions.AlignJustify,
     Actions.AddImage,
+    Actions.Iframe,
     Actions.FormatClear,
     Actions.Divider,
     Actions.GoBackLine,

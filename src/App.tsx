@@ -33,7 +33,9 @@ import FloatingMenu from "./components/FloatingMenu";
 import { buildWebrtcProvider, getInitialUser } from "./common/collab-utils";
 import { MessageContainer } from "./common/utils";
 import { Suggestion } from "./extensions/Suggestion";
-
+import { Iframe } from "./extensions/Iframe";
+import { RemixIcon } from "./components/RemixIcon";
+import {AiOutlineEdit, AiOutlineRead} from "react-icons/ai"
 
 
 
@@ -45,9 +47,9 @@ const provider=buildWebrtcProvider(ydoc);
 export default () => {
   const [status, setStatus] = useState('connecting')
   const [currentUser, setCurrentUser] = useState(getInitialUser)  
-
-
+  const [editable,setEditable] = useState(false);
   const editor = useEditor({
+    editable,
     extensions: [
       StarterKit.configure({
         document: false,
@@ -72,6 +74,7 @@ export default () => {
       SaveFile,
       Invite,
       Suggestion,
+      Iframe,
       TextAlign.configure({
         types: ['heading', 'paragraph'],
       }),
@@ -93,6 +96,12 @@ export default () => {
     ],
     content: ``
   })
+
+  useEffect(()=>{
+    if(editor){
+      editor.setEditable(editable)
+    }
+  },[editable,editor])
   
 
   useEffect(() => {
@@ -102,6 +111,8 @@ export default () => {
       setStatus(event.status)
     })
   }, [])
+
+
 
   // Save current user to localStorage and emit to editor
   useEffect(() => {
@@ -120,9 +131,13 @@ export default () => {
 
   return (
     <div className="editor">
-      
-      {editor && <MenuBar editor={editor} />}
-      {editor && <BubbleMenu editor={editor} />}
+      {editor && !editable && <div style={{"display":"flex","flexFlow":"row-reverse"}}>
+       { !editable && <AiOutlineEdit style={{"padding":"5px"}} onClick={()=>{
+          setEditable(true);
+        }}/>}
+        </div>}
+      {editor && editable && <MenuBar editor={editor} />}
+      {editor && editable && <BubbleMenu editor={editor} />}
       {/* {editor && <FloatingMenu editor={editor} />} */}
 
       <EditorContent className="editor__content" editor={editor} />
@@ -132,7 +147,7 @@ export default () => {
         {editor!.storage.characterCount.words()} words
       </div>} */}
       {
-        editor && <div className="editor__footer">
+        editor && editable && <div className="editor__footer">
         <div className={`editor__status editor__status--${status}`}>
           {(editor!.storage.collaborationCursor.users.length>1||(status === 'connected'))
             ? `${editor!.storage.collaborationCursor.users.length} user${editor!.storage.collaborationCursor.users.length === 1 ? '' : 's'} online.`

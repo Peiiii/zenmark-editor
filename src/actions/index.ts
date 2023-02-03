@@ -143,7 +143,7 @@ export const DoubleQuotes1 = {
 export const Separator = {
     icon: 'separator',
     title: 'Horizontal Rule',
-    description:"separator",
+    description: "separator",
     action: (editor) => editor.chain().focus().setHorizontalRule().run(),
     command: ({ editor, range }) => {
         editor.chain().focus().deleteRange(range).setHorizontalRule().run();
@@ -229,6 +229,19 @@ export const Invite: Action = {
     title: "Invite Collaborator",
     action: (editor) => (editor.commands as any).copyCollabUrl()
 }
+
+export const Iframe: Action = {
+    icon:"window-line",
+    title: "Iframe",
+    action: (editor) => {
+        const url = window.prompt('URL')
+        if (url) {
+            editor.chain().focus().setIframe({ src: url }).run()
+        }
+    }
+}
+
+
 export const Actions = {
     Bold,
     Italic,
@@ -256,4 +269,5 @@ export const Actions = {
     GoForwardLine,
     SaveFile,
     Invite,
+    Iframe,
 }

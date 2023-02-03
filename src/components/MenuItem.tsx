@@ -5,7 +5,7 @@ import remixiconUrl from 'remixicon/fonts/remixicon.symbol.svg'
 
 export default ({
   icon, title, action, isActive = null,editor,
-}) => (
+}:any) => (
   <button
     className={`menu-item${isActive && isActive(editor) ? ' is-active' : ''}`}
     onClick={()=>{action(editor)}}
