@@ -63,7 +63,10 @@ export default () => {
       Paragraph,
       Text,
       Code,
-      Image,
+      Image.configure({
+        inline: true,
+        allowBase64: true
+      }),
       Link,
       Typography,
       Dropcursor,
