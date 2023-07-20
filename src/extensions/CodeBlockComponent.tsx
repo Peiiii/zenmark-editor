@@ -1,11 +1,13 @@
 import '../css/CodeBlockComponent.scss'
 
 import { NodeViewContent, NodeViewWrapper } from '@tiptap/react'
-import React from 'react'
 
 export default ({ node: { attrs: { language: defaultLanguage } }, updateAttributes, extension }) => (
   <NodeViewWrapper className="code-block">
-    <select contentEditable={false} defaultValue={defaultLanguage} onChange={event => updateAttributes({ language: event.target.value })}>
+  
+    <pre>
+    <div className="bar">
+   <select contentEditable={false} defaultValue={defaultLanguage} onChange={event => updateAttributes({ language: event.target.value })}>
       <option value="null">
         auto
       </option>
@@ -18,7 +20,8 @@ export default ({ node: { attrs: { language: defaultLanguage } }, updateAttribut
         </option>
       ))}
     </select>
-    <pre>
+   </div>
+
       <NodeViewContent as="code" />
     </pre>
   </NodeViewWrapper>

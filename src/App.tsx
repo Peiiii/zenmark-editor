@@ -16,6 +16,7 @@ import CharacterCount from '@tiptap/extension-character-count'
 import Collaboration from '@tiptap/extension-collaboration'
 import CollaborationCursor from '@tiptap/extension-collaboration-cursor'
 import Highlight from '@tiptap/extension-highlight'
+
 import Code from "@tiptap/extension-code";
 import TextAlign from "@tiptap/extension-text-align";
 import Link from "@tiptap/extension-link";
@@ -36,6 +37,10 @@ import { Suggestion } from "./extensions/Suggestion";
 import { Iframe } from "./extensions/Iframe";
 import { RemixIcon } from "./components/RemixIcon";
 import {AiOutlineEdit, AiOutlineRead} from "react-icons/ai"
+import MathInline from "@/extensions/MathInline";
+import MathBlock from "@/extensions/MathBlock";
+import Gapcursor from "@tiptap/extension-gapcursor";
+import { Underline } from "@/extensions/Underline";
 
 
 
@@ -47,16 +52,18 @@ const provider=buildWebrtcProvider(ydoc);
 export default () => {
   const [status, setStatus] = useState('connecting')
   const [currentUser, setCurrentUser] = useState(getInitialUser)  
-  const [editable,setEditable] = useState(false);
+  const [editable,setEditable] = useState(true);
   const editor = useEditor({
     editable,
     extensions: [
       StarterKit.configure({
         document: false,
       }),
-      Document.extend({
-        content: 'heading block*',
-      }),
+      Document,
+      // Document.extend({
+      //   content: 'heading block*',
+      // }),
+      Underline,
       TaskList,
       TaskItem,
       Highlight,
@@ -70,6 +77,7 @@ export default () => {
       Link,
       Typography,
       Dropcursor,
+      Gapcursor,
       CharacterCount,
       ColorHighlighter,
       SmilieReplacer,
@@ -78,15 +86,17 @@ export default () => {
       Invite,
       Suggestion,
       Iframe,
+      MathInline,
+      MathBlock,
       TextAlign.configure({
         types: ['heading', 'paragraph'],
       }),
       Placeholder.configure({
         placeholder: ({ node }) => {
           if (node.type.name === 'heading') {
-            return "What's the title?"
+            return "Title"
           }
-          return 'Try input / for commands?';
+          return 'type / for commands?';
         },
       }),
       
@@ -139,11 +149,11 @@ export default () => {
           setEditable(true);
         }}/>}
         </div>}
-      {editor && editable && <MenuBar editor={editor} />}
+      {/* {editor && editable && <MenuBar editor={editor} />} */}
       {editor && editable && <BubbleMenu editor={editor} />}
       {/* {editor && <FloatingMenu editor={editor} />} */}
 
-      <EditorContent className="editor__content" editor={editor} />
+      <EditorContent className="editor-content scroll scroll-7" editor={editor} />
       {/* {editor && <div className="character-count">
         {editor!.storage.characterCount.characters()} characters
         <br />

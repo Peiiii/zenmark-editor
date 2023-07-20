@@ -120,6 +120,9 @@ export const ListCheck2 = {
     title: 'Task List',
     action: (editor) => editor.chain().focus().toggleTaskList().run(),
     isActive: (editor) => editor.isActive('taskList'),
+    command: ({ editor, range }) => {
+        editor.chain().focus().deleteRange(range).setNode("taskList").run();
+    }
 };
 export const CodeBoxLine = {
     icon: 'code-box-line',

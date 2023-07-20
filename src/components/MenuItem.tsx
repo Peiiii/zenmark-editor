@@ -1,7 +1,7 @@
-import '../css/MenuItem.scss'
+import '../css/MenuItem.scss';
 
-import React from 'react'
-import remixiconUrl from 'remixicon/fonts/remixicon.symbol.svg'
+import React from 'react';
+import remixiconUrl from 'remixicon/fonts/remixicon.symbol.svg';
 
 export default ({
   icon, title, action, isActive = null,editor,

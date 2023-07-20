@@ -6,6 +6,9 @@ import "./css/extension-code.scss";
 import "./css/CharacterCount.scss";
 import "./css/Suggestion.scss";
 import "./css/Iframe.scss";
+import "./css/MathDisplay.scss";
+
+import "./css/scroll.scss";
 
 // themes
 import "./css/themes/basic.scss";

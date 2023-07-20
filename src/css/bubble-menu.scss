@@ -2,14 +2,16 @@
 
 .bubble-menu {
     display: flex;
-    background-color: #0D0D0D;
-    padding: 0.2rem;
+    // background-color: #0D0D0D;
+    background-color: white;
+    padding: 0 0.2rem;
     border-radius: 0.5rem;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 
     button {
         border: none;
         background: none;
-        color: #FFF;
+        // color: #FFF;
         font-size: 0.85rem;
         font-weight: 500;
         padding: 0 0.2rem;

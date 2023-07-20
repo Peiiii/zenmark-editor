@@ -34,7 +34,7 @@
     border-radius: 0.5rem;
     color: #fff;
     font-family: "JetBrainsMono", monospace;
-    padding: 0.75rem 1rem;
+    padding: 0 1rem 0.5rem 1rem;
 
 
 
@@ -60,8 +60,9 @@
   }
 
   blockquote {
-    border-left: 2px solid rgba(#0d0d0d, 0.1);
-    padding-left: 1rem;
+    border-left: 4px solid rgba(#0d0d0d, 0.1);
+    margin: 0 !important;
+    padding: 0 1em;
   }
 
   hr {
@@ -76,7 +77,7 @@
       margin-top: 0.5rem;
 
       p {
-        margin: 0 !important;
+        // margin: 0 !important;
       }
     }
   }
@@ -88,7 +89,7 @@
     li {
       display: flex;
       align-items: flex-start !important;
-      padding-top: 0.5rem;
+      // padding-top: 0.5rem;
 
       >label {
         flex: 0 0 auto;
@@ -98,7 +99,7 @@
       }
 
       p {
-        margin: 0 !important;
+        // margin: 0 !important;
       }
 
       >div {

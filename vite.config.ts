@@ -36,10 +36,10 @@ export default defineConfig({
     outDir:"build/tiptap-editor",
     rollupOptions:{
       output:{
-        manualChunks: {
-          vendor: ['react', 'react-dom'],
-          ...renderChunks(dependencies),
-        },
+        // manualChunks: {
+        //   vendor: ['react', 'react-dom'],
+        //   ...renderChunks(dependencies),
+        // },
       }
     }
   }
