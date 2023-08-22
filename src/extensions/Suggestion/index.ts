@@ -5,7 +5,7 @@ import renderItems from "./renderItems";
 
 export const Suggestion = Extension.create({
   name: "suggestion",
-  defaultOptions: {
+  addOptions:()=> ({
     suggestion: {
       char: "/",
       startOfLine: false,
@@ -15,7 +15,7 @@ export const Suggestion = Extension.create({
         props.command({ editor, range, props });
       }
     }
-  },
+  }),
   addProseMirrorPlugins() {
     return [
       TiptapSuggestion({

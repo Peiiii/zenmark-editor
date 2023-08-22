@@ -7,28 +7,26 @@ export default ({ items, editor }: any) => {
   const [activeIndex, setActiveIndex] = useState(() =>
     items.indexOf(items.find((item: any) => item.isActive(editor)))
   );
-  const activeItem = items[activeIndex];
+  const activeItem = items[activeIndex] || items[0];
   const [expanded, setExpanded] = useState(false);
 
   return (
     <div
-    //  style={{ width: "2rem" }}  
+    //  style={{ width: "2rem" }}
     //  onBlur={() => setExpanded((expanded) => !expanded)}
-     >
-        <div style={{ display: "flex" }}>
-          <button
-            className={`menu-item`}
-            onClick={() => setExpanded((expanded) => !expanded)}
-          
-            title={activeItem.title}
-          >
-            <svg className="remix">
-              <use xlinkHref={`${remixiconUrl}#ri-${activeItem.icon}`} />
-            </svg>
-          </button>
-        </div>
+    >
+      <div style={{ display: "flex" }}>
+        <button
+          className={`menu-item`}
+          onClick={() => setExpanded((expanded) => !expanded)}
+          title={activeItem.title}
+        >
+          <svg className="remix">
+            <use xlinkHref={`${remixiconUrl}#ri-${activeItem.icon}`} />
+          </svg>
+        </button>
+      </div>
       <div style={{ position: "absolute" }}>
-        
         {expanded && (
           <div
             className="dropdown"
@@ -39,9 +37,7 @@ export default ({ items, editor }: any) => {
               const { isActive, title, icon, action } = item;
               return (
                 <Fragment key={index}>
-                  <div
-                  key={index}
-                  >
+                  <div key={index}>
                     <button
                       className={`menu-item${
                         isActive && isActive(editor) ? " is-active" : ""

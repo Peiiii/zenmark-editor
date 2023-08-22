@@ -1,13 +1,12 @@
 import "../css/bubble-menu.scss";
-import { BubbleMenu } from '@tiptap/react'
-import React, { Fragment, useState } from 'react'
+import { BubbleMenu, Editor } from "@tiptap/react";
+import React, { FC, Fragment, useEffect, useState } from "react";
 
-import MenuItem from './MenuItem'
+import MenuItem from "./MenuItem";
 import { Actions } from "../actions";
 import MenuItemSelect from "@/components/MenuItemSelect";
 
-
-export default ({ editor }) => {
+export default ({ editor }: { editor: Editor }) => {
   const items = [
     Actions.Bold,
     Actions.Italic,
@@ -24,26 +23,40 @@ export default ({ editor }) => {
     Actions.FormatClear,
     // Actions.Divider,
     // Actions.AlignLeft
-    [
-      Actions.AlignCenter,
-      Actions.AlignLeft,
-      Actions.AlignRight,
-    ]
-  ]
+    [Actions.AlignLeft, Actions.AlignCenter, Actions.AlignRight],
+    Actions.AddTableColumnBefore,
+    Actions.AddTableColumnAfter,
+    Actions.AddTableRowBefore,
+    Actions.AddTableRowAfter,
+  ];
+  useEffect(() => {
+    const fromNode = editor.view.state.tr.doc.nodeAt(
+      editor.state.selection.from
+    );
+    console.log("fromNode:", fromNode);
+  }, [editor.state.selection]);
 
   return (
-    <BubbleMenu className="bubble-menu" tippyOptions={{ duration: 100 }} editor={editor}>
-     {items.map((item:any, index) => {
-      if(Array.isArray(item)){
-        return <MenuItemSelect key={index} items={item} editor={editor}/>;
-      }else{
-        return (
-          <Fragment key={index}>
-            {item.type === 'divider' ? <div className="divider" /> : <MenuItem editor={editor} {...item} />}
-          </Fragment>
-        )
-      }
-     })}
-  </BubbleMenu>
-  )
-}
+    <BubbleMenu
+      className="bubble-menu"
+      tippyOptions={{ duration: 100 }}
+      editor={editor}
+    >
+      {items.map((item: any, index) => {
+        if (Array.isArray(item)) {
+          return <MenuItemSelect key={index} items={item} editor={editor} />;
+        } else {
+          return (
+            <Fragment key={index}>
+              {item.type === "divider" ? (
+                <div className="divider" />
+              ) : (
+                <MenuItem editor={editor} {...item} />
+              )}
+            </Fragment>
+          );
+        }
+      })}
+    </BubbleMenu>
+  );
+};

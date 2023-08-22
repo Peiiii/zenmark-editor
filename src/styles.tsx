@@ -7,6 +7,7 @@ import "./css/CharacterCount.scss";
 import "./css/Suggestion.scss";
 import "./css/Iframe.scss";
 import "./css/MathDisplay.scss";
+import "./css/Table.scss";
 
 import "./css/scroll.scss";
 

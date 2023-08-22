@@ -17,6 +17,10 @@
     line-height: 1.1;
   }
 
+  p {
+    line-height: 1.5;
+  }
+
   .code-block {
     select {
       border-radius: 0.2rem;
@@ -35,8 +39,6 @@
     color: #fff;
     font-family: "JetBrainsMono", monospace;
     padding: 0 1rem 0.5rem 1rem;
-
-
 
     code {
       background: none;
@@ -76,9 +78,7 @@
     li {
       margin-top: 0.5rem;
 
-      p {
-        // margin: 0 !important;
-      }
+
     }
   }
 
