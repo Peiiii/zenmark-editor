@@ -1,14 +1,15 @@
+import { RemixIcon } from "@/components/RemixIcon";
 import React, { Component } from "react";
 
-class CommandList extends Component<any,any>{
+class CommandList extends Component<any, any> {
   state = {
-    selectedIndex: 0
+    selectedIndex: 0,
   };
 
   componentDidUpdate(oldProps) {
     if (this.props.items !== oldProps.items) {
       this.setState({
-        selectedIndex: 0
+        selectedIndex: 0,
       });
     }
   }
@@ -36,13 +37,13 @@ class CommandList extends Component<any,any>{
     this.setState({
       selectedIndex:
         (this.state.selectedIndex + this.props.items.length - 1) %
-        this.props.items.length
+        this.props.items.length,
     });
   }
 
   downHandler() {
     this.setState({
-      selectedIndex: (this.state.selectedIndex + 1) % this.props.items.length
+      selectedIndex: (this.state.selectedIndex + 1) % this.props.items.length,
     });
   }
 
@@ -61,18 +62,26 @@ class CommandList extends Component<any,any>{
   render() {
     const { items } = this.props;
     return (
-      <div className="items">
+      <div className="suggestion-panel">
         {items.map((item, index) => {
           return (
-            <button
-              className={`item ${
+            <div
+              className={`suggestion-item ${
                 index === this.state.selectedIndex ? "is-selected" : ""
               }`}
               key={index}
               onClick={() => this.selectItem(index)}
             >
-              {item.element || item.title}
-            </button>
+              {/* {item.element || item.title} */}
+              {/* <div className="suggestion-item"> */}
+              <div className="icon-wrapper">
+                <RemixIcon icon={item.icon} />
+              </div>
+              <div className="title-wrapper">
+                <strong>{item.title}</strong>
+              </div>
+              {/* </div> */}
+            </div>
           );
         })}
       </div>

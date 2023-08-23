@@ -175,7 +175,7 @@ export default () => {
           )}
         </div>
       )}
-      {/* {editor && editable && <MenuBar editor={editor} />} */}
+      {editor && editable && <MenuBar editor={editor} />}
       {editor && editable && <BubbleMenu editor={editor} />}
       {/* {editor && <FloatingMenu editor={editor} />} */}
 

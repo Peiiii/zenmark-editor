@@ -32,4 +32,7 @@ $$
 ![Hello.md](http://itmyhome.com/markdown/article/about/images/hello.png "Hello.md")
 
 > 要了解将 Markdown 转换为 HTML 或其他格式，可以参考 [格式转换](http://itmyhome.com/markdown/article/convert/readme.html) 。
+
+
+![区块链技术助力锂电池梯次利用，电池回收价最高翻3倍 | 最前线](https://img.36krcdn.com/hsossms/20230817/v2_e0eae55476fe48ca8e1018ea17127e2c@594936739_oswg80680oswg1053oswg495_img_jpg?x-oss-process=image/resize,m_mfit,w_600,h_400,limit_0/crop,w_600,h_400,g_center)
 `;

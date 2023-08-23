@@ -10,7 +10,7 @@ const renderItems = () => {
     onStart: (props) => {
       component = new ReactRenderer(CommandList, {
         props,
-        editor: props.editor
+        editor: props.editor,
       });
 
       popup = tippy("body", {
@@ -20,14 +20,14 @@ const renderItems = () => {
         showOnCreate: true,
         interactive: true,
         trigger: "manual",
-        placement: "bottom-start"
+        placement: "bottom-start",
       });
     },
     onUpdate(props) {
       component.updateProps(props);
 
       popup[0].setProps({
-        getReferenceClientRect: props.clientRect
+        getReferenceClientRect: props.clientRect,
       });
     },
     onKeyDown(props) {
@@ -42,7 +42,7 @@ const renderItems = () => {
     onExit() {
       popup[0].destroy();
       component.destroy();
-    }
+    },
   };
 };
 
