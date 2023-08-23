@@ -38,8 +38,6 @@ export default Node.create({
       rules: [makeBlockMathInputRule(REGEX_BLOCK_MATH_DOLLARS, this.type)],
     });
 
-    return [
-        // mathPlugin, 
-        inputRulePlugin];
+    return [mathPlugin, inputRulePlugin];
   },
 });

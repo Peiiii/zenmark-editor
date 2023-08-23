@@ -41,6 +41,6 @@ export default Node.create({
       rules: [makeInlineMathInputRule(REGEX_INLINE_MATH_DOLLARS, this.type)],
     });
 
-    return [mathPlugin, inputRulePlugin];
+    return [inputRulePlugin];
   },
 });

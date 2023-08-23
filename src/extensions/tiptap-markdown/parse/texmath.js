@@ -22,30 +22,41 @@ function texmath(md, options) {
   katexOptions.macros = katexOptions.macros || (options && options.macros); // ensure backwards compatibility
 
   console.log("it's me !");
-  if (!texmath.katex) {
-    // else ... deprecated `use` method was used ...
-    if (options && typeof options.engine === "object") {
-      texmath.katex = options.engine;
-    } else if (typeof module === "object") texmath.katex = ketex;
-    // artifical error object.
-    else
-      texmath.katex = {
-        renderToString(content, { displayMode }) {
-          //   console.log("args:", args);
-          //   return "No math renderer found.";
-          return content;
-          return displayMode
-            ? `<math-display class="math-node">${content}<math-display>`
-            : `<math-inline class="math-node">${content}<math-inline>`;
-        },
-      };
-  }
+  texmath.katex = {
+    renderToString(content, { displayMode }) {
+      //   console.log("args:", args);
+      //   return "No math renderer found.";
+      return content;
+      return displayMode
+        ? `<math-display class="math-node">${content}<math-display>`
+        : `<math-inline class="math-node">${content}<math-inline>`;
+    },
+  };
+  // if (!texmath.katex) {
+  //   // else ... deprecated `use` method was used ...
+  //   if (options && typeof options.engine === "object") {
+  //     texmath.katex = options.engine;
+  //   } else if (typeof module === "object") texmath.katex = ketex;
+  //   // artifical error object.
+  //   else
+  //     texmath.katex = {
+  //       renderToString(content, { displayMode }) {
+  //         //   console.log("args:", args);
+  //         //   return "No math renderer found.";
+  //         return content;
+  //         return displayMode
+  //           ? `<math-display class="math-node">${content}<math-display>`
+  //           : `<math-inline class="math-node">${content}<math-inline>`;
+  //       },
+  //     };
+  // }
   //   return;
 
   // inject inline rules to markdown-it
   for (const rule of delimiters.inline) {
     if (!!outerSpace && "outerSpace" in rule) rule.outerSpace = true;
     md.inline.ruler.before("escape", rule.name, texmath.inline(rule)); // ! important
+    console.log("rule: " + rule.name);
     md.renderer.rules[rule.name] = (tokens, idx) =>
       rule.tmpl.replace(
         /\$1/,

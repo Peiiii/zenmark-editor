@@ -270,6 +270,25 @@ export const AddTableRowAfter: Action = {
     editor.commands.addRowAfter();
   },
 };
+
+export const EditLink: Action = {
+  icon: "links-line",
+  title: "Edit Link",
+  action: (editor: Editor) => {
+    const previousUrl = editor.getAttributes("link").href;
+    const url = (window.prompt("URL", previousUrl || "") || "").trim();
+    if (!url) {
+      editor.chain().focus().extendMarkRange("link").unsetLink().run();
+    } else {
+      editor
+        .chain()
+        .focus()
+        .extendMarkRange("link")
+        .setLink({ href: url })
+        .run();
+    }
+  },
+};
 export const Actions = {
   Bold,
   Italic,
@@ -302,4 +321,5 @@ export const Actions = {
   AddTableColumnAfter,
   AddTableRowBefore,
   AddTableRowAfter,
+  EditLink,
 };

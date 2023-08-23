@@ -29,7 +29,7 @@ export default Table.extend({
                 $from.pos - 1 >= 0
                   ? editor.state.doc.nodeAt($from.pos - 1)
                   : null;
-              console.log("wrapperNode:", wrapperNode);
+              // console.log("wrapperNode:", wrapperNode);
               if (
                 wrapperNode &&
                 ["tableCell", "tableHeader"].includes(wrapperNode.type.name)

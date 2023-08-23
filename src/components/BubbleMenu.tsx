@@ -20,6 +20,7 @@ export default ({ editor }: { editor: Editor }) => {
     Actions.ListCheck2,
     Actions.CodeBoxLine,
     Actions.DoubleQuotes1,
+    Actions.EditLink,
     Actions.FormatClear,
     // Actions.Divider,
     // Actions.AlignLeft
