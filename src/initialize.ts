@@ -15,6 +15,10 @@ I like [Google](https://www.google.com/)
 
 它转换为 HTML 文档后，应该和 [Hello.md](http://Hello.md) 差不多：
 
+- [x] Write the press release
+- [ ] Update the website
+- [ ] Contact the media
+
 勾股定理：$a²+b²=c²$ 
 
 虚数的定义：

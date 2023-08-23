@@ -178,11 +178,14 @@ export default () => {
       {editor && editable && <MenuBar editor={editor} />}
       {editor && editable && <BubbleMenu editor={editor} />}
       {/* {editor && <FloatingMenu editor={editor} />} */}
-
-      <EditorContent
-        className="editor-content scroll scroll-7"
-        editor={editor}
-      />
+      <div className="editor-content-wrapper  scroll scroll-7">
+        <div className="editor-content-extra-left" />
+        <EditorContent
+          className="editor-content scroll scroll-7"
+          editor={editor}
+        />
+        <div className="editor-content-extra-right" />
+      </div>
       {/* {editor && <div className="character-count">
         {editor!.storage.characterCount.characters()} characters
         <br />
