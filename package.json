@@ -45,6 +45,7 @@
     "katex": "^0.13.0",
     "lodash.debounce": "^4.0.8",
     "lowlight": "^2.8.0",
+    "markdown-it-multimd-table": "^4.2.3",
     "markdown-it-task-lists": "^2.1.1",
     "markdown-it-texmath": "^1.0.0",
     "nanoid": "^4.0.2",

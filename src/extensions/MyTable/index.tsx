@@ -40,6 +40,18 @@ export default Table.extend({
                   })
                 );
               }
+              const selectedNode = editor.state.doc.nodeAt($from.pos);
+              console.log("wrapperNode:", wrapperNode);
+              if (
+                selectedNode &&
+                ["tableCell", "tableHeader"].includes(selectedNode.type.name)
+              ) {
+                decs.push(
+                  Decoration.node($from.pos, $to.pos, {
+                    class: "selected",
+                  })
+                );
+              }
             }
             return DecorationSet.create(state.doc, decs);
           },

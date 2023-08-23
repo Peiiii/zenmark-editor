@@ -66,6 +66,9 @@ export default () => {
       }),
       Markdown,
       Document,
+      TextAlign.configure({
+        types: ["tableCell", "tableHeader"],
+      }),
       // Document.extend({
       //   content: 'heading block*',
       // }),

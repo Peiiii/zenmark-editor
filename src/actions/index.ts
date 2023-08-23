@@ -188,7 +188,8 @@ export const AlignRight: Action = {
 export const AlignCenter: Action = {
   icon: "align-center",
   title: "Align Center",
-  action: (editor) => editor.chain().focus().setTextAlign("center").run(),
+  action: (editor: Editor) =>
+    editor.chain().focus().setTextAlign("center").run(),
   isActive: (editor) => editor.isActive({ textAlign: "center" }),
 };
 export const AlignJustify: Action = {

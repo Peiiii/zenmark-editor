@@ -3,7 +3,13 @@
 // import type { ContentNodeWithPos } from "@tiptap/pm";
 // import { cloneTr, findParentNode } from "@tiptap/pm/co";
 import type { Node } from "@tiptap/pm/model";
-import type { Selection, Transaction } from "@tiptap/pm/state";
+import {
+  NodeSelection,
+  Selection,
+  SelectionRange,
+  TextSelection,
+  type Transaction,
+} from "@tiptap/pm/state";
 import type { TableRect } from "@tiptap/pm/tables";
 import { CellSelection, TableMap } from "@tiptap/pm/tables";
 import { findParentNode } from "@tiptap/react";
@@ -136,6 +142,28 @@ export const selectTable = (tr: Transaction) => {
   return tr;
 };
 
+export const selectNodeTable = (tr: Transaction) => {
+  const cells = getAllCellsInTable(tr.selection);
+  if (cells && cells[0]) {
+    const $firstCell = tr.doc.resolve(cells[0].pos);
+    const last = cells[cells.length - 1];
+    if (last) {
+      const $lastCell = tr.doc.resolve(last.pos);
+      const cellSelection = new CellSelection($lastCell, $firstCell);
+      return cloneTr(
+        tr.setSelection(
+          new MultiNodeSelection(
+            tr,
+            cellSelection.$anchorCell,
+            cellSelection.$headCell
+          )
+        )
+      );
+    }
+  }
+  return tr;
+};
+
 // export function addRowWithAlignment(
 //   tr: Transaction,
 //   { map, tableStart, table }: TableRect,
@@ -160,6 +188,35 @@ export const selectTable = (tr: Transaction) => {
 //   return tr;
 // }
 
+class MultiNodeSelection extends CellSelection {
+  constructor(tr, $anchorCell, $headCell = $anchorCell) {
+    super($anchorCell, $headCell);
+    this.ranges = this.ranges.map((cellRange) => {
+      const nodeSelection = NodeSelection.create(
+        tr.doc,
+        cellRange.$from.pos - 1
+      );
+      // console.log()
+      return new SelectionRange(nodeSelection.$from, nodeSelection.$to);
+    });
+  }
+  // eq(other) {
+  //   return (
+  //     other instanceof MultiNodeSelection &&
+  //     this.ranges.every(
+  //       (rg, idx) =>
+  //         rg.$from.pos === other.ranges[idx].$from.pos &&
+  //         rg.$to.pos === other.ranges[idx].$to.pos
+  //     )
+  //   );
+  // }
+  // toJSON() {
+  //   return {
+  //     type: "multiNode",
+  //     ranges: this.ranges.map((rg) => [rg.$from.pos, rg.$to.pos]),
+  //   };
+  // }
+}
 export const selectLine =
   (type: "row" | "col") => (index: number) => (tr: Transaction) => {
     const table = findTable(tr.selection);
@@ -196,8 +253,65 @@ export const selectLine =
     return tr;
   };
 
+// const cellSelectionToMultiNodeSelection = (
+//   tr,
+//   cellSelection: CellSelection
+// ): Selection => {
+//   const ranges = cellSelection.ranges.map((cellRange) => {
+//     const nodeSelection = NodeSelection.create(tr.doc, cellRange.$from.pos - 1);
+//     return new SelectionRange(nodeSelection.$from, nodeSelection.$to);
+//   });
+//   const multiNodeSelection = new MultiNodeSelection(
+//     ranges[0].$from,
+//     ranges[0].$to,
+//     ranges
+//   );
+//   return multiNodeSelection;
+// };
+export const selectNodeLine =
+  (type: "row" | "col") => (index: number) => (tr: Transaction) => {
+    const table = findTable(tr.selection);
+    const isRowSelection = type === "row";
+    if (table) {
+      const map = TableMap.get(table.node);
+
+      // Check if the index is valid
+      if (index >= 0 && index < (isRowSelection ? map.height : map.width)) {
+        const lastCell = map.positionAt(
+          isRowSelection ? index : map.height - 1,
+          isRowSelection ? map.width - 1 : index,
+          table.node
+        );
+        const $lastCell = tr.doc.resolve(table.start + lastCell);
+
+        const createCellSelection = isRowSelection
+          ? CellSelection.rowSelection
+          : CellSelection.colSelection;
+
+        const firstCell = map.positionAt(
+          isRowSelection ? index : 0,
+          isRowSelection ? 0 : index,
+          table.node
+        );
+        const $firstCell = tr.doc.resolve(table.start + firstCell);
+        const cellSelection = createCellSelection($lastCell, $firstCell);
+        return cloneTr(
+          tr.setSelection(
+            new MultiNodeSelection(
+              tr,
+              cellSelection.$anchorCell,
+              cellSelection.$headCell
+            )
+          )
+        );
+      }
+    }
+    return tr;
+  };
 export const selectRow = selectLine("row");
+export const selectNodeRow = selectNodeLine("row");
 export const selectCol = selectLine("col");
+export const selectNodeCol = selectNodeLine("col");
 
 // const transpose = <T>(array: T[][]) => {
 //   return array[0]!.map((_, i) => {

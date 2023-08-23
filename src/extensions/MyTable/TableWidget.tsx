@@ -42,6 +42,9 @@ import {
   getCellsInColumn,
   getCellsInRow,
   selectCol,
+  selectNodeCol,
+  selectNodeRow,
+  selectNodeTable,
   selectRow,
   selectTable,
 } from "@/extensions/MyTable/utils";
@@ -102,12 +105,12 @@ const TableSelectorWidget: FC = ({ spec }: any) => {
           getReferenceClientRect: () => rect,
         });
         tooltip?.show();
-
+        // console.log("top-left clicked");
         if (type === "left")
-          editor?.view.dispatch(selectRow(index)(editor?.state.tr));
+          editor?.view.dispatch(selectNodeRow(index)(editor?.state.tr));
         else if (type === "top")
-          editor?.view.dispatch(selectCol(index)(editor?.state.tr));
-        else editor?.view.dispatch(selectTable(editor?.state.tr));
+          editor?.view.dispatch(selectNodeCol(index)(editor?.state.tr));
+        else editor?.view.dispatch(selectNodeTable(editor?.state.tr));
         // getEditor().action((ctx) => {
         //   const tooltip = ctx.get(tableTooltipCtx.key);
         //   const rect = (e.target as HTMLElement).getBoundingClientRect();

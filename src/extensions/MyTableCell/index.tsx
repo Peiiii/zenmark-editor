@@ -52,33 +52,33 @@ export const MyTableCell = Node.create<TableCellOptions>({
   },
   addProseMirrorPlugins() {
     return [
-      new Plugin({
-        view(view) {
-          return new (class MyView implements PluginView {
-            update(view: EditorView, prevState: EditorState) {
-              const { $from, $to, ranges } = view.state.selection;
-              for (let i = 0; i < ranges.length; i++) {
-                const { $from, $to } = ranges[i];
-                const fromNode = view.state.doc.nodeAt($from.pos);
-                const toNode = view.state.doc.nodeAt($to.pos);
-                // console.log(
-                //   "$from:",
-                //   $from,
-                //   "$to:",
-                //   $to,
-                //   "fromNode:",
-                //   fromNode,
-                //   "toNode:",
-                //   toNode
-                // );
-              }
-              //   console.log("selection:", view.state.selection);
-              //   console.log("dom:", view.dom);
-              //   view.domAtPos();
-            }
-          })();
-        },
-      }),
+      // new Plugin({
+      //   view(view) {
+      //     return new (class MyView implements PluginView {
+      //       update(view: EditorView, prevState: EditorState) {
+      //         const { $from, $to, ranges } = view.state.selection;
+      //         for (let i = 0; i < ranges.length; i++) {
+      //           const { $from, $to } = ranges[i];
+      //           const fromNode = view.state.doc.nodeAt($from.pos);
+      //           const toNode = view.state.doc.nodeAt($to.pos);
+      //           // console.log(
+      //           //   "$from:",
+      //           //   $from,
+      //           //   "$to:",
+      //           //   $to,
+      //           //   "fromNode:",
+      //           //   fromNode,
+      //           //   "toNode:",
+      //           //   toNode
+      //           // );
+      //         }
+      //         //   console.log("selection:", view.state.selection);
+      //         //   console.log("dom:", view.dom);
+      //         //   view.domAtPos();
+      //       }
+      //     })();
+      //   },
+      // }),
     ];
   },
 

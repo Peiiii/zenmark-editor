@@ -13,7 +13,7 @@ export default MathInline.extend({
     return {
       markdown: {
         serialize(state, node) {
-          state.write(`\n$$\n${node.textContent}\n$$`);
+          state.write(`\n$$\n${node.textContent}\n$$\n`);
         },
         parse: {
           setup(markdownit) {
