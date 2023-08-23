@@ -9,7 +9,7 @@
     "build:wc": "tsc && vite --config wc.vite.config.ts build",
     "preview": "vite preview --host --port 3000",
     "oss:upload": "ossutil64 cp -r -u build/tiptap-editor oss://apps-eiooie-com/tiptap-editor && ossutil64 cp -r -u build/wc/tiptap-editor oss://apps-eiooie-com/wc/tiptap-editor",
-    "update": "yarn build && pkx gitops update && yarn oss:upload"
+    "update": "yarn build && git add . && git commit -m 'update' && git push && yarn oss:upload"
   },
   "dependencies": {
     "@benrbray/prosemirror-math": "^0.2.2",
