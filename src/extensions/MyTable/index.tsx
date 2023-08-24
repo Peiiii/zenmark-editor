@@ -41,7 +41,7 @@ export default Table.extend({
                 );
               }
               const selectedNode = editor.state.doc.nodeAt($from.pos);
-              console.log("wrapperNode:", wrapperNode);
+              console.log("selectedNode:", selectedNode);
               if (
                 selectedNode &&
                 ["tableCell", "tableHeader"].includes(selectedNode.type.name)

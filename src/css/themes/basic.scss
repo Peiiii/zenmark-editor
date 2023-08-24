@@ -55,7 +55,14 @@
   img {
     height: auto;
     max-width: 100%;
+
+    &.ProseMirror-selectednode {
+      outline: 2px solid #2d89eb;
+      outline-offset: -2px;
+    }
   }
+
+
 
   hr {
     margin: 1rem 0;
@@ -78,9 +85,37 @@
   ol {
     li {
       margin-top: 0.5rem;
-
-
+      margin-left: 8px;
     }
+  }
+
+  li>ol {
+    counter-reset: list;
+    margin: 0;
+  }
+
+  li>ol>li {
+    list-style: none;
+    position: relative;
+  }
+
+  li>ol>li:before {
+    counter-increment: list;
+    content: counter(list, lower-alpha) ". ";
+    position: absolute;
+    left: -1.4em;
+  }
+
+  li>ol>li>ol {
+    list-style: none;
+    position: relative;
+  }
+
+  li>ol>li>ol>li:before {
+    counter-increment: list;
+    content: counter(list, lower-roman) ". ";
+    position: absolute;
+    left: -1.4em;
   }
 
   ul[data-type="taskList"] {
@@ -89,8 +124,9 @@
 
     li {
       display: flex;
-      align-items: flex-start !important;
+      align-items: center !important;
       // padding-top: 0.5rem;
+      margin-left: 8px;
 
       >label {
         flex: 0 0 auto;

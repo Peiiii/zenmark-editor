@@ -24,12 +24,9 @@ function texmath(md, options) {
   console.log("it's me !");
   texmath.katex = {
     renderToString(content, { displayMode }) {
-      //   console.log("args:", args);
+      // console.log(`content: start:${content}:end`);
       //   return "No math renderer found.";
-      return content;
-      return displayMode
-        ? `<math-display class="math-node">${content}<math-display>`
-        : `<math-inline class="math-node">${content}<math-inline>`;
+      return content.trim();
     },
   };
   // if (!texmath.katex) {
@@ -56,7 +53,6 @@ function texmath(md, options) {
   for (const rule of delimiters.inline) {
     if (!!outerSpace && "outerSpace" in rule) rule.outerSpace = true;
     md.inline.ruler.before("escape", rule.name, texmath.inline(rule)); // ! important
-    console.log("rule: " + rule.name);
     md.renderer.rules[rule.name] = (tokens, idx) =>
       rule.tmpl.replace(
         /\$1/,
@@ -66,13 +62,15 @@ function texmath(md, options) {
   // inject block rules to markdown-it
   for (const rule of delimiters.block) {
     md.block.ruler.before("fence", rule.name, texmath.block(rule)); // ! important for ```math delimiters
-    md.renderer.rules[rule.name] = (tokens, idx) =>
-      rule.tmpl
+    md.renderer.rules[rule.name] = (tokens, idx) => {
+      const res = rule.tmpl
         .replace(/\$2/, escapeHTML(tokens[idx].info)) // equation number .. ?
         .replace(
           /\$1/,
           texmath.render(tokens[idx].content, true, katexOptions)
         );
+      return res;
+    };
   }
 }
 

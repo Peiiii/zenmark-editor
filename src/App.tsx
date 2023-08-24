@@ -47,6 +47,7 @@ import MyTableRow from "@/extensions/MyTableRow";
 import { MyTableCell } from "@/extensions/MyTableCell";
 import { Markdown } from "@/extensions/tiptap-markdown";
 import { initialContent } from "@/initialize";
+import HorizontalRule from "@tiptap/extension-horizontal-rule";
 // import { TableTooltip } from "@/extensions/MyTable/TableWidget";
 
 const ydoc = new Y.Doc();
@@ -63,12 +64,14 @@ export default () => {
         document: false,
         codeBlock: false,
         history: false,
+        horizontalRule: false,
       }),
       Markdown,
       Document,
       TextAlign.configure({
-        types: ["tableCell", "tableHeader"],
+        types: ["tableCell", "tableHeader", "heading", "paragraph"],
       }),
+      HorizontalRule,
       // Document.extend({
       //   content: 'heading block*',
       // }),
@@ -109,9 +112,6 @@ export default () => {
       Iframe,
       MathInline,
       MathBlock,
-      TextAlign.configure({
-        types: ["heading", "paragraph"],
-      }),
       Placeholder.configure({
         placeholder: ({ node }) => {
           if (node.type.name === "heading") {
@@ -134,6 +134,7 @@ export default () => {
   useEffect(() => {
     if (editor) {
       editor.setEditable(editable);
+      console.log("doc:", editor.state.doc);
     }
   }, [editable, editor]);
 
