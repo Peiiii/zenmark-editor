@@ -31,6 +31,7 @@
     // overflow-y: hidden;
     overflow-x: hidden;
     overflow-y: auto;
+    align-items: stretch;
 
     .editor-content-extra-left {
       width: 5rem;
@@ -48,12 +49,14 @@
   }
 
   .editor-content {
-    padding: 4rem 0;
+    padding: 2rem 0 2rem 0;
     flex: 1 1 auto;
+    height: fit-content;
 
     // padding: 1.25rem 1rem;
     // max-width: 30em;
     max-width: 720px;
+    min-width: 0;
     -webkit-overflow-scrolling: touch;
 
     :focus {

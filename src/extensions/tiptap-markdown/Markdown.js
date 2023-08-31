@@ -53,7 +53,7 @@ export const Markdown = Extension.create({
     this.editor.options.content = this.editor.storage.markdown.parser.parse(
       this.editor.options.content
     );
-    console.log("rendered content: ", this.editor.options.content);
+    // console.log("rendered content: ", this.editor.options.content);
   },
   onCreate() {
     this.editor.options.content = this.editor.options.initialContent;

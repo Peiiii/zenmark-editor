@@ -6,7 +6,7 @@ import {
   defaultMarkdownSerializer,
   MarkdownSerializer,
 } from "@tiptap/pm/markdown";
-console.log(defaultMarkdownSerializer.nodes, defaultMarkdownSerializer.marks);
+// console.log(defaultMarkdownSerializer.nodes, defaultMarkdownSerializer.marks);
 const markdownSerializer = new MarkdownSerializer(
   {
     ...defaultMarkdownSerializer.nodes,
@@ -68,8 +68,8 @@ export const SaveFile = Extension.create({
         () =>
         async ({ commands, editor }) => {
           const m = editor.storage.markdown.getMarkdown();
-          console.log("tiptap-markdown output:");
-          console.log(m);
+          // console.log("tiptap-markdown output:");
+          // console.log(m);
           const content = editor.getHTML();
           // console.log("html output:", content);
           //   console.log("doc:", editor.state.doc);
@@ -82,7 +82,7 @@ export const SaveFile = Extension.create({
             await fs.promises.writeFile(path, content);
             message.success("File saved");
           } else {
-            console.log("File not saved, no path specified.");
+            // console.log("File not saved, no path specified.");
           }
         },
       isPathGiven: () => () => {

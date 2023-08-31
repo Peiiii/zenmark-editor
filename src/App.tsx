@@ -57,6 +57,7 @@ export default () => {
   const [status, setStatus] = useState("connecting");
   const [currentUser, setCurrentUser] = useState(getInitialUser);
   const [editable, setEditable] = useState(true);
+
   const editor = useEditor({
     editable,
     extensions: [
@@ -130,18 +131,29 @@ export default () => {
     ],
     content: initialContent,
   });
+  useEffect(() => {
+    return window.addEventListener(
+      "message",
+      (event) => {
+        console.log(event);
+        const { content } = JSON.parse(event.data);
+        editor?.commands.setContent(content);
+      },
+      false
+    );
+  }, [editor]);
 
   useEffect(() => {
     if (editor) {
       editor.setEditable(editable);
-      console.log("doc:", editor.state.doc);
+      // console.log("doc:", editor.state.doc);
     }
   }, [editable, editor]);
 
   useEffect(() => {
     // Update status changes
     provider.on("status", (event) => {
-      console.log(event);
+      // console.log(event);
       setStatus(event.status);
     });
   }, []);
@@ -192,7 +204,7 @@ export default () => {
         <br />
         {editor!.storage.characterCount.words()} words
       </div>} */}
-      {editor && editable && (
+      {/* {editor && editable && (
         <div className="editor__footer">
           <div className={`editor__status editor__status--${status}`}>
             {editor!.storage.collaborationCursor.users.length > 1 ||
@@ -208,7 +220,7 @@ export default () => {
             <button onClick={setName}>{currentUser.name}</button>
           </div>
         </div>
-      )}
+      )} */}
       {MessageContainer}
     </div>
     // </TableTooltip>

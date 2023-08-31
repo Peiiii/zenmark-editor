@@ -200,7 +200,7 @@ export const tableSelectorPlugin = (editor: Editor) =>
   // widgetViewFactory: ReturnType<typeof useWidgetViewFactory>
   // $prose(() =>
   {
-    console.log("editor:", editor);
+    // console.log("editor:", editor);
     const widgetViewFactory = createWidgetViewFactory(editor);
     const key = new PluginKey("MILKDOWN_TABLE_SELECTOR");
     return new Plugin({

@@ -8,7 +8,7 @@ const getSuggestionItems = (query) => {
     includeScore: true,
     keys: ["title", "description"],
   };
-  console.log(Actions, actionList);
+  // console.log(Actions, actionList);
 
   const fuse = new Fuse(actionList, options);
   const items = query.query

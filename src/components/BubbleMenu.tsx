@@ -34,7 +34,7 @@ export default ({ editor }: { editor: Editor }) => {
     const fromNode = editor.view.state.tr.doc.nodeAt(
       editor.state.selection.from
     );
-    console.log("fromNode:", fromNode);
+    // console.log("fromNode:", fromNode);
   }, [editor.state.selection]);
 
   return (

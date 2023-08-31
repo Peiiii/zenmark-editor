@@ -1,4 +1,4 @@
-type LogLevel = 'DEBUG' | 'INFO' | 'WARNING' | 'ERROR';
+type LogLevel = "DEBUG" | "INFO" | "WARNING" | "ERROR";
 
 interface Logger {
   debug: (message: string) => void;
@@ -14,34 +14,40 @@ interface LoggerOptions {
 }
 
 function createLogger(options: LoggerOptions = {}): Logger {
-  const { level: defaultLevel = 'INFO', format = (level, message) => `[${level}] ${message}` } = options;
+  const {
+    level: defaultLevel = "INFO",
+    format = (level, message) => `[${level}] ${message}`,
+  } = options;
 
   function log(level: LogLevel, message: string): void {
-    if (['DEBUG', 'INFO', 'WARNING', 'ERROR'].indexOf(level) >= ['DEBUG', 'INFO', 'WARNING', 'ERROR'].indexOf(defaultLevel)) {
+    if (
+      ["DEBUG", "INFO", "WARNING", "ERROR"].indexOf(level) >=
+      ["DEBUG", "INFO", "WARNING", "ERROR"].indexOf(defaultLevel)
+    ) {
       const formattedMessage = format(level, message);
-      console.log(formattedMessage);
+      // console.log(formattedMessage);
     }
   }
 
   return {
     // log:,
-    debug: (message: string) => log('DEBUG', message),
-    info: (message: string) => log('INFO', message),
-    warning: (message: string) => log('WARNING', message),
-    error: (message: string) => log('ERROR', message),
+    debug: (message: string) => log("DEBUG", message),
+    info: (message: string) => log("INFO", message),
+    warning: (message: string) => log("WARNING", message),
+    error: (message: string) => log("ERROR", message),
   };
 }
 
-const createLogService=()=>{
-    const rootLogger=createLogger();
-    return {
-        debug:rootLogger.debug,
-        info:rootLogger.info,
-        warning:rootLogger.warning,
-        error:rootLogger.error,
-        // log:rootLogger.
-        createLogger,
-    }
-}
+const createLogService = () => {
+  const rootLogger = createLogger();
+  return {
+    debug: rootLogger.debug,
+    info: rootLogger.info,
+    warning: rootLogger.warning,
+    error: rootLogger.error,
+    // log:rootLogger.
+    createLogger,
+  };
+};
 
-export const logService=createLogService();
+export const logService = createLogService();

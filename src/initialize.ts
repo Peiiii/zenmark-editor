@@ -1,4 +1,5 @@
 export const initialContent = `# **第一个 Markdown 文档**
+
 ---
 
 ## 二级标题
@@ -11,7 +12,7 @@ export const initialContent = `# **第一个 Markdown 文档**
 
 ###### 六级标题
 
-**加粗** *斜体* ~~删除线~~ \`Inline Code\` 
+**加粗** *斜体* ~~删除线~~
 
 - 一级无序列表
   - 二级无序列表
@@ -28,7 +29,8 @@ export const initialContent = `# **第一个 Markdown 文档**
 | *LearnShare* | 12 | [LearnShare](http://xianbai.me/) |
 | **Mike** | 32 | [Mike](http://mike.me/) |
 
-这是一个行内公式：$\\int_0^\\infty \\mathrm{e}^{-x}\\,\\mathrm{d}x$ ， 公式块也是支持的：
+这是一个行内公式：$\\int_0^\\infty \\mathrm{e}^{-x}]\\,\\mathrm{d}x$ ， 公式块也是支持的：
+
 
 $$
 \\sqrt[n]{1+x+x^2+\\ldots }
@@ -50,7 +52,9 @@ $$
   }
 }
 \`\`\`
+
 ![玉山银行数字化（上）：构建台湾地区第一个银行自建的“微服务架构”核心系统](https://static001.infoq.cn/resource/image/12/4a/12584834cf3183549f3fe81547bc204a.jpg?x-oss-process=image/crop,y_1,w_1279,h_718/resize,w_613,h_345)
+
 `;
 
 /*

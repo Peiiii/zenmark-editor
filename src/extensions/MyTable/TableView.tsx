@@ -73,7 +73,7 @@ const addTableEditorWidgets = (node: ProseMirrorNode, dom: HTMLElement) => {
     bar.style.bottom = "20px";
     bar.style.height = "10px";
     bar.style.backgroundColor = "#e5e7eb";
-    console.log("th:", th);
+    // console.log("th:", th);
   }
 };
 
@@ -100,7 +100,7 @@ export class TableView implements NodeView {
     updateColumns(node, this.colgroup, this.table, cellMinWidth);
     this.contentDOM = this.table.appendChild(document.createElement("tbody"));
     this.dom.addEventListener("mouseover", () => {
-      console.log("hi");
+      // console.log("hi");
       addTableEditorWidgets(node, this.dom);
     });
   }

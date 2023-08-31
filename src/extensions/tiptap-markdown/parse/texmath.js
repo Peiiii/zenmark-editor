@@ -21,7 +21,7 @@ function texmath(md, options) {
   katexOptions.throwOnError = katexOptions.throwOnError || false;
   katexOptions.macros = katexOptions.macros || (options && options.macros); // ensure backwards compatibility
 
-  console.log("it's me !");
+  // console.log("it's me !");
   texmath.katex = {
     renderToString(content, { displayMode }) {
       // console.log(`content: start:${content}:end`);

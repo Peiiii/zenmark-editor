@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 
 export const TableComponent = ({ node, updateAttributes, extension }) => {
   const dom = useRef<HTMLTableElement>(null);
-  console.log("table node:", node);
+  // console.log("table node:", node);
   useEffect(() => {
     if (dom.current) {
       // dom.current.on
