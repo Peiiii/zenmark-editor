@@ -1,4 +1,3 @@
-import { RemixIcon } from "@/components/RemixIcon";
 import React, { Component } from "react";
 
 class CommandList extends Component<any, any> {
@@ -64,6 +63,7 @@ class CommandList extends Component<any, any> {
     return (
       <div className="suggestion-panel">
         {items.map((item, index) => {
+          const { icon: Icon } = item;
           return (
             <div
               className={`suggestion-item ${
@@ -74,9 +74,7 @@ class CommandList extends Component<any, any> {
             >
               {/* {item.element || item.title} */}
               {/* <div className="suggestion-item"> */}
-              <div className="icon-wrapper">
-                <RemixIcon icon={item.icon} />
-              </div>
+              <div className="icon-wrapper">{<Icon />}</div>
               <div className="title-wrapper">
                 <strong>{item.title}</strong>
               </div>

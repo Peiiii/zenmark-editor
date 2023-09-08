@@ -10,7 +10,7 @@ import {
 } from "@benrbray/prosemirror-math";
 
 import "@benrbray/prosemirror-math/style/math.css";
-import "katex/dist/katex.min.css";
+// import "katex/dist/katex.min.css";
 
 export default Node.create({
   name: "math_inline",

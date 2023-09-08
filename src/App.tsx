@@ -36,7 +36,6 @@ import { buildWebrtcProvider, getInitialUser } from "./common/collab-utils";
 import { MessageContainer } from "./common/utils";
 import { Suggestion } from "./extensions/Suggestion";
 import { Iframe } from "./extensions/Iframe";
-import { RemixIcon } from "./components/RemixIcon";
 import { AiOutlineEdit, AiOutlineRead } from "react-icons/ai";
 import MathInline from "@/extensions/MathInline";
 import MathBlock from "@/extensions/MathBlock";
@@ -53,7 +52,13 @@ import HorizontalRule from "@tiptap/extension-horizontal-rule";
 const ydoc = new Y.Doc();
 const provider = buildWebrtcProvider(ydoc);
 
-export default () => {
+export default ({
+  readContent,
+  writeContent,
+}: {
+  readContent?: () => Promise<string>;
+  writeContent?: (s: string) => Promise<void>;
+}) => {
   const [status, setStatus] = useState("connecting");
   const [currentUser, setCurrentUser] = useState(getInitialUser);
   const [editable, setEditable] = useState(true);
@@ -107,7 +112,9 @@ export default () => {
       ColorHighlighter,
       SmilieReplacer,
       CodeBlockHighlight,
-      SaveFile,
+      SaveFile.configure({
+        saveContent: writeContent,
+      }),
       Invite,
       Suggestion,
       Iframe,
@@ -132,16 +139,19 @@ export default () => {
     content: initialContent,
   });
   useEffect(() => {
-    return window.addEventListener(
-      "message",
-      (event) => {
-        console.log(event);
-        const { content } = JSON.parse(event.data);
-        editor?.commands.setContent(content);
-      },
-      false
-    );
-  }, [editor]);
+    // return window.addEventListener(
+    //   "message",
+    //   (event) => {
+    //     console.log(event);
+    //     const { content } = JSON.parse(event.data);
+    //     editor?.commands.setContent(content);
+    //   },
+    //   false
+    // );
+    if (readContent && editor) {
+      readContent().then((content) => editor.commands.setContent(content));
+    }
+  }, [editor, readContent]);
 
   useEffect(() => {
     if (editor) {

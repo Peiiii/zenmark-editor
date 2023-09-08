@@ -23,12 +23,7 @@ import { Decoration, EditorView } from "@tiptap/pm/view";
 import { DecorationSet } from "@tiptap/pm/view";
 // import { useInstance } from "@milkdown/react";
 // import { $ctx, $prose } from "@milkdown/utils";
-import type { useWidgetViewFactory } from "@prosemirror-adapter/react";
-addColumnAfter;
-import {
-  usePluginViewContext,
-  useWidgetViewContext,
-} from "@prosemirror-adapter/react";
+
 import type { ComponentType, FC, ReactNode, ReactPortal } from "react";
 import {
   createContext,

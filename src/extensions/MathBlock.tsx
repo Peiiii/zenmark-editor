@@ -10,6 +10,7 @@ import {
 } from "@benrbray/prosemirror-math";
 import "@benrbray/prosemirror-math/style/math.css";
 import "katex/dist/katex.min.css";
+// import "katex/";
 export default Node.create({
   name: "math_display",
   group: "block math",

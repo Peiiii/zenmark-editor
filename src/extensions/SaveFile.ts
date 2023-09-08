@@ -1,11 +1,9 @@
 import { Extension } from "@tiptap/core";
-import { history } from "../common/history";
-import { fs } from "../common/fs";
-import { message } from "../common/utils";
 import {
   defaultMarkdownSerializer,
   MarkdownSerializer,
 } from "@tiptap/pm/markdown";
+import { message } from "../common/utils";
 // console.log(defaultMarkdownSerializer.nodes, defaultMarkdownSerializer.marks);
 const markdownSerializer = new MarkdownSerializer(
   {
@@ -50,17 +48,10 @@ const markdownSerializer = new MarkdownSerializer(
 );
 export const SaveFile = Extension.create({
   name: "saveFile",
-  async onCreate() {
-    const path = (history.location.query as any).path;
-    if (path) {
-      await fs.ready();
-      if (await fs.promises.exists(path)) {
-        const content = await fs.promises.readFile(path, "utf8");
-        this.editor.commands.setContent(content);
-      } else {
-        message.warning("File not exists : " + path);
-      }
-    }
+  addOptions() {
+    return {
+      saveContent: null,
+    };
   },
   addCommands() {
     return {
@@ -77,18 +68,12 @@ export const SaveFile = Extension.create({
           //   "markdown:",
           //   markdownSerializer.serialize(editor.state.doc)
           // );
-          const path = (history.location.query as any).path;
-          if (path) {
-            await fs.promises.writeFile(path, content);
-            message.success("File saved");
-          } else {
-            // console.log("File not saved, no path specified.");
+          if (this.options.saveContent) {
+            this.options.saveContent(m).then(() => {
+              message.success("File saved");
+            });
           }
         },
-      isPathGiven: () => () => {
-        const path = (history.location.query as any).path;
-        return !!path;
-      },
     } as any;
   },
   addKeyboardShortcuts() {

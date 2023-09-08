@@ -7,13 +7,16 @@
     "build": "yarn build:app && yarn build:wc",
     "build:app": "tsc && vite build",
     "build:wc": "tsc && vite --config wc.vite.config.ts build",
+    "build:lib": "tsc && vite --config lib.vite.config.ts build",
     "preview": "vite preview --host --port 3000",
+    "deploy": "yarn build && yarn oss:upload",
+    "deploy:lib": "yarn build:lib && ossutil64 cp -r -u build/lib/tiptap-editor oss://apps-eiooie-com/tiptap-editor/lib",
     "oss:upload": "ossutil64 cp -r -u build/tiptap-editor oss://apps-eiooie-com/tiptap-editor && ossutil64 cp -r -u build/wc/tiptap-editor oss://apps-eiooie-com/wc/tiptap-editor",
-    "update": "yarn build && git add . && git commit -m 'update' && git push && yarn oss:upload"
+    "git:update": "git add . && git commit -m 'update' && git push",
+    "update": "yarn git:update  &&  yarn deploy:lib && yarn deploy"
   },
   "dependencies": {
     "@benrbray/prosemirror-math": "^0.2.2",
-    "@prosemirror-adapter/react": "^0.2.6",
     "@tiptap/extension-character-count": "^2.0.0-beta.209",
     "@tiptap/extension-code": "^2.0.0-beta.209",
     "@tiptap/extension-code-block-lowlight": "^2.0.0-beta.209",
@@ -65,7 +68,6 @@
     "react-icons": "^4.7.1",
     "react-to-webcomponent": "^2.0.0-alpha.0",
     "react-toastify": "^9.1.1",
-    "remixicon": "^2.5.0",
     "rxjs": "^7.8.1",
     "tippy.js": "^6.3.7",
     "y-prosemirror": "^1.2.0",
@@ -73,6 +75,7 @@
     "yjs": "^13.5.44"
   },
   "devDependencies": {
+    "@types/node": "^20.5.9",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.9",
     "@vitejs/plugin-react": "^3.0.0",

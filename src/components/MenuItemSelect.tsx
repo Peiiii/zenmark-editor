@@ -1,13 +1,12 @@
 import { Fragment, useState } from "react";
 import "../css/MenuItem.scss";
 
-import remixiconUrl from "remixicon/fonts/remixicon.symbol.svg";
-
 export default ({ items, editor }: any) => {
   const [activeIndex, setActiveIndex] = useState(() =>
     items.indexOf(items.find((item: any) => item.isActive(editor)))
   );
   const activeItem = items[activeIndex] || items[0];
+  const { icon: Icon } = activeItem;
   const [expanded, setExpanded] = useState(false);
 
   return (
@@ -21,9 +20,7 @@ export default ({ items, editor }: any) => {
           onClick={() => setExpanded((expanded) => !expanded)}
           title={activeItem.title}
         >
-          <svg className="remix">
-            <use xlinkHref={`${remixiconUrl}#ri-${activeItem.icon}`} />
-          </svg>
+          <Icon />
         </button>
       </div>
       <div style={{ position: "absolute" }}>
@@ -34,7 +31,7 @@ export default ({ items, editor }: any) => {
             style={{ position: "relative", background: "white" }}
           >
             {items.map((item: any, index: any) => {
-              const { isActive, title, icon, action } = item;
+              const { isActive, title, icon: Icon, action } = item;
               return (
                 <Fragment key={index}>
                   <div key={index}>
@@ -48,9 +45,7 @@ export default ({ items, editor }: any) => {
                       }}
                       title={title}
                     >
-                      <svg className="remix">
-                        <use xlinkHref={`${remixiconUrl}#ri-${icon}`} />
-                      </svg>
+                      <Icon />
                     </button>
                   </div>
                 </Fragment>

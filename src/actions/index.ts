@@ -1,8 +1,36 @@
 import { Editor, Range } from "@tiptap/react";
-import { fs } from "../common/fs";
-import { history } from "../common/history";
+import {
+  AiOutlineAlignCenter,
+  AiOutlineAlignLeft,
+  AiOutlineAlignRight,
+  AiOutlineArrowDown,
+  AiOutlineArrowLeft,
+  AiOutlineArrowRight,
+  AiOutlineArrowUp,
+  AiOutlineBold,
+  AiOutlineCheckSquare,
+  AiOutlineCode,
+  AiOutlineDown,
+  AiOutlineFileImage,
+  AiOutlineHighlight,
+  AiOutlineItalic,
+  AiOutlineLink,
+  AiOutlineOrderedList,
+  AiOutlineRight,
+  AiOutlineSave,
+  AiOutlineStrikethrough,
+  AiOutlineUnorderedList,
+  AiOutlineUp,
+  AiOutlineUserAdd,
+} from "react-icons/ai";
+import { BiAlignJustify, BiCodeBlock, BiParagraph } from "react-icons/bi";
+import { BsBlockquoteLeft, BsTextWrap } from "react-icons/bs";
+import { LuHeading1, LuHeading2 } from "react-icons/lu";
+import { VscHorizontalRule } from "react-icons/vsc";
+import { FaRemoveFormat } from "react-icons/fa";
+import { PiFrameCorners } from "react-icons/pi";
 interface Action {
-  icon: string;
+  icon: React.ComponentType;
   title?: string;
   action?: (editor: Editor) => any;
   command?: (state: { editor: Editor; range: Range }) => void;
@@ -11,7 +39,7 @@ interface Action {
 }
 
 export const Bold: Action = {
-  icon: "bold",
+  icon: AiOutlineBold,
   title: "Bold",
   action: (editor) => editor.chain().focus().toggleBold().run(),
   isActive: (editor) => editor.isActive("bold"),
@@ -20,7 +48,7 @@ export const Bold: Action = {
   },
 };
 export const Italic = {
-  icon: "italic",
+  icon: AiOutlineItalic,
   title: "Italic",
   action: (editor) => editor.chain().focus().toggleItalic().run(),
   isActive: (editor) => editor.isActive("italic"),
@@ -30,7 +58,7 @@ export const Italic = {
 };
 
 export const Strikethrough = {
-  icon: "strikethrough",
+  icon: AiOutlineStrikethrough,
   title: "Strike",
   action: (editor) => editor.chain().focus().toggleStrike().run(),
   isActive: (editor) => editor.isActive("strike"),
@@ -39,7 +67,7 @@ export const Strikethrough = {
   },
 };
 export const CodeView = {
-  icon: "code-view",
+  icon: AiOutlineCode,
   title: "Code",
   action: (editor) => editor.chain().focus().toggleCode().run(),
   isActive: (editor) => editor.isActive("code"),
@@ -48,7 +76,7 @@ export const CodeView = {
   },
 };
 export const MarkPenLine = {
-  icon: "mark-pen-line",
+  icon: AiOutlineHighlight,
   title: "Highlight",
   action: (editor) => editor.chain().focus().toggleHighlight().run(),
   isActive: (editor) => editor.isActive("highlight"),
@@ -60,7 +88,7 @@ export const Divider = {
   type: "divider",
 };
 export const H1 = {
-  icon: "h-1",
+  icon: LuHeading1,
   title: "Heading 1",
   action: (editor) => editor.chain().focus().toggleHeading({ level: 1 }).run(),
   isActive: (editor) => editor.isActive("heading", { level: 1 }),
@@ -74,7 +102,7 @@ export const H1 = {
   },
 };
 export const H2 = {
-  icon: "h-2",
+  icon: LuHeading2,
   title: "Heading 2",
   action: (editor) => editor.chain().focus().toggleHeading({ level: 2 }).run(),
   isActive: (editor) => editor.isActive("heading", { level: 2 }),
@@ -88,7 +116,7 @@ export const H2 = {
   },
 };
 export const Paragraph = {
-  icon: "paragraph",
+  icon: BiParagraph,
   title: "Paragraph",
   action: (editor) => editor.chain().focus().setParagraph().run(),
   isActive: (editor) => editor.isActive("paragraph"),
@@ -102,19 +130,19 @@ export const Paragraph = {
   },
 };
 export const ListUnordered = {
-  icon: "list-unordered",
+  icon: AiOutlineUnorderedList,
   title: "Bullet List",
   action: (editor) => editor.chain().focus().toggleBulletList().run(),
   isActive: (editor) => editor.isActive("bulletList"),
 };
 export const ListOrdered = {
-  icon: "list-ordered",
+  icon: AiOutlineOrderedList,
   title: "Ordered List",
   action: (editor) => editor.chain().focus().toggleOrderedList().run(),
   isActive: (editor) => editor.isActive("orderedList"),
 };
 export const ListCheck2 = {
-  icon: "list-check-2",
+  icon: AiOutlineCheckSquare,
   title: "Task List",
   action: (editor) => editor.chain().focus().toggleTaskList().run(),
   isActive: (editor) => editor.isActive("taskList"),
@@ -123,7 +151,7 @@ export const ListCheck2 = {
   },
 };
 export const CodeBoxLine = {
-  icon: "code-box-line",
+  icon: BiCodeBlock,
   title: "Code Block",
   action: (editor) => editor.chain().focus().toggleCodeBlock().run(),
   isActive: (editor) => editor.isActive("codeBlock"),
@@ -133,7 +161,7 @@ export const CodeBoxLine = {
 };
 
 export const DoubleQuotes1 = {
-  icon: "double-quotes-l",
+  icon: BsBlockquoteLeft,
   title: "Blockquote",
   action: (editor) => editor.chain().focus().toggleBlockquote().run(),
   isActive: (editor) => editor.isActive("blockquote"),
@@ -142,7 +170,7 @@ export const DoubleQuotes1 = {
   },
 };
 export const Separator = {
-  icon: "separator",
+  icon: VscHorizontalRule,
   title: "Horizontal Rule",
   description: "separator",
   action: (editor: Editor) => editor.chain().focus().setHorizontalRule().run(),
@@ -152,54 +180,54 @@ export const Separator = {
 };
 
 export const TextWrap = {
-  icon: "text-wrap",
+  icon: BsTextWrap,
   title: "Hard Break",
   action: (editor) => editor.chain().focus().setHardBreak().run(),
 };
 export const FormatClear = {
-  icon: "format-clear",
+  icon: FaRemoveFormat,
   title: "Clear Format",
   action: (editor) => editor.chain().focus().clearNodes().unsetAllMarks().run(),
 };
 
 export const GoBackLine = {
-  icon: "arrow-go-back-line",
+  icon: AiOutlineArrowLeft,
   title: "Undo",
   action: (editor) => editor.chain().focus().undo().run(),
 };
 export const GoForwardLine = {
-  icon: "arrow-go-forward-line",
+  icon: AiOutlineArrowRight,
   title: "Redo",
   action: (editor) => editor.chain().focus().redo().run(),
 };
 
 export const AlignLeft: Action = {
-  icon: "align-left",
+  icon: AiOutlineAlignLeft,
   title: "Align Left",
   action: (editor) => editor.chain().focus().setTextAlign("left").run(),
   isActive: (editor) => editor.isActive({ textAlign: "left" }),
 };
 export const AlignRight: Action = {
-  icon: "align-right",
+  icon: AiOutlineAlignRight,
   title: "Align Right",
   action: (editor) => editor.chain().focus().setTextAlign("right").run(),
   isActive: (editor) => editor.isActive({ textAlign: "right" }),
 };
 export const AlignCenter: Action = {
-  icon: "align-center",
+  icon: AiOutlineAlignCenter,
   title: "Align Center",
   action: (editor: Editor) =>
     editor.chain().focus().setTextAlign("center").run(),
   isActive: (editor) => editor.isActive({ textAlign: "center" }),
 };
 export const AlignJustify: Action = {
-  icon: "align-justify",
+  icon: BiAlignJustify,
   title: "Align Justify",
   action: (editor) => editor.chain().focus().setTextAlign("justify").run(),
   isActive: (editor) => editor.isActive({ textAlign: "justify" }),
 };
 export const AddImage: Action = {
-  icon: "image-line",
+  icon: AiOutlineFileImage,
   title: "Add Image",
   action: (editor) => {
     const url = window.prompt("URL");
@@ -217,7 +245,7 @@ export const AddImage: Action = {
 };
 
 export const SaveFile: Action = {
-  icon: "save-line",
+  icon: AiOutlineSave,
   title: "Save File",
   action: (editor) => {
     (editor.commands as any).saveFile();
@@ -226,13 +254,13 @@ export const SaveFile: Action = {
 };
 
 export const Invite: Action = {
-  icon: "chat-new-line",
+  icon: AiOutlineUserAdd,
   title: "Invite Collaborator",
   action: (editor) => (editor.commands as any).copyCollabUrl(),
 };
 
 export const Iframe: Action = {
-  icon: "window-line",
+  icon: PiFrameCorners,
   title: "Iframe",
   action: (editor) => {
     const url = window.prompt("URL");
@@ -243,28 +271,28 @@ export const Iframe: Action = {
 };
 
 export const AddTableColumnBefore: Action = {
-  icon: "arrow-left-line",
+  icon: AiOutlineArrowLeft,
   title: "Add Table Column Left",
   action: (editor: Editor) => {
     editor.commands.addColumnBefore();
   },
 };
 export const AddTableColumnAfter: Action = {
-  icon: "arrow-right-line",
+  icon: AiOutlineArrowRight,
   title: "Add Table Column Right",
   action: (editor: Editor) => {
     editor.commands.addColumnAfter();
   },
 };
 export const AddTableRowBefore: Action = {
-  icon: "arrow-up-line",
+  icon: AiOutlineArrowUp,
   title: "Add Table Row Up",
   action: (editor: Editor) => {
     editor.commands.addRowBefore();
   },
 };
 export const AddTableRowAfter: Action = {
-  icon: "arrow-down-line",
+  icon: AiOutlineArrowDown,
   title: "Add Table Row Down",
   action: (editor: Editor) => {
     editor.commands.addRowAfter();
@@ -272,7 +300,7 @@ export const AddTableRowAfter: Action = {
 };
 
 export const EditLink: Action = {
-  icon: "links-line",
+  icon: AiOutlineLink,
   title: "Edit Link",
   action: (editor: Editor) => {
     const previousUrl = editor.getAttributes("link").href;

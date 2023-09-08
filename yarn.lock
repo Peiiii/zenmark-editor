@@ -445,22 +445,6 @@
   resolved "https://registry.npmmirror.com/@popperjs/core/-/core-2.11.8.tgz#6b79032e760a0899cd4204710beede972a3a185f"
   integrity sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==
 
-"@prosemirror-adapter/core@0.2.6":
-  version "0.2.6"
-  resolved "https://registry.npmmirror.com/@prosemirror-adapter/core/-/core-0.2.6.tgz#7f14bf568ef30a6d085bffdb1112de7426b42452"
-  integrity sha512-7GXWQBR/bd6ngvek8SgtlEVC0x3KL7LKZ5cxyZl4IBAlRDbITQWsuKLChEXNan9A6+9Ry4a46crbDGTQlzooOg==
-  dependencies:
-    tslib "^2.5.0"
-
-"@prosemirror-adapter/react@^0.2.6":
-  version "0.2.6"
-  resolved "https://registry.npmmirror.com/@prosemirror-adapter/react/-/react-0.2.6.tgz#2375f74d42dad1373f139af2053810ef8fd89ed9"
-  integrity sha512-JdDqAJV7FnRyIlnXPP+E0Iu80BQPvHeB+7c0ZfdcHLfVb2BLTNHk6iOoqJmBJmqqHt/KjxXXTmxRUS4EEsjVlg==
-  dependencies:
-    "@prosemirror-adapter/core" "0.2.6"
-    nanoid "^4.0.2"
-    tslib "^2.5.0"
-
 "@r2wc/core@^1.0.0":
   version "1.0.0"
   resolved "https://registry.npmmirror.com/@r2wc/core/-/core-1.0.0.tgz#5724bf472769ffe4157528bd10f62b9aada36098"
@@ -785,6 +769,11 @@
   integrity sha512-wLEm0QvaoawEDoTRwzTXp4b4jpwiJDvR5KMnFnVodm3scufTlBOWRD6N1OBf9TZMhjlNsSfcO5V+7AF4+Vy+9g==
   dependencies:
     "@types/unist" "*"
+
+"@types/node@^20.5.9":
+  version "20.5.9"
+  resolved "https://registry.npmmirror.com/@types/node/-/node-20.5.9.tgz#a70ec9d8fa0180a314c3ede0e20ea56ff71aed9a"
+  integrity sha512-PcGNd//40kHAS3sTlzKB9C9XL4K0sTup8nbG5lC14kzEteTNuAFh9u5nA0o5TWnSG2r/JNPRXFVcHJIIeRlmqQ==
 
 "@types/object.omit@^3.0.0":
   version "3.0.0"
@@ -1588,11 +1577,6 @@ regenerator-runtime@^0.13.11:
   resolved "https://registry.npmmirror.com/regenerator-runtime/-/regenerator-runtime-0.13.11.tgz#f6dca3e7ceec20590d07ada785636a90cdca17f9"
   integrity sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==
 
-remixicon@^2.5.0:
-  version "2.5.0"
-  resolved "https://registry.npmmirror.com/remixicon/-/remixicon-2.5.0.tgz#b5e245894a1550aa23793f95daceadbf96ad1a41"
-  integrity sha512-q54ra2QutYDZpuSnFjmeagmEiN9IMo56/zz5dDNitzKD23oFRw77cWo4TsrAdmdkPiEn8mxlrTqxnkujDbEGww==
-
 rollup@^3.21.0:
   version "3.25.1"
   resolved "https://registry.npmmirror.com/rollup/-/rollup-3.25.1.tgz#9fff79d22ff1a904b2b595a2fb9bc3793cb987d8"
@@ -1694,7 +1678,7 @@ to-regex-range@^5.0.1:
   dependencies:
     is-number "^7.0.0"
 
-tslib@^2.1.0, tslib@^2.5.0:
+tslib@^2.1.0:
   version "2.6.1"
   resolved "https://registry.npmmirror.com/tslib/-/tslib-2.6.1.tgz#fd8c9a0ff42590b25703c0acb3de3d3f4ede0410"
   integrity sha512-t0hLfiEKfMUoqhG+U1oid7Pva4bbDPHYfJNiB7BiIjRkj1pyC++4N3huJfqY6aRH6VTB0rvtzQwjM4K6qpfOig==
