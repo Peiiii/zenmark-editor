@@ -5,8 +5,9 @@ export default {
   activate: (xbook: any) => {
     console.log("React:", React, "useCallback:", useCallback);
     xbook.componentService.register("tiptap-editor", ({ fid }) => {
-      console.log("[inside]React:", React, "useCallback:", useCallback);
-      const a = useState(0);
+      // console.log("[inside]React:", React, "useCallback:", useCallback);
+      // const a = useState(0);
+      console.log("[editor] fid:", fid);
       const readContent = useCallback(async () => {
         return await xbook.serviceBus.invoke("fileSystemService.read", fid);
       }, [fid]);

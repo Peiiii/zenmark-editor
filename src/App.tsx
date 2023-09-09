@@ -47,6 +47,10 @@ import { MyTableCell } from "@/extensions/MyTableCell";
 import { Markdown } from "@/extensions/tiptap-markdown";
 import { initialContent } from "@/initialize";
 import HorizontalRule from "@tiptap/extension-horizontal-rule";
+import ListKeymap from "@tiptap/extension-list-keymap";
+import Focus from "@tiptap/extension-focus";
+import Superscript from "@tiptap/extension-superscript";
+import Subscript from "@tiptap/extension-subscript";
 // import { TableTooltip } from "@/extensions/MyTable/TableWidget";
 
 const ydoc = new Y.Doc();
@@ -91,6 +95,10 @@ export default ({
       TaskItem.configure({
         nested: true,
       }),
+      ListKeymap,
+      Focus.configure({ className: "focus" }),
+      Subscript,
+      Superscript,
       Highlight,
 
       Image.configure({
@@ -129,12 +137,12 @@ export default ({
         },
       }),
 
-      Collaboration.configure({
-        document: ydoc,
-      }),
-      CollaborationCursor.configure({
-        provider: provider,
-      }),
+      // Collaboration.configure({
+      //   document: ydoc,
+      // }),
+      // CollaborationCursor.configure({
+      //   provider: provider,
+      // }),
     ],
     content: initialContent,
   });
@@ -169,12 +177,12 @@ export default ({
   }, []);
 
   // Save current user to localStorage and emit to editor
-  useEffect(() => {
-    if (editor && currentUser) {
-      localStorage.setItem("currentUser", JSON.stringify(currentUser));
-      editor.chain().focus().updateUser(currentUser).run();
-    }
-  }, [editor, currentUser]);
+  // useEffect(() => {
+  //   if (editor && currentUser) {
+  //     localStorage.setItem("currentUser", JSON.stringify(currentUser));
+  //     editor.chain().focus().updateUser(currentUser).run();
+  //   }
+  // }, [editor, currentUser]);
 
   const setName = useCallback(() => {
     const name = (window.prompt("Name") || "").trim().substring(0, 32);

@@ -34,16 +34,18 @@
     align-items: stretch;
 
     .editor-content-extra-left {
-      width: 3rem;
+      max-width: 3rem;
       // flex-shrink: 1;
       // flex-grow: 1;
+      width: 5%;
       min-width: 1em;
     }
 
     .editor-content-extra-right {
-      width: 3rem;
+      max-width: 3rem;
       // flex-shrink: 1;
       // flex-grow: 1;
+      width: 5%;
       min-width: 1em;
     }
   }

@@ -569,6 +569,11 @@
   dependencies:
     tippy.js "^6.3.7"
 
+"@tiptap/extension-focus@^2.1.8":
+  version "2.1.8"
+  resolved "https://registry.npmmirror.com/@tiptap/extension-focus/-/extension-focus-2.1.8.tgz#19d854721937f18d311a71b4a9e347ca563a3534"
+  integrity sha512-RxMrkdeq9fJeaP0CHZFzrhBpr1by8Gw/25x9QsWPt85QDXYbCKq8TfXeOvu6TxS5IbLvwtTiLL9kPGt81YokMg==
+
 "@tiptap/extension-gapcursor@^2.0.3":
   version "2.0.3"
   resolved "https://registry.npmmirror.com/@tiptap/extension-gapcursor/-/extension-gapcursor-2.0.3.tgz#e098b78c4a169e1630dc6531d68b7f365de59c2f"
@@ -626,6 +631,11 @@
   resolved "https://registry.npmmirror.com/@tiptap/extension-list-item/-/extension-list-item-2.1.7.tgz#dc24045e445d0f91baec9b113f711dc90c6682ac"
   integrity sha512-hd/E4qQopBXWa6kdFY19qFVgqj4fzdPgAnzdXJ2XW7bC6O2CusmHphRRZ5FBsuspYTN/6/fv0i0jK9rSGlsEyA==
 
+"@tiptap/extension-list-keymap@^2.1.8":
+  version "2.1.8"
+  resolved "https://registry.npmmirror.com/@tiptap/extension-list-keymap/-/extension-list-keymap-2.1.8.tgz#65f16e95b12ec649f14118b5687f4b6055ca79c8"
+  integrity sha512-7kn+G3DtP/Aweqo+PuV8buge+og+g2cNuhX5GDMavWjjxdWa6MwUR8FV9NHKSCK6nq5jLjA2idotPxA8MUOX4Q==
+
 "@tiptap/extension-ordered-list@^2.1.7":
   version "2.1.7"
   resolved "https://registry.npmmirror.com/@tiptap/extension-ordered-list/-/extension-ordered-list-2.1.7.tgz#72d9ddc432ecf0fd19c8acd3c6b44f5358d8e0d0"
@@ -650,6 +660,16 @@
   version "2.1.7"
   resolved "https://registry.npmmirror.com/@tiptap/extension-strike/-/extension-strike-2.1.7.tgz#b7b7f49254f1de22416b1415ca88a2a20edd0627"
   integrity sha512-ONLXYnuZGM2EoGcxkyvJSDMBeAp7K6l83UXkK9TSj+VpEEDdeV7m8mJs8/vACJjJxD5HMN61+EPgU7VTEukQCA==
+
+"@tiptap/extension-subscript@^2.1.8":
+  version "2.1.8"
+  resolved "https://registry.npmmirror.com/@tiptap/extension-subscript/-/extension-subscript-2.1.8.tgz#8e90850d3e5c3338f8497872c21729581265ad81"
+  integrity sha512-vWtm/NaXTnWnfekXlUP5wi9hrMqMmIxz3InhlqCdcwFwM2Luquen+Di6i6qnbtj4nzxJXgCi8MIUwIT+D5MtLA==
+
+"@tiptap/extension-superscript@^2.1.8":
+  version "2.1.8"
+  resolved "https://registry.npmmirror.com/@tiptap/extension-superscript/-/extension-superscript-2.1.8.tgz#9767f5552db0e947ace8fb81cf1a7700ec6d0eea"
+  integrity sha512-3FwSnwbQ33qqewKXYlowmKgCzZB3LtN+Dew6rm8hTziCvQJ+CkDS/+XK6UymXDyvcKk9X7JnCo+/SrqjCT/T5g==
 
 "@tiptap/extension-table-cell@^2.0.4":
   version "2.0.4"
