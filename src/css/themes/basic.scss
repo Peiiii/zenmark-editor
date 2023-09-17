@@ -203,7 +203,7 @@
 
     li {
       display: flex;
-      align-items: center !important;
+      align-items: flex-start;
       // padding-top: 0.5rem;
       margin-left: 8px;
 
@@ -212,6 +212,7 @@
         margin-right: 0.5rem;
         user-select: none;
         padding-top: 1px;
+        line-height: 1.5;
       }
 
       p {

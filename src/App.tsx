@@ -73,7 +73,7 @@ export default ({
       StarterKit.configure({
         document: false,
         codeBlock: false,
-        history: false,
+        // history: false,
         horizontalRule: false,
       }),
       Markdown,

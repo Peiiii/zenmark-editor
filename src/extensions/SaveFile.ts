@@ -60,6 +60,7 @@ export const SaveFile = Extension.create({
         async ({ commands, editor }) => {
           const m = editor.storage.markdown.getMarkdown();
           // console.log("tiptap-markdown output:");
+
           // console.log(m);
           const content = editor.getHTML();
           // console.log("html output:", content);
