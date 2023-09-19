@@ -196,7 +196,7 @@ export default ({
 
   const [collapsed, setCollapsed] = xbook.cacheService
     .space("tiptap-editor", "localStorage")
-    .useCachedState("collapsed", false);
+    .useCachedState<boolean>("collapsed", false);
 
   useEffect(() => {
     xbook.serviceBus.expose("collapseMenuBar", () => setCollapsed(true));
@@ -204,7 +204,6 @@ export default ({
   }, [setCollapsed]);
 
   return (
-    // <TableTooltip editor={editor}>
     <div className="editor">
       <div className={"editor-header" + (collapsed ? " hidden" : "")}>
         {editor && !editable && (
@@ -264,6 +263,5 @@ export default ({
         </div>
       </div>
     </div>
-    // </TableTooltip>
   );
 };
