@@ -1,12 +1,14 @@
-import '../css/MenuBar.scss'
+import "../css/MenuBar.scss";
 
-import React, { Fragment } from 'react'
+import React, { Fragment } from "react";
 
-import MenuItem from './MenuItem'
-import { Actions } from "../actions";
+import MenuItem from "./MenuItem";
+import { Actions } from "../actions/editor";
+import {FcCollapse} from "react-icons/fc"
+import xbook from "xbook"
 
 export default ({ editor }) => {
-  const items:any[] = [
+  const items: any[] = [
     Actions.Bold,
     Actions.Italic,
     Actions.Strikethrough,
@@ -38,15 +40,28 @@ export default ({ editor }) => {
     Actions.Divider,
     Actions.SaveFile,
     Actions.Invite,
-  ]
+  ];
 
   return (
     <div className="editor__header">
-      {items.map((item, index) => (
-        <Fragment key={index}>
-          {item.type === 'divider' ? <div className="divider" /> : <MenuItem editor={editor} {...item} />}
-        </Fragment>
-      ))}
+      <div className="editor__header-left">
+        {" "}
+        {items.map((item, index) => (
+          <Fragment key={index}>
+            {item.type === "divider" ? (
+              <div className="divider" />
+            ) : (
+              <MenuItem editor={editor} {...item} />
+            )}
+          </Fragment>
+        ))}
+      </div>
+      <div className="editor__header-middle"/>
+      <div className="editor__header-right">
+        <MenuItem editor={editor} title="collapse" icon={FcCollapse} action={()=>{
+          xbook.serviceBus.invoke("collapseMenuBar")
+        }}/>
+      </div>
     </div>
-  )
-}
+  );
+};

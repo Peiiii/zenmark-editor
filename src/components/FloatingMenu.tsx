@@ -3,7 +3,7 @@ import {  FloatingMenu } from '@tiptap/react'
 import React, { Fragment } from 'react'
 
 import MenuItem from './MenuItem'
-import { Actions } from "../actions";
+import { Actions } from "../actions/editor";
 
 export default ({ editor }) => {
   const items = [

@@ -111,6 +111,15 @@
         transparent 80%, #{$bg-mask} 80%);
     --scroll-thumb-color: #10b981;
   }
+
+  &-8{
+    --scroll-size: 8px;
+    --scroll-thumb-color: transparent;
+    &:hover{
+      --scroll-size: 8px;
+    --scroll-thumb-color: #cbcdd1;
+    }
+  }
 }
 
 // Solo demo

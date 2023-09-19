@@ -29,14 +29,7 @@ import { LuHeading1, LuHeading2 } from "react-icons/lu";
 import { VscHorizontalRule } from "react-icons/vsc";
 import { FaRemoveFormat } from "react-icons/fa";
 import { PiFrameCorners } from "react-icons/pi";
-interface Action {
-  icon: React.ComponentType;
-  title?: string;
-  action?: (editor: Editor) => any;
-  command?: (state: { editor: Editor; range: Range }) => void;
-  isActive?: (editor: Editor) => boolean;
-  discription?: string;
-}
+import { Action } from "@/actions/types";
 
 export const Bold: Action = {
   icon: AiOutlineBold,

@@ -51,6 +51,9 @@ import ListKeymap from "@tiptap/extension-list-keymap";
 import Focus from "@tiptap/extension-focus";
 import Superscript from "@tiptap/extension-superscript";
 import Subscript from "@tiptap/extension-subscript";
+import xbook from "xbook";
+import MenuItem from "@/components/MenuItem";
+import { ExpandMenuBar } from "@/actions/page";
 // import { TableTooltip } from "@/extensions/MyTable/TableWidget";
 
 const ydoc = new Y.Doc();
@@ -191,55 +194,75 @@ export default ({
     }
   }, [currentUser]);
 
+  const [collapsed, setCollapsed] = xbook.cacheService
+    .space("tiptap-editor", "localStorage")
+    .useCachedState("collapsed", false);
+
+  useEffect(() => {
+    xbook.serviceBus.expose("collapseMenuBar", () => setCollapsed(true));
+    xbook.serviceBus.expose("expandMenuBar", () => setCollapsed(false));
+  }, [setCollapsed]);
+
   return (
     // <TableTooltip editor={editor}>
     <div className="editor">
-      {editor && !editable && (
-        <div style={{ display: "flex", flexFlow: "row-reverse" }}>
-          {!editable && (
-            <AiOutlineEdit
-              style={{ padding: "5px" }}
-              onClick={() => {
-                setEditable(true);
-              }}
-            />
-          )}
+      <div className={"editor-header" + (collapsed ? " hidden" : "")}>
+        {editor && !editable && (
+          <div style={{ display: "flex", flexFlow: "row-reverse" }}>
+            {!editable && (
+              <AiOutlineEdit
+                style={{ padding: "5px" }}
+                onClick={() => {
+                  setEditable(true);
+                }}
+              />
+            )}
+          </div>
+        )}
+        {editor && editable && <MenuBar editor={editor} />}
+      </div>
+      {editor && collapsed && (
+        <div className="sticky-widget">
+          <MenuItem editor={editor} {...ExpandMenuBar} />
         </div>
       )}
-      {editor && editable && <MenuBar editor={editor} />}
-      {editor && editable && <BubbleMenu editor={editor} />}
-      {/* {editor && <FloatingMenu editor={editor} />} */}
-      <div className="editor-content-wrapper  scroll scroll-7">
-        <div className="editor-content-extra-left" />
-        <EditorContent
-          className="editor-content scroll scroll-7"
-          editor={editor}
-        />
-        <div className="editor-content-extra-right" />
-      </div>
-      {/* {editor && <div className="character-count">
-        {editor!.storage.characterCount.characters()} characters
-        <br />
-        {editor!.storage.characterCount.words()} words
-      </div>} */}
-      {/* {editor && editable && (
-        <div className="editor__footer">
-          <div className={`editor__status editor__status--${status}`}>
-            {editor!.storage.collaborationCursor.users.length > 1 ||
-            status === "connected"
-              ? `${editor!.storage.collaborationCursor.users.length} user${
-                  editor!.storage.collaborationCursor.users.length === 1
-                    ? ""
-                    : "s"
-                } online.`
-              : "offline"}
+      <div className="editor-middle scroll scroll-8">
+        <div className="editor-inner">
+          {editor && editable && <BubbleMenu editor={editor} />}
+          {/* {editor && <FloatingMenu editor={editor} />} */}
+          <div className="editor-content-wrapper  scroll scroll-7">
+            <div className="editor-content-extra-left" />
+            <EditorContent
+              className="editor-content scroll scroll-7"
+              editor={editor}
+            />
+            <div className="editor-content-extra-right" />
           </div>
-          <div className="editor__name">
-            <button onClick={setName}>{currentUser.name}</button>
-          </div>
+          {/* {editor && <div className="character-count">
+     {editor!.storage.characterCount.characters()} characters
+     <br />
+     {editor!.storage.characterCount.words()} words
+   </div>} */}
+          {/* {editor && editable && (
+     <div className="editor__footer">
+       <div className={`editor__status editor__status--${status}`}>
+         {editor!.storage.collaborationCursor.users.length > 1 ||
+         status === "connected"
+           ? `${editor!.storage.collaborationCursor.users.length} user${
+               editor!.storage.collaborationCursor.users.length === 1
+                 ? ""
+                 : "s"
+             } online.`
+           : "offline"}
+       </div>
+       <div className="editor__name">
+         <button onClick={setName}>{currentUser.name}</button>
+       </div>
+     </div>
+   )} */}
+          {MessageContainer}
         </div>
-      )} */}
-      {MessageContainer}
+      </div>
     </div>
     // </TableTooltip>
   );

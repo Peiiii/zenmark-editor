@@ -3,7 +3,7 @@ import { BubbleMenu, Editor } from "@tiptap/react";
 import React, { FC, Fragment, useEffect, useState } from "react";
 
 import MenuItem from "./MenuItem";
-import { Actions } from "../actions";
+import { Actions } from "../actions/editor";
 import MenuItemSelect from "@/components/MenuItemSelect";
 
 export default ({ editor }: { editor: Editor }) => {

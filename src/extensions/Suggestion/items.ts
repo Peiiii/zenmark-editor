@@ -1,4 +1,4 @@
-import { Actions } from "@/actions";
+import { Actions } from "@/actions/editor";
 import Fuse from "fuse.js";
 const getSuggestionItems = (query) => {
   const actionList = Object.keys(Actions)
