@@ -43,9 +43,22 @@ $margin-md: 24px;
   }
 
   .sticky-widget {
-    position: absolute;
-    right: 24px;
-    top: 0;
+    width: 100%;
+    display: flex;
+    flex-flow: row;
+
+    .sticky-widget-left {
+      flex-grow: 1;
+    }
+
+    .sticky-widget-right {
+      height: 0;
+
+      .sticky-widget-inner {
+        position: relative;
+        // right: 24px;
+      }
+    }
   }
 
   .editor-middle {

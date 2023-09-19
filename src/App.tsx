@@ -222,7 +222,12 @@ export default ({
       </div>
       {editor && collapsed && (
         <div className="sticky-widget">
-          <MenuItem editor={editor} {...ExpandMenuBar} />
+          <div className="sticky-widget-left" />
+          <div className="sticky-widget-right">
+            <div className="sticky-widget-inner">
+              <MenuItem editor={editor} {...ExpandMenuBar} />
+            </div>
+          </div>
         </div>
       )}
       <div className="editor-middle scroll scroll-8">
