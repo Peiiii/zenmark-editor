@@ -196,7 +196,7 @@ export default ({
 
   const [collapsed, setCollapsed] = xbook.cacheService
     .space("tiptap-editor", "localStorage")
-    .useCachedState<boolean>("collapsed", false);
+    .useLocalStorage("collapsed", false);
 
   useEffect(() => {
     xbook.serviceBus.expose("collapseMenuBar", () => setCollapsed(true));
