@@ -187,12 +187,12 @@ export default ({
   //   }
   // }, [editor, currentUser]);
 
-  const setName = useCallback(() => {
-    const name = (window.prompt("Name") || "").trim().substring(0, 32);
-    if (name) {
-      return setCurrentUser({ ...currentUser, name });
-    }
-  }, [currentUser]);
+  // const setName = useCallback(() => {
+  //   const name = (window.prompt("Name") || "").trim().substring(0, 32);
+  //   if (name) {
+  //     return setCurrentUser({ ...currentUser, name });
+  //   }
+  // }, [currentUser]);
 
   const [collapsed, setCollapsed] = xbook.cacheService
     .space("tiptap-editor", "localStorage")

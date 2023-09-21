@@ -1,4 +1,5 @@
-export const initialContent = `# **第一个 Markdown 文档**
+export const initialContent = `# **第一个 Markdown 文档**`;
+export const initialContent2 = `# **第一个 Markdown 文档**
 
 ---
 
