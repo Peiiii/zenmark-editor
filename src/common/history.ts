@@ -5,7 +5,7 @@ const updateUrlParameter = (parameterName: string, newValue: string) => {
   var url = window.location.href;
 
   // 解析URL获取参数
-  var searchParams = new URLSearchParams(url);
+  var searchParams = new URLSearchParams(new URL(url).search);
 
   // 修改参数的值
   searchParams.set(parameterName, newValue);
@@ -14,8 +14,7 @@ const updateUrlParameter = (parameterName: string, newValue: string) => {
   var newUrl = window.location.pathname + "?" + searchParams.toString();
 
   // 修改地址栏URL但不更新页面标题
-  window.history.pushState("", "", newUrl);
-  console.log("pushState", newUrl);
+  window.history.pushState(null, "", newUrl);
 };
 const makeQuery = () => {
   const handler = {
@@ -23,18 +22,18 @@ const makeQuery = () => {
       return new URLSearchParams(realLocation.search).get(prop);
     },
     set(target, prop, value) {
-        // const query = {};
-        // for (let [k, v] of new URLSearchParams(realLocation.search) as any)
-        //   query[k] = v;
-        // query[prop] = value;
-        // const search: string[] = [];
-        // Object.keys(query).forEach((key) => {
-        //   search.push(`${key}=${query[key]}`);
-        // });
-        // const searchString = "?" + search.join("&");
-        // console.log(searchString);
-        // // realLocation.search = searchString;
-        // realHistory.pushState('','',);
+      // const query = {};
+      // for (let [k, v] of new URLSearchParams(realLocation.search) as any)
+      //   query[k] = v;
+      // query[prop] = value;
+      // const search: string[] = [];
+      // Object.keys(query).forEach((key) => {
+      //   search.push(`${key}=${query[key]}`);
+      // });
+      // const searchString = "?" + search.join("&");
+      // console.log(searchString);
+      // // realLocation.search = searchString;
+      // realHistory.pushState('','',);
       updateUrlParameter(prop, value);
       return true;
     },
