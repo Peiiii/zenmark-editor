@@ -23,6 +23,7 @@ const makeCollabDocId = () => {
     const resourseId= getResourceId(currentUser);
     return resourseId || nanoid();
 }
+// export const getCollabDocId = () => (history.location.query as any).collabDocId;
 export const getCollabDocId = () => (history.location.query as any).collabDocId;
 export const getCollabUrl =()=>{
     return `${location.protocol}://${location.hostname}:${location.port}${location.pathname}?collabDocId=${getCollabDocId()}`;

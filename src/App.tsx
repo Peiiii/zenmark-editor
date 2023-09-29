@@ -56,8 +56,8 @@ import MenuItem from "@/components/MenuItem";
 import { ExpandMenuBar } from "@/actions/page";
 // import { TableTooltip } from "@/extensions/MyTable/TableWidget";
 
-const ydoc = new Y.Doc();
-const provider = buildWebrtcProvider(ydoc);
+// const ydoc = new Y.Doc();
+// const provider = buildWebrtcProvider(ydoc);
 
 export default ({
   readContent,
@@ -171,13 +171,13 @@ export default ({
     }
   }, [editable, editor]);
 
-  useEffect(() => {
-    // Update status changes
-    provider.on("status", (event) => {
-      // console.log(event);
-      setStatus(event.status);
-    });
-  }, []);
+  // useEffect(() => {
+  //   // Update status changes
+  //   provider.on("status", (event) => {
+  //     // console.log(event);
+  //     setStatus(event.status);
+  //   });
+  // }, []);
 
   // Save current user to localStorage and emit to editor
   // useEffect(() => {
