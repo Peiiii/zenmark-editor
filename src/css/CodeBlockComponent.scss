@@ -1,10 +1,40 @@
 .code-block {
   position: relative;
   margin-top: 0.5rem;
+
   .bar {
     // height: 1.5rem;
     display: flex;
-    justify-content: end;
+    justify-content: flex-start;
+    padding: 10px;
+    
+    .language-select {
+      background-color: transparent;
+      border: 0;
+      border-radius: 0;
+      color: inherit;
+      // opacity: 0.5;
+      color: gray;
+      width: 6em;
+      text-align: right;
+
+      &::-webkit-scrollbar {
+        width: 0;
+      }
+
+      .language-option {
+        color: white;
+        text-align: center;
+        opacity: 0.8;
+        background-color: gray;
+
+        &:hover {
+          background-color: #70cff8;
+          color: white;
+        }
+      }
+    }
+
   }
 
   // select {
@@ -12,31 +42,6 @@
   //   right: 0;
   // }
 
-  .language-select {
-    background-color: transparent;
-    border: 0;
-    border-radius: 0;
-    color: inherit;
-    opacity: 0.5;
-    width: 6em;
-    text-align: right;
-
-    &::-webkit-scrollbar {
-      width: 0;
-    }
-
-    .language-option {
-      color: white;
-      text-align: center;
-      opacity: 0.8;
-      background-color: gray;
-
-      &:hover {
-        background-color: #70cff8;
-        color: white;
-      }
-    }
-  }
 
 }
 

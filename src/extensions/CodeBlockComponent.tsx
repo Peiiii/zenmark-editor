@@ -5,7 +5,7 @@ import { NodeViewContent, NodeViewWrapper } from "@tiptap/react";
 
 export default ({
   node: {
-    attrs: { language: defaultLanguage },
+    attrs: { language },
   },
   updateAttributes,
   extension,
@@ -17,7 +17,9 @@ export default ({
           <select
             className="language-select"
             contentEditable={false}
-            defaultValue={defaultLanguage}
+            style={{ width:`${ (language || "").length/2 + 2}em` }}
+            // defaultValue={defaultLanguage}
+            value={language}
             onChange={(event) =>
               updateAttributes({ language: event.target.value })
             }
