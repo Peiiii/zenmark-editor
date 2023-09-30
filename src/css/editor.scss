@@ -22,10 +22,11 @@ $padding-md: 24px;
     flex-flow: row;
     width: 100%;
     overflow: hidden;
+    border-bottom: 1px solid gainsboro;
 
     .editor__header-left {
       align-items: center;
-      border-bottom: 1px solid gainsboro;
+   
       display: flex;
       // flex: 0 0 auto;
       flex-wrap: wrap;
@@ -57,6 +58,14 @@ $padding-md: 24px;
 
       .sticky-widget-inner {
         position: relative;
+        // height: 40px;
+        // right: -20px;
+        // top: -20px;
+        // border-radius: 50%;
+        .button {
+          // border-radius: 50%;
+          // background-color: !;
+        }
         // right: 24px;
       }
     }

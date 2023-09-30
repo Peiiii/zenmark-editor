@@ -2,9 +2,9 @@
   background-color: transparent;
   border: none;
   border-radius: 0.4rem;
-  color: black;
+  // color: black;
   height: 1.75rem;
-  margin-right: 0.25rem;
+  // margin-right: 0.25rem;
   padding: 0.25rem;
   width: 1.75rem;
 
@@ -15,9 +15,11 @@
     width: 100%;
   }
 
-  &:hover,
+  &:hover {
+    background-color: gray;
+    color: #fff;
+  }
   &.is-active {
-    // background-color: gainsboro;
-    // color: #fff;
+    
   }
 }

@@ -69,6 +69,8 @@ export default ({
   const [status, setStatus] = useState("connecting");
   const [currentUser, setCurrentUser] = useState(getInitialUser);
   const [editable, setEditable] = useState(true);
+  const [showToolBarDropdownButton, setShowToolBarDropdownButton] =
+    useState(false);
 
   const editor = useEditor({
     editable,
@@ -171,6 +173,20 @@ export default ({
     }
   }, [editable, editor]);
 
+  useEffect(() => {
+    let timeout;
+    if (showToolBarDropdownButton) {
+      timeout = setTimeout(() => {
+        setShowToolBarDropdownButton(false);
+      }, 10000);
+    }
+    return () => {
+      if (timeout) {
+        clearTimeout(timeout);
+      }
+    };
+  }, [showToolBarDropdownButton]);
+
   // useEffect(() => {
   //   // Update status changes
   //   provider.on("status", (event) => {
@@ -204,9 +220,16 @@ export default ({
   }, [setCollapsed]);
 
   return (
-    <div className="editor">
+    <div
+      className="editor"
+      onClick={() => {
+        if (editable && collapsed && !showToolBarDropdownButton) {
+          setShowToolBarDropdownButton(true);
+        }
+      }}
+    >
       <div className={"editor-header" + (collapsed ? " hidden" : "")}>
-        {editor && !editable && (
+        {editor && (
           <div style={{ display: "flex", flexFlow: "row-reverse" }}>
             {!editable && (
               <AiOutlineEdit
@@ -218,9 +241,9 @@ export default ({
             )}
           </div>
         )}
-        {editor && editable && <MenuBar editor={editor} />}
+        {editor && <MenuBar editor={editor} />}
       </div>
-      {editor && collapsed && (
+      {editor && collapsed && showToolBarDropdownButton && (
         <div className="sticky-widget">
           <div className="sticky-widget-left" />
           <div className="sticky-widget-right">
