@@ -23,8 +23,11 @@ export const Markdown = Extension.create({
     const commands = extensions.Commands.config.addCommands();
     return {
       setContent: (content, emitUpdate, parseOptions) => (props) => {
+        const contentParsed =
+          props.editor.storage.markdown.parser.parse(content);
+          console.log("content parsed: " + contentParsed)
         return commands.setContent(
-          props.editor.storage.markdown.parser.parse(content),
+          contentParsed,
           emitUpdate,
           parseOptions
         )(props);
@@ -39,6 +42,7 @@ export const Markdown = Extension.create({
     };
   },
   onBeforeCreate() {
+
     this.editor.storage.markdown = {
       options: { ...this.options },
       parser: new MarkdownParser(this.editor, this.options),
@@ -53,6 +57,7 @@ export const Markdown = Extension.create({
     this.editor.options.content = this.editor.storage.markdown.parser.parse(
       this.editor.options.content
     );
+    console.log("content parsed: ", this.editor.options.content )
     // console.log("rendered content: ", this.editor.options.content);
   },
   onCreate() {

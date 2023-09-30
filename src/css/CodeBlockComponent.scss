@@ -1,3 +1,15 @@
+.hover-action {
+  .hover-visible {
+    visibility: hidden;
+  }
+
+  &:hover {
+    .hover-visible {
+      visibility: visible;
+    }
+  }
+}
+
 .code-block {
   position: relative;
   margin-top: 0.5rem;
@@ -7,7 +19,7 @@
     display: flex;
     justify-content: flex-start;
     padding: 10px;
-    
+
     .language-select {
       background-color: transparent;
       border: 0;
@@ -35,7 +47,27 @@
       }
     }
 
+    .right {
+      flex-grow: 1;
+      display: flex;
+      justify-content: flex-end;
+
+      .copy-button {
+        background: inherit;
+        border: none;
+        color: gray;
+        font-size: 0.8em;
+      }
+
+      .copied-text {
+        font-size: 0.8em;
+        color: gray;
+      }
+    }
+
   }
+
+
 
   // select {
   //   position: absolute;
@@ -66,6 +98,59 @@
       // background: none;
       // font-size: 0.8rem;
       // padding: 0.5rem;
+
+
+      div {
+        overflow-x: auto;
+
+        @mixin scroll-style($size: 10px,
+          $thumb: none,
+          $thumb-color: grey,
+          $thumb-radius: 10px,
+          $track-color: transparent,
+          $track-radius: 10px) {
+
+          // Respaldo para Firefox
+          scrollbar-color: $thumb-color $track-color;
+          scrollbar-width: thin;
+
+          // Navegadores basados en webkit
+          &::-webkit-scrollbar {
+            width: $size;
+            height: $size;
+
+            &-track {
+              background-color: $track-color;
+              border-radius: $track-radius;
+            }
+
+            &-thumb {
+              background-color: $thumb-color;
+              background-image: $thumb;
+              border-radius: $thumb-radius;
+            }
+          }
+        }
+
+        @include scroll-style($size: var(--scroll-size, 10px),
+
+          $thumb: var(--scroll-thumb, none),
+          $thumb-color: var(--scroll-thumb-color, grey),
+          $thumb-radius: var(--scroll-thumb-radius, var(--scroll-radius)),
+
+          $track-color: var(--scroll-track, transparent),
+          $track-radius: var(--scroll-track-radius, var(--scroll-radius)),
+        );
+
+
+        --scroll-size: 5px;
+        --scroll-thumb-color: transparent;
+
+        &:hover {
+          --scroll-size: 5px;
+          --scroll-thumb-color: #dfdfdf52;
+        }
+      }
     }
 
     .hljs-comment,

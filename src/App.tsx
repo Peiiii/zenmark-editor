@@ -1,59 +1,48 @@
-import "./styles";
+import CharacterCount from "@tiptap/extension-character-count";
+import Document from "@tiptap/extension-document";
+import Highlight from "@tiptap/extension-highlight";
+import Image from "@tiptap/extension-image";
+import Placeholder from "@tiptap/extension-placeholder";
+import Typography from "@tiptap/extension-typography";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import React, { useCallback, useEffect, useState } from "react";
-import * as Y from "yjs";
-import Document from "@tiptap/extension-document";
-import Paragraph from "@tiptap/extension-paragraph";
-import Text from "@tiptap/extension-text";
-import Image from "@tiptap/extension-image";
-import Typography from "@tiptap/extension-typography";
-import Placeholder from "@tiptap/extension-placeholder";
-import CharacterCount from "@tiptap/extension-character-count";
-import Collaboration from "@tiptap/extension-collaboration";
-import CollaborationCursor from "@tiptap/extension-collaboration-cursor";
-import Highlight from "@tiptap/extension-highlight";
+import { useEffect, useState } from "react";
+import "./styles";
 
-import Code from "@tiptap/extension-code";
-import TextAlign from "@tiptap/extension-text-align";
-import Link from "@tiptap/extension-link";
-import Dropcursor from "@tiptap/extension-dropcursor";
-import { ColorHighlighter } from "./extensions/ColorHighlighter";
-import { SmilieReplacer } from "./extensions/SmilieReplacer";
-import { CodeBlockHighlight } from "./extensions/CodeBlockHighlight";
-import { SaveFile } from "./extensions/SaveFile";
-import { Invite } from "./extensions/Invite";
-import TaskItem from "@tiptap/extension-task-item";
-import TaskList from "@tiptap/extension-task-list";
-import TableCell from "@tiptap/extension-table-cell";
-import TableHeader from "@tiptap/extension-table-header";
-import TableRow from "@tiptap/extension-table-row";
-import Table from "@tiptap/extension-table";
-import MenuBar from "./components/MenuBar";
-import BubbleMenu from "./components/BubbleMenu";
-import FloatingMenu from "./components/FloatingMenu";
-import { buildWebrtcProvider, getInitialUser } from "./common/collab-utils";
-import { MessageContainer } from "./common/utils";
-import { Suggestion } from "./extensions/Suggestion";
-import { Iframe } from "./extensions/Iframe";
-import { AiOutlineEdit, AiOutlineRead } from "react-icons/ai";
-import MathInline from "@/extensions/MathInline";
+import { ExpandMenuBar } from "@/actions/page";
+import MenuItem from "@/components/MenuItem";
 import MathBlock from "@/extensions/MathBlock";
-import Gapcursor from "@tiptap/extension-gapcursor";
-import { Underline } from "@/extensions/Underline";
+import MathInline from "@/extensions/MathInline";
 import MyTable from "@/extensions/MyTable";
-import MyTableRow from "@/extensions/MyTableRow";
 import { MyTableCell } from "@/extensions/MyTableCell";
+import MyTableRow from "@/extensions/MyTableRow";
+import { Underline } from "@/extensions/Underline";
 import { Markdown } from "@/extensions/tiptap-markdown";
 import { initialContent } from "@/initialize";
-import HorizontalRule from "@tiptap/extension-horizontal-rule";
-import ListKeymap from "@tiptap/extension-list-keymap";
 import Focus from "@tiptap/extension-focus";
-import Superscript from "@tiptap/extension-superscript";
+import HorizontalRule from "@tiptap/extension-horizontal-rule";
+import Link from "@tiptap/extension-link";
+import ListKeymap from "@tiptap/extension-list-keymap";
 import Subscript from "@tiptap/extension-subscript";
+import Superscript from "@tiptap/extension-superscript";
+import TableHeader from "@tiptap/extension-table-header";
+import TaskItem from "@tiptap/extension-task-item";
+import TaskList from "@tiptap/extension-task-list";
+import TextAlign from "@tiptap/extension-text-align";
+import { AiOutlineEdit } from "react-icons/ai";
 import xbook from "xbook";
-import MenuItem from "@/components/MenuItem";
-import { ExpandMenuBar } from "@/actions/page";
+import { getInitialUser } from "./common/collab-utils";
+import { MessageContainer } from "./common/utils";
+import BubbleMenu from "./components/BubbleMenu";
+import MenuBar from "./components/MenuBar";
+import { CodeBlockHighlight } from "./extensions/CodeBlockHighlight";
+import { ColorHighlighter } from "./extensions/ColorHighlighter";
+import { Iframe } from "./extensions/Iframe";
+import { Invite } from "./extensions/Invite";
+import { SaveFile } from "./extensions/SaveFile";
+import { SmilieReplacer } from "./extensions/SmilieReplacer";
+import { Suggestion } from "./extensions/Suggestion";
+import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
 // import { TableTooltip } from "@/extensions/MyTable/TableWidget";
 
 // const ydoc = new Y.Doc();
@@ -80,8 +69,15 @@ export default ({
         codeBlock: false,
         // history: false,
         horizontalRule: false,
+        // code: false,
+        
       }),
       Markdown,
+      // Code.configure({
+      //   HTMLAttributes: {
+      //     "data-mark":"code"
+      //   },
+      // }),
       Document,
       TextAlign.configure({
         types: ["tableCell", "tableHeader", "heading", "paragraph"],
@@ -125,6 +121,7 @@ export default ({
       ColorHighlighter,
       SmilieReplacer,
       CodeBlockHighlight,
+      // CodeBlockLowlight,
       SaveFile.configure({
         saveContent: writeContent,
       }),
