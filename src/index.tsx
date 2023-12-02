@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import App from "./App";
 
-export default {
+const plugin = {
   activate: (xbook: any) => {
     console.log("React:", React, "useCallback:", useCallback);
     xbook.componentService.register("tiptap-editor", ({ fid }) => {
@@ -39,4 +39,9 @@ export default {
       },
     });
   },
+}
+
+export default {
+  plugin,
+  Component: App,
 };
