@@ -51,9 +51,11 @@ import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
 export default ({
   readContent,
   writeContent,
+  subscribeContent,
 }: {
   readContent?: () => Promise<string>;
   writeContent?: (s: string) => Promise<void>;
+  subscribeContent?: (cb: (s: string) => void) => () => void;
 }) => {
   const [status, setStatus] = useState("connecting");
   const [currentUser, setCurrentUser] = useState(getInitialUser);
@@ -70,7 +72,6 @@ export default ({
         // history: false,
         horizontalRule: false,
         // code: false,
-        
       }),
       Markdown,
       // Code.configure({
@@ -162,6 +163,14 @@ export default ({
       readContent().then((content) => editor.commands.setContent(content));
     }
   }, [editor, readContent]);
+
+  useEffect(() => {
+    if (subscribeContent) {
+      return subscribeContent((content) => {
+        editor?.commands.setContent(content);
+      });
+    }
+  }, [editor, subscribeContent]);
 
   useEffect(() => {
     if (editor) {
