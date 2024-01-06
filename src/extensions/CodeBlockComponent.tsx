@@ -11,7 +11,7 @@ export default ({ node, updateAttributes, extension }) => {
   const value = language || "null";
   const [copied, setCopied] = useState(false);
   // console.log("node:", node);
-  const code = node.content.content[0].text;
+  const code = node.content.content[0]?.text;
   // console.log("code:",code)
   useEffect(() => {
     if (copied) {
