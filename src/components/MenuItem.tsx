@@ -10,11 +10,11 @@ export default ({
 }: {
   icon: any;
   title?: string;
-  action?: (editor:Editor)=>void;
-  isActive?:(editor:Editor) => boolean;
+  action?: (editor: Editor) => void;
+  isActive?: (editor: Editor) => boolean;
   editor: Editor;
 }) => (
-  <button
+  <span
     className={`menu-item${isActive && isActive(editor) ? " is-active" : ""}`}
     onClick={() => {
       action?.(editor);
@@ -22,5 +22,5 @@ export default ({
     title={title}
   >
     {<Icon />}
-  </button>
+  </span>
 );

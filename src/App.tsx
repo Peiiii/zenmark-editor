@@ -19,7 +19,7 @@ import MyTableRow from "@/extensions/MyTableRow";
 import { Underline } from "@/extensions/Underline";
 import { Markdown } from "@/extensions/tiptap-markdown";
 import { initialContent } from "@/initialize";
-import Focus from "@tiptap/extension-focus";
+import Focus from "@tiptap/extension-focus"
 import HorizontalRule from "@tiptap/extension-horizontal-rule";
 import Link from "@tiptap/extension-link";
 import ListKeymap from "@tiptap/extension-list-keymap";
@@ -57,7 +57,7 @@ export default ({
   subscribeContent?: (cb: (s: string) => void) => () => void;
 }) => {
   console.log("[tiptap-editor] version: 2023-12-28");
-  
+
   const [status, setStatus] = useState("connecting");
   const [currentUser, setCurrentUser] = useState(getInitialUser);
   const [editable, setEditable] = useState(true);
