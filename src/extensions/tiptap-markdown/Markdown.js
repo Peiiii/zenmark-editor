@@ -24,8 +24,10 @@ export const Markdown = Extension.create({
     const commands = extensions.Commands.config.addCommands();
     return {
       setContent: (content, emitUpdate, parseOptions) => (props) => {
+        const [frontmatter, pureMarkdown] = extractAndRemoveFrontmatter(content);
+        this.editor.storage.markdown.frontmatter = frontmatter;
         const contentParsed =
-          props.editor.storage.markdown.parser.parse(content);
+          props.editor.storage.markdown.parser.parse(pureMarkdown);
           console.log("content parsed: " + contentParsed)
         return commands.setContent(
           contentParsed,
