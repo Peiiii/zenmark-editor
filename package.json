@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@benrbray/prosemirror-math": "^0.2.2",
+    "@mdx-js/mdx": "^3.0.0",
     "@tiptap/extension-character-count": "^2.0.0-beta.209",
     "@tiptap/extension-code": "^2.0.0-beta.209",
     "@tiptap/extension-code-block-lowlight": "^2.0.0-beta.209",
@@ -72,11 +73,20 @@
     "react-icons": "^4.7.1",
     "react-to-webcomponent": "^2.0.0-alpha.0",
     "react-toastify": "^9.1.1",
+    "rehype-raw": "^7.0.0",
+    "remark-frontmatter": "^5.0.0",
+    "remark-gfm": "^4.0.0",
+    "remark-parse": "^11.0.0",
+    "remark-parse-frontmatter": "^1.0.3",
+    "remark-stringify": "^11.0.0",
     "rxjs": "^7.8.1",
     "tippy.js": "^6.3.7",
+    "unified": "^11.0.4",
+    "unist-util-visit": "^5.0.0",
     "usehooks-ts": "^2.9.1",
     "y-prosemirror": "^1.2.0",
     "y-webrtc": "^10.2.3",
+    "yaml": "^2.3.4",
     "yjs": "^13.5.44"
   },
   "devDependencies": {

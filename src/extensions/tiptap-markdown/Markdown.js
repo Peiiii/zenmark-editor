@@ -1,8 +1,9 @@
+import { extractAndRemoveFrontmatter, modifyFrontmatter } from "@/extensions/tiptap-markdown/util/frontmatter";
 import { Extension, extensions } from "@tiptap/core";
-import { MarkdownTightLists } from "./extensions/tiptap/tight-lists";
-import { MarkdownSerializer } from "./serialize/MarkdownSerializer";
-import { MarkdownParser } from "./parse/MarkdownParser";
 import { MarkdownClipboard } from "./extensions/tiptap/clipboard";
+import { MarkdownTightLists } from "./extensions/tiptap/tight-lists";
+import { MarkdownParser } from "./parse/MarkdownParser";
+import { MarkdownSerializer } from "./serialize/MarkdownSerializer";
 
 export const Markdown = Extension.create({
   name: "markdown",
@@ -48,11 +49,22 @@ export const Markdown = Extension.create({
       parser: new MarkdownParser(this.editor, this.options),
       serializer: new MarkdownSerializer(this.editor),
       getMarkdown: () => {
-        return this.editor.storage.markdown.serializer.serialize(
+        const pureMarkdown= this.editor.storage.markdown.serializer.serialize(
           this.editor.state.doc
         );
+        const frontmatter = this.editor.storage.markdown.frontmatter;
+        if (frontmatter) {
+          return modifyFrontmatter(pureMarkdown, frontmatter);
+        }
+        return pureMarkdown;
       },
+      frontmatter: null,
     };
+    const [frontmatter, pureMarkdown] = extractAndRemoveFrontmatter(this.editor.options.content);
+    console.log("frontmatter: ", frontmatter, "pureMarkdown: ", pureMarkdown);
+    this.editor.storage.markdown.frontmatter = frontmatter;
+    this.editor.options.content = pureMarkdown;
+     
     this.editor.options.initialContent = this.editor.options.content;
     this.editor.options.content = this.editor.storage.markdown.parser.parse(
       this.editor.options.content

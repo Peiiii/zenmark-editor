@@ -55,6 +55,12 @@ export const SaveFile = Extension.create({
   },
   addCommands() {
     return {
+      logMarkdown:
+        () =>
+        async ({ commands, editor }) => {
+          const markdown = editor.storage.markdown.getMarkdown();
+          console.log("markdown:", markdown);
+        },
       saveFile:
         () =>
         async ({ commands, editor }) => {
@@ -62,6 +68,8 @@ export const SaveFile = Extension.create({
           // console.log("tiptap-markdown output:");
 
           // console.log(m);
+
+        
           const content = editor.getHTML();
           // console.log("html output:", content);
           //   console.log("doc:", editor.state.doc);
@@ -80,6 +88,7 @@ export const SaveFile = Extension.create({
   addKeyboardShortcuts() {
     return {
       "Ctrl-s": () => (this.editor.commands as any).saveFile(),
+      "Ctrl-g": () => (this.editor.commands as any).logMarkdown(),
     };
   },
 });

@@ -1,4 +1,8 @@
 let initialContent = `
+---
+title: home
+---
+
 \`\`\`
 <!doctype html>
 <html lang="en">

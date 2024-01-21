@@ -19,7 +19,7 @@ import MyTableRow from "@/extensions/MyTableRow";
 import { Underline } from "@/extensions/Underline";
 import { Markdown } from "@/extensions/tiptap-markdown";
 import { initialContent } from "@/initialize";
-import Focus from "@tiptap/extension-focus"
+import Focus from "@tiptap/extension-focus";
 import HorizontalRule from "@tiptap/extension-horizontal-rule";
 import Link from "@tiptap/extension-link";
 import ListKeymap from "@tiptap/extension-list-keymap";
