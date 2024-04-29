@@ -1,9 +1,10 @@
+import { EventKeys } from "@/constants/eventKeys";
+import xbook from "@/xbook";
 import { Extension } from "@tiptap/core";
 import {
   defaultMarkdownSerializer,
   MarkdownSerializer,
 } from "@tiptap/pm/markdown";
-import { message } from "../common/utils";
 // console.log(defaultMarkdownSerializer.nodes, defaultMarkdownSerializer.marks);
 const markdownSerializer = new MarkdownSerializer(
   {
@@ -69,7 +70,6 @@ export const SaveFile = Extension.create({
 
           // console.log(m);
 
-        
           const content = editor.getHTML();
           // console.log("html output:", content);
           //   console.log("doc:", editor.state.doc);
@@ -79,7 +79,8 @@ export const SaveFile = Extension.create({
           // );
           if (this.options.saveContent) {
             this.options.saveContent(m).then(() => {
-              message.success("File saved");
+              // message.success("File saved");
+              xbook.eventBus.emit(EventKeys.FileSaved);
             });
           }
         },
