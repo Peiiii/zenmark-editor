@@ -42,7 +42,7 @@ const plugin = {
     });
 
     xbook.eventBus.on(EventKeys.FileSaved, () => {
-      context.notiva.emit(EventKeys.FileSaved);
+      context.eventBus.emit(EventKeys.FileSaved);
     });
   },
 };

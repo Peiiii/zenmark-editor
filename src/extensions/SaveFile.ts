@@ -52,6 +52,7 @@ export const SaveFile = Extension.create({
   addOptions() {
     return {
       saveContent: null,
+      onFileSaved: null,
     };
   },
   addCommands() {
@@ -80,7 +81,7 @@ export const SaveFile = Extension.create({
           if (this.options.saveContent) {
             this.options.saveContent(m).then(() => {
               // message.success("File saved");
-              xbook.eventBus.emit(EventKeys.FileSaved);
+              this.options.onFileSaved?.();
             });
           }
         },

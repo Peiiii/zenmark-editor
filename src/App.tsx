@@ -43,6 +43,7 @@ import { SaveFile } from "./extensions/SaveFile";
 import { SmilieReplacer } from "./extensions/SmilieReplacer";
 import { Suggestion } from "./extensions/Suggestion";
 import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
+import { EventKeys } from "@/constants/eventKeys";
 // import { TableTooltip } from "@/extensions/MyTable/TableWidget";
 
 // const ydoc = new Y.Doc();
@@ -58,8 +59,8 @@ export default ({
 }) => {
   console.log("[tiptap-editor] version: 2023-12-28");
 
-  const [status, setStatus] = useState("connecting");
-  const [currentUser, setCurrentUser] = useState(getInitialUser);
+  // const [status, setStatus] = useState("connecting");
+  // const [currentUser, setCurrentUser] = useState(getInitialUser);
   const [editable, setEditable] = useState(true);
   const [showToolBarDropdownButton, setShowToolBarDropdownButton] =
     useState(false);
@@ -126,6 +127,9 @@ export default ({
       // CodeBlockLowlight,
       SaveFile.configure({
         saveContent: writeContent,
+        onFileSaved: () => {
+          xbook.eventBus.emit(EventKeys.FileSaved);
+        },
       }),
       Invite,
       Suggestion,
