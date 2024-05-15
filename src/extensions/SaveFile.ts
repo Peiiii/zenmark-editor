@@ -89,6 +89,7 @@ export const SaveFile = Extension.create({
   },
   addKeyboardShortcuts() {
     return {
+      "Cmd-s": () => (this.editor.commands as any).saveFile(),
       "Ctrl-s": () => (this.editor.commands as any).saveFile(),
       "Ctrl-g": () => (this.editor.commands as any).logMarkdown(),
     };
