@@ -28,7 +28,7 @@ export const Markdown = Extension.create({
         this.editor.storage.markdown.frontmatter = frontmatter;
         const contentParsed =
           props.editor.storage.markdown.parser.parse(pureMarkdown);
-          console.log("content parsed: " + contentParsed)
+          // console.log("content parsed: " + contentParsed)
         return commands.setContent(
           contentParsed,
           emitUpdate,
@@ -63,7 +63,7 @@ export const Markdown = Extension.create({
       frontmatter: null,
     };
     const [frontmatter, pureMarkdown] = extractAndRemoveFrontmatter(this.editor.options.content);
-    console.log("frontmatter: ", frontmatter, "pureMarkdown: ", pureMarkdown);
+    // console.log("frontmatter: ", frontmatter, "pureMarkdown: ", pureMarkdown);
     this.editor.storage.markdown.frontmatter = frontmatter;
     this.editor.options.content = pureMarkdown;
      
@@ -71,7 +71,7 @@ export const Markdown = Extension.create({
     this.editor.options.content = this.editor.storage.markdown.parser.parse(
       this.editor.options.content
     );
-    console.log("content parsed: ", this.editor.options.content )
+    // console.log("content parsed: ", this.editor.options.content )
     // console.log("rendered content: ", this.editor.options.content);
   },
   onCreate() {
