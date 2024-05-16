@@ -44,6 +44,7 @@ import { SmilieReplacer } from "./extensions/SmilieReplacer";
 import { Suggestion } from "./extensions/Suggestion";
 import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
 import { EventKeys } from "@/constants/eventKeys";
+import { device } from "@/xbook/common/device";
 // import { TableTooltip } from "@/extensions/MyTable/TableWidget";
 
 // const ydoc = new Y.Doc();
@@ -223,7 +224,7 @@ export default ({
 
   const [collapsed, setCollapsed] = xbook.cacheService
     .space("tiptap-editor", "localStorage")
-    .useLocalStorage("collapsed", false);
+    .useLocalStorage("collapsed", device.isMobile() ? true : false);
 
   useEffect(() => {
     xbook.serviceBus.expose("collapseMenuBar", () => setCollapsed(true));
