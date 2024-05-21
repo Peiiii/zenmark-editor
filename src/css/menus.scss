@@ -1,0 +1,89 @@
+// Define global variables
+$color-bg-base: var(--color-bg-base);
+$color-text-base: var(--color-text-base);
+$color-bg-hover: rgba(
+  0,
+  0,
+  0,
+  0.1
+); // Ensure this is not a fully transparent color
+$color-text-hover: #a975ff; // Ensure this is not a fully transparent color
+$font-size-base: 0.9rem;
+$padding-base: 0.2rem 0.5rem;
+$border-radius-base: 0.25rem;
+
+.panel-base {
+  position: relative;
+  border-radius: $border-radius-base;
+  background: $color-bg-base;
+  color: $color-text-base;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  font-size: $font-size-base;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.item-base {
+  display: flex;
+  align-items: center;
+
+  gap: 0.5rem;
+  font-size: $font-size-base;
+  font-weight: 500;
+  color: $color-text-base;
+  background: $color-bg-base; // Set a non-transparent background color
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+
+  &:hover,
+  &.is-active {
+    background: $color-bg-hover;
+    color: $color-text-hover;
+  }
+}
+
+.suggestion-item {
+  @extend .item-base;
+  width: 12em;
+  flex-grow: 1;
+  text-align: left;
+  overflow: hidden;
+  padding: $padding-base;
+
+  &:hover,
+  &.is-selected {
+    background: $color-bg-hover;
+    color: $color-text-hover;
+  }
+}
+
+.suggestion-panel {
+  @extend .panel-base;
+}
+
+.bubble-menu {
+  @extend .panel-base;
+  max-width: 315px;
+  flex-direction: row; // Change this to row
+  flex-wrap: wrap; // Add this to allow items to wrap to the next line
+}
+
+.bubble-menu .menu-item {
+  @extend .item-base;
+  
+  margin: 0.1rem; // Reduce the margin to decrease the space between items
+}
+
+.bubble-menu .menu-item-select {
+  &.expanded {
+    background: $color-bg-hover;
+    color: $color-text-hover;
+  }
+}
+
+.bubble-menu .menu-dropdown {
+  @extend .panel-base;
+}

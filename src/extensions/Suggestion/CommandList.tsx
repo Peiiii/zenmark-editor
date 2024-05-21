@@ -1,19 +1,35 @@
 import React, { Component } from "react";
+import { SuggestionPanel } from "./SuggestionPanel"; // 确保路径正确
+import { SuggestionItem } from "@/actions/types";
 
-class CommandList extends Component<any, any> {
+class CommandList extends Component<
+  {
+    items: SuggestionItem[];
+    command: (item: SuggestionItem) => void;
+  },
+  any
+> {
   state = {
-    selectedIndex: 0,
+    selectedId: undefined,
   };
 
-  componentDidUpdate(oldProps) {
-    if (this.props.items !== oldProps.items) {
+  componentDidMount(): void {
+    if (this.props.items.length > 0) {
       this.setState({
-        selectedIndex: 0,
+        selectedId: this.props.items[0]?.id,
       });
     }
   }
 
-  onKeyDown({ event }) {
+  componentDidUpdate(oldProps) {
+    if (this.props.items !== oldProps.items && this.props.items.length > 0) {
+      this.setState({
+        selectedId: this.props.items[0]?.id,
+      });
+    }
+  }
+
+  onKeyDown = ({ event }) => {
     if (event.key === "ArrowUp") {
       this.upHandler();
       return true;
@@ -30,59 +46,47 @@ class CommandList extends Component<any, any> {
     }
 
     return false;
-  }
+  };
 
-  upHandler() {
-    this.setState({
-      selectedIndex:
-        (this.state.selectedIndex + this.props.items.length - 1) %
-        this.props.items.length,
-    });
-  }
+  upHandler = () => {
+    const currentIndex = this.props.items.findIndex(
+      (item) => item.id === this.state.selectedId
+    );
+    const newIndex =
+      (currentIndex - 1 + this.props.items.length) % this.props.items.length;
+    this.setState({ selectedId: this.props.items[newIndex].id });
+  };
 
-  downHandler() {
-    this.setState({
-      selectedIndex: (this.state.selectedIndex + 1) % this.props.items.length,
-    });
-  }
+  downHandler = () => {
+    const currentIndex = this.props.items.findIndex(
+      (item) => item.id === this.state.selectedId
+    );
+    const newIndex = (currentIndex + 1) % this.props.items.length;
+    this.setState({ selectedId: this.props.items[newIndex].id });
+  };
 
-  enterHandler() {
-    this.selectItem(this.state.selectedIndex);
-  }
+  enterHandler = () => {
+    this.selectItem(this.state.selectedId);
+  };
 
-  selectItem(index) {
-    const item = this.props.items[index];
-
+  selectItem = (id) => {
+    const item = this.props.items.find((item) => item.id === id);
     if (item) {
       this.props.command(item);
     }
-  }
+  };
 
   render() {
     const { items } = this.props;
+    const selectedIndex = items.findIndex(
+      (item) => item.id === this.state.selectedId
+    );
     return (
-      <div className="suggestion-panel">
-        {items.map((item, index) => {
-          const { icon: Icon } = item;
-          return (
-            <div
-              className={`suggestion-item ${
-                index === this.state.selectedIndex ? "is-selected" : ""
-              }`}
-              key={index}
-              onClick={() => this.selectItem(index)}
-            >
-              {/* {item.element || item.title} */}
-              {/* <div className="suggestion-item"> */}
-              <div className="icon-wrapper">{<Icon />}</div>
-              <div className="title-wrapper">
-                <strong>{item.title}</strong>
-              </div>
-              {/* </div> */}
-            </div>
-          );
-        })}
-      </div>
+      <SuggestionPanel
+        items={items}
+        selectedIndex={selectedIndex}
+        selectItem={(index) => this.selectItem(items[index].id)}
+      />
     );
   }
 }

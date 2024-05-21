@@ -6,7 +6,8 @@
     color: var(--color-text-base);
     overflow: hidden;
     display: flex;
-    flex-flow: row;
+    // flex-flow: row;
+    flex-direction: column;
     flex-wrap: wrap;
     font-size: 0.9rem;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0px 10px 20px rgba(0, 0, 0, 0.1);
@@ -14,9 +15,10 @@
 
 .suggestion-item {
     display: flex;
-    width: 6em;
+    width: 12em;
     flex-grow: 1;
     text-align: left;
+    align-items: center;
     background: transparent;
     border: none;
     padding: 0.2rem 0.5rem;
@@ -26,6 +28,11 @@
     .remix {
         height: 1.2em;
         width: 1.2em;
+    }
+    
+    .icon-wrapper {
+        display: flex;
+        align-items: center;
     }
 
     .title-wrapper {

@@ -1,6 +1,6 @@
 import { Extension } from "@tiptap/core";
 import TiptapSuggestion from "@tiptap/suggestion";
-import getSuggestionItems from "./items";
+import getSuggestionItems from "./searchItems";
 import renderItems from "./renderItems";
 
 export const Suggestion = Extension.create({

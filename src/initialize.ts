@@ -3,6 +3,15 @@ let initialContent = `
 title: home
 ---
 
+# 测试
+---
+
+- [ ] dd
+
+* [ ] 吃饭
+- [x] 睡觉
+- [] 打豆豆
+
 \`\`\`
 <!doctype html>
 <html lang="en">

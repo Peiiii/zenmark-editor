@@ -1,10 +1,11 @@
-import "../css/bubble-menu.scss";
 import { BubbleMenu, Editor } from "@tiptap/react";
-import React, { FC, Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect } from "react";
+// import "../css/bubble-menu.scss";
 
-import MenuItem from "./MenuItem";
-import { Actions } from "../actions/editor";
 import MenuItemSelect from "@/components/MenuItemSelect";
+import { Actions } from "../actions/editor";
+import MenuItem from "./MenuItem";
+import PopMenu from "@/components/PopMenu";
 
 export default ({ editor }: { editor: Editor }) => {
   const items = [
@@ -45,7 +46,8 @@ export default ({ editor }: { editor: Editor }) => {
     >
       {items.map((item: any, index) => {
         if (Array.isArray(item)) {
-          return <MenuItemSelect key={index} items={item} editor={editor} />;
+          // return <MenuItemSelect key={index} items={item} editor={editor} />;
+           return <PopMenu key={index} items={item} editor={editor} />;
         } else {
           return (
             <Fragment key={index}>
