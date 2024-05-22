@@ -43,7 +43,7 @@ export default ({ editor }) => {
   ];
 
   return (
-    <div className="editor__header">
+    <div className="editor__header toolbar">
       <div className="editor__header-left">
         {" "}
         {items.map((item, index) => (
@@ -58,7 +58,7 @@ export default ({ editor }) => {
       </div>
       <div className="editor__header-middle"/>
       <div className="editor__header-right">
-        <MenuItem editor={editor} title="collapse" icon={FcCollapse} action={()=>{
+        <MenuItem name="collapseMenuBar" editor={editor} title="collapse" icon={FcCollapse} action={()=>{
           xbook.serviceBus.invoke("collapseMenuBar")
         }}/>
       </div>
