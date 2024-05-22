@@ -31,5 +31,7 @@
   "action.AddTableRowDown": "在下方添加表行",
   "action.EditLink": "编辑链接",
   "action.LinkURL": "链接地址",
-  "action.ImageURL": "图片地址"
+  "action.ImageURL": "图片地址",
+  "editor.StartOfLinePlaceholder": "输入 / 选择命令",
+  "editor.HeadingPlaceholder": "输入标题"
 }

@@ -43,6 +43,7 @@ import { Invite } from "./extensions/Invite";
 import { SaveFile } from "./extensions/SaveFile";
 import { SmilieReplacer } from "./extensions/SmilieReplacer";
 import { Suggestion } from "./extensions/Suggestion";
+import { i18n } from "@/services/i18n";
 // import { TableTooltip } from "@/extensions/MyTable/TableWidget";
 
 // const ydoc = new Y.Doc();
@@ -138,9 +139,15 @@ export default ({
       Placeholder.configure({
         placeholder: ({ node }) => {
           if (node.type.name === "heading") {
-            return "Title";
+            return i18n.get({
+              key: "editor.HeadingPlaceholder",
+              defaultValue: "Type a heading",
+            });
           }
-          return "type / for commands?";
+          return i18n.get({
+            key: "editor.StartOfLinePlaceholder",
+            defaultValue: "type / for commands?",
+          });
         },
       }),
 
