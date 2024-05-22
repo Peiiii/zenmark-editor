@@ -168,6 +168,12 @@ $border-radius-base: 0.25rem;
   margin: 0;
 } 
 
+.sticky-widget .menu-item {
+  @extend .item-base;
+  margin: 0;
+  border-top-left-radius: 0;
+}
+
 .toolbar .menu-item-select {
   &.expanded {
     background: $color-bg-hover;
