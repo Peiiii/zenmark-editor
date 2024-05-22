@@ -128,7 +128,8 @@ $border-radius-base: 0.25rem;
   max-width: 315px;
   flex-direction: row; // Change this to row
   flex-wrap: wrap; // Add this to allow items to wrap to the next line
-  z-index: index;
+  // z-index: index;
+  // z-index: 1;// 9999???
 }
 
 .bubble-menu .menu-item {
@@ -160,6 +161,7 @@ $border-radius-base: 0.25rem;
   // gap: 0.5rem;
   flex-wrap: nowrap;
   justify-content: space-between;
+  z-index: 10000;
 }
 
 .toolbar .menu-item {

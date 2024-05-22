@@ -13,9 +13,8 @@ function MenuItemSelect({ items, editor }) {
 
   const handleItemClick = (itemId) => {
     const item=items.find((item) => item.id === itemId);
-    console.log("itemId:", itemId);
-    console.log("item:", item);
     item.action(editor);
+    setExpanded(false);
     setActiveIndex(items.indexOf(items.find((item) => item.id === itemId)));
   };
 
@@ -59,9 +58,7 @@ function MenuItemSelect({ items, editor }) {
               }`}
               onClick={(e) => {
                 console.log("item:", item);
-                
-                e.stopPropagation();
-                e.preventDefault();
+              
                 handleItemClick(item.id);
               }}
               title={item.title}

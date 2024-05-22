@@ -21,24 +21,24 @@ export default ({ editor }: { editor: Editor }) => {
     Actions.Strikethrough,
     // Actions.CodeView,
     Actions.MarkPenLine,
-    Actions.H1,
-    Actions.H2,
-    Actions.ListUnordered,
-    Actions.ListOrdered,
-    Actions.ListCheck2,
-    Actions.CodeBoxLine,
-    Actions.DoubleQuotes1,
+    // Actions.H1,
+    // Actions.H2,
+    // Actions.ListUnordered,
+    // Actions.ListOrdered,
+    // Actions.ListCheck2,
+    // Actions.CodeBoxLine,
+    // Actions.DoubleQuotes1,
     Actions.EditLink,
     Actions.FormatClear,
     // Actions.Divider,
     // Actions.AlignLeft
-    [Actions.AlignLeft, Actions.AlignCenter, Actions.AlignRight],
-    Actions.AddTableColumnBefore,
-    Actions.AddTableColumnAfter,
-    Actions.AddTableRowBefore,
-    Actions.AddTableRowAfter,
+    // [Actions.AlignLeft, Actions.AlignCenter, Actions.AlignRight],
+    // Actions.AddTableColumnBefore,
+    // Actions.AddTableColumnAfter,
+    // Actions.AddTableRowBefore,
+    // Actions.AddTableRowAfter,
   ].map(withId);
-  
+
   useEffect(() => {
     const fromNode = editor.view.state.tr.doc.nodeAt(
       editor.state.selection.from
