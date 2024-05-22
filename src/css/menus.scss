@@ -155,15 +155,16 @@ $border-radius-base: 0.25rem;
 
 .toolbar {
   @extend .panel-base;
-  padding: 0.5rem;
-  gap: 0.5rem;
+  border-radius: 0;
+  // padding: 0.5rem;
+  // gap: 0.5rem;
   flex-wrap: nowrap;
   justify-content: space-between;
 }
 
 .toolbar .menu-item {
   @extend .item-base;
-  padding: 0.5rem;
+  // padding: 0.5rem;
   margin: 0;
 } 
 
