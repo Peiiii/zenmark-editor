@@ -1,16 +1,56 @@
 // Define global variables
+// Define colors for light mode
 $color-bg-base: var(--color-bg-base);
 $color-text-base: var(--color-text-base);
-$color-bg-hover: rgba(
-  0,
-  0,
-  0,
-  0.1
-); // Ensure this is not a fully transparent color
-$color-text-hover: #a975ff; // Ensure this is not a fully transparent color
+$color-bg-hover: #f5f5f5; // Light gray for hover background
+$color-text-hover: #333333; // Dark gray for hover text
+$color-bg-selected: #e0e0e0; // Slightly darker gray for selected background
+$color-text-selected: #000000; // Black for selected text
+
+// Define colors for dark mode
+$color-bg-base-dark: var(--color-bg-base-dark);
+$color-text-base-dark: var(--color-text-base-dark);
+$color-bg-hover-dark: #333333; // Dark gray for hover background
+$color-text-hover-dark: #f5f5f5; // Light gray for hover text
+$color-bg-selected-dark: #000000; // Black for selected background
+$color-text-selected-dark: #ffffff; // White for selected text
+
+// Use colors based on the user's preferred color scheme
+@media (prefers-color-scheme: dark) {
+  $color-bg-base: $color-bg-base-dark;
+  $color-text-base: $color-text-base-dark;
+  $color-bg-hover: $color-bg-hover-dark;
+  $color-text-hover: $color-text-hover-dark;
+  $color-bg-selected: $color-bg-selected-dark;
+  $color-text-selected: $color-text-selected-dark;
+}
+
 $font-size-base: 0.9rem;
 $padding-base: 0.2rem 0.5rem;
 $border-radius-base: 0.25rem;
+
+@mixin custom-scrollbar(
+  $width,
+  $track-color,
+  $thumb-color,
+  $thumb-hover-color
+) {
+  &::-webkit-scrollbar {
+    width: $width;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $track-color;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $thumb-color;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: $thumb-hover-color;
+  }
+}
 
 .panel-base {
   position: relative;
@@ -38,10 +78,14 @@ $border-radius-base: 0.25rem;
   cursor: pointer;
   transition: background 0.2s, color 0.2s;
 
-  &:hover,
-  &.is-active {
+  &:hover {
     background: $color-bg-hover;
     color: $color-text-hover;
+  }
+
+  &.is-selected {
+    background: $color-bg-selected;
+    color: $color-text-selected;
   }
 }
 
@@ -49,19 +93,34 @@ $border-radius-base: 0.25rem;
   @extend .item-base;
   width: 12em;
   flex-grow: 1;
+  flex-shrink: 0;
   text-align: left;
   overflow: hidden;
   padding: $padding-base;
 
-  &:hover,
-  &.is-selected {
+  &:hover {
     background: $color-bg-hover;
     color: $color-text-hover;
+  }
+
+  &.is-selected {
+    background: $color-bg-selected;
+    color: $color-text-selected;
+  }
+
+  .icon-wrapper {
+    align-items: center;
+    display: flex;
   }
 }
 
 .suggestion-panel {
   @extend .panel-base;
+  max-height: 15em;
+  overflow-y: auto;
+  flex-wrap: nowrap;
+
+  @include custom-scrollbar(4px, #f1f1f1, #888, #555);
 }
 
 .bubble-menu {
@@ -73,8 +132,12 @@ $border-radius-base: 0.25rem;
 
 .bubble-menu .menu-item {
   @extend .item-base;
-  
   margin: 0.1rem; // Reduce the margin to decrease the space between items
+
+  &.is-active {
+    background: $color-bg-selected;
+    color: $color-text-selected;
+  }
 }
 
 .bubble-menu .menu-item-select {

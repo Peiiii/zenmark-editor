@@ -285,8 +285,11 @@ export const AlignCenter: Action = {
     key: "action.AlignCenter",
     defaultValue: "Align Center",
   }),
-  action: (editor: Editor) =>
-    editor.chain().focus().setTextAlign("center").run(),
+  action: (editor: Editor) => {
+    console.log("editor:", editor);
+    
+    editor.chain().focus().setTextAlign("center").run();
+  },
   isActive: (editor) => editor.isActive({ textAlign: "center" }),
 };
 export const AlignJustify: Action = {

@@ -3,6 +3,7 @@ export type Action = {
   id?: string;
   icon: React.ComponentType;
   title?: string;
+  type?: string;
   name: string;
   action?: (editor: Editor) => any;
   command?: (state: { editor: Editor; range: Range }) => void;

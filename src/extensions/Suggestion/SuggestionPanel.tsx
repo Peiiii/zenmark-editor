@@ -1,3 +1,5 @@
+import { useEffect, useRef } from "react";
+
 export const SuggestionItem = ({ item, isSelected, onSelect, id }) => {
   const { icon: Icon, title } = item;
   return (
@@ -16,8 +18,14 @@ export const SuggestionItem = ({ item, isSelected, onSelect, id }) => {
 };
 
 export const SuggestionPanel = ({ items, selectedIndex, selectItem }) => {
+  const panelRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const selectedItem = panelRef.current?.children[selectedIndex];
+    selectedItem?.scrollIntoView({ block: "nearest" });
+  }, [selectedIndex]);
   return (
-    <div className="suggestion-panel">
+    <div className="suggestion-panel" ref={panelRef}>
       {items.map((item, index) => (
         <SuggestionItem
           id={index}

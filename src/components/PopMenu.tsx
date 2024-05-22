@@ -1,6 +1,5 @@
-import { useState } from "react";
 import classNames from "classnames";
-import { isActive } from "@tiptap/react";
+import { useState } from "react";
 // Assume items is an array of objects, each with an `id`, `title`, `icon`, and `children` property.
 // `children` is an array of objects, each with an `id` and `title` property.
 
@@ -8,14 +7,16 @@ function MenuItemSelect({ items, editor }) {
   const [activeIndex, setActiveIndex] = useState(() =>
     items.indexOf(items.find((item) => item.isActive(editor)))
   );
-  const [expandedItem, setExpandedItem] = useState(null);
   const [expanded, setExpanded] = useState(false);
   const activeItem = items[activeIndex] || items[0];
   const { icon: Icon } = activeItem;
 
   const handleItemClick = (itemId) => {
+    const item=items.find((item) => item.id === itemId);
+    console.log("itemId:", itemId);
+    console.log("item:", item);
+    item.action(editor);
     setActiveIndex(items.indexOf(items.find((item) => item.id === itemId)));
-    items.find((item) => item.id === itemId).action(editor);
   };
 
   return (
@@ -56,7 +57,13 @@ function MenuItemSelect({ items, editor }) {
               className={`menu-item ${
                 activeIndex === index ? "is-active" : ""
               }`}
-              onClick={() => handleItemClick(item.id)}
+              onClick={(e) => {
+                console.log("item:", item);
+                
+                e.stopPropagation();
+                e.preventDefault();
+                handleItemClick(item.id);
+              }}
               title={item.title}
             >
               <item.icon />

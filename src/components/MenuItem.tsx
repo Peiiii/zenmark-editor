@@ -1,3 +1,4 @@
+import { Action } from "@/actions/types";
 import { Editor } from "@tiptap/react";
 import "../css/MenuItem.scss";
 
@@ -7,13 +8,7 @@ export default ({
   action,
   isActive,
   editor,
-}: {
-  icon: any;
-  title?: string;
-  action?: (editor: Editor) => void;
-  isActive?: (editor: Editor) => boolean;
-  editor: Editor;
-}) => (
+}: Action & { editor: Editor }) => (
   <span
     className={`menu-item${isActive && isActive(editor) ? " is-active" : ""}`}
     onClick={() => {

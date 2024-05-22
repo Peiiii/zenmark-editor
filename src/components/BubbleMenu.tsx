@@ -2,13 +2,20 @@ import { BubbleMenu, Editor } from "@tiptap/react";
 import { Fragment, useEffect } from "react";
 // import "../css/bubble-menu.scss";
 
-import MenuItemSelect from "@/components/MenuItemSelect";
+import { Action } from "@/actions/types";
+import PopMenu from "@/components/PopMenu";
 import { Actions } from "../actions/editor";
 import MenuItem from "./MenuItem";
-import PopMenu from "@/components/PopMenu";
+
+const withId = (item: Action | Action[]) => {
+  if (Array.isArray(item)) {
+    return item.map(withId);
+  }
+  return { ...item, id: item.id || item.name || item.title };
+};
 
 export default ({ editor }: { editor: Editor }) => {
-  const items = [
+  const items: (Action | Action[])[] = [
     Actions.Bold,
     Actions.Italic,
     Actions.Strikethrough,
@@ -30,7 +37,8 @@ export default ({ editor }: { editor: Editor }) => {
     Actions.AddTableColumnAfter,
     Actions.AddTableRowBefore,
     Actions.AddTableRowAfter,
-  ];
+  ].map(withId);
+  
   useEffect(() => {
     const fromNode = editor.view.state.tr.doc.nodeAt(
       editor.state.selection.from
@@ -44,10 +52,10 @@ export default ({ editor }: { editor: Editor }) => {
       tippyOptions={{ duration: 100 }}
       editor={editor}
     >
-      {items.map((item: any, index) => {
+      {items.map((item, index) => {
         if (Array.isArray(item)) {
           // return <MenuItemSelect key={index} items={item} editor={editor} />;
-           return <PopMenu key={index} items={item} editor={editor} />;
+          return <PopMenu key={index} items={item} editor={editor} />;
         } else {
           return (
             <Fragment key={index}>
