@@ -6,9 +6,10 @@ import { EventKeys } from "@/constants/eventKeys";
 const plugin = {
   activate: (context: any) => {
     console.log("React:", React, "useCallback:", useCallback);
-    context.componentService.register("tiptap-editor", ({ fid }) => {
+    context.componentService.register("tiptap-editor", ({ fid,uri }) => {
       // console.log("[inside]React:", React, "useCallback:", useCallback);
       // const a = useState(0);
+      fid = fid || uri;
       console.log("[editor] fid:", fid);
       const readContent = useCallback(async () => {
         return await context.serviceBus.invoke("fileSystemService.read", fid);
@@ -34,7 +35,8 @@ const plugin = {
           viewData: {
             type: "tiptap-editor",
             props: {
-              fid,
+              // fid,
+              uri: fid,
             },
           },
         });
