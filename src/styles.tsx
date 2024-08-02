@@ -1,3 +1,4 @@
+import "./css/global.scss";
 import "./css/App.scss";
 import "./css/editor.scss";
 import "./css/force-title.scss";

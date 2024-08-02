@@ -7,7 +7,7 @@ module.exports = {
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
   ],
-  prefix: "ttedit",
+  // prefix: "ttedit",
   theme: {
     container: {
       center: true,

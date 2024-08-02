@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import App from "./App";
 import xbook from "@/xbook";
-import { EventKeys } from "@/constants/eventKeys";
+import { EventKeys } from "@/tokens/eventKeys";
 
 const plugin = {
   activate: (context: any) => {

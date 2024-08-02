@@ -82,7 +82,7 @@ export const CodeView = {
     editor.chain().focus().deleteRange(range).setMark("code").run();
   },
 };
-export const MarkPenLine = {
+export const Highlight = {
   name: "highlight",
   icon: AiOutlineHighlight,
   title: i18n.get({
@@ -185,7 +185,7 @@ export const ListCheck2 = {
     editor.chain().focus().deleteRange(range).setNode("taskList").run();
   },
 };
-export const CodeBoxLine = {
+export const CodeBlock = {
   name: "codeBlock",
   icon: BiCodeBlock,
   title: i18n.get({
@@ -443,7 +443,7 @@ export const Actions = {
   Italic,
   Strikethrough,
   CodeView,
-  MarkPenLine,
+  Highlight,
   Divider,
   H1,
   H2,
@@ -451,7 +451,7 @@ export const Actions = {
   ListOrdered,
   ListUnordered,
   ListCheck2,
-  CodeBoxLine,
+  CodeBlock,
   DoubleQuotes1,
   Separator,
   TextWrap,

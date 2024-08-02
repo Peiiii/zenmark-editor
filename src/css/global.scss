@@ -68,9 +68,9 @@
 
   @layer base {
     * {
-      @apply tteditborder-border;
+      @apply border-border;
     }
     body {
-      @apply tteditbg-background ttedittext-foreground;
+      @apply bg-background text-foreground;
     }
   }

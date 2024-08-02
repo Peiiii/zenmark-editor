@@ -18,7 +18,8 @@
   "dependencies": {
     "@benrbray/prosemirror-math": "^0.2.2",
     "@mdx-js/mdx": "^3.0.0",
-    "@radix-ui/react-popover": "^1.0.7",
+    "@radix-ui/react-popover": "^1.1.1",
+    "@radix-ui/react-tooltip": "^1.1.2",
     "@tiptap/extension-character-count": "^2.0.0-beta.209",
     "@tiptap/extension-code": "^2.0.0-beta.209",
     "@tiptap/extension-code-block-lowlight": "^2.0.0-beta.209",

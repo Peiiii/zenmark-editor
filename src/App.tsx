@@ -11,7 +11,7 @@ import "./styles";
 
 import { ExpandMenuBar } from "@/actions/page";
 import MenuItem from "@/components/MenuItem";
-import { EventKeys } from "@/constants/eventKeys";
+import { EventKeys } from "@/tokens/eventKeys";
 import MathBlock from "@/extensions/MathBlock";
 import MathInline from "@/extensions/MathInline";
 import MyTable from "@/extensions/MyTable";

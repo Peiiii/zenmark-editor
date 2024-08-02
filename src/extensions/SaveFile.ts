@@ -1,4 +1,4 @@
-import { EventKeys } from "@/constants/eventKeys";
+import { EventKeys } from "@/tokens/eventKeys";
 import xbook from "@/xbook";
 import { Extension } from "@tiptap/core";
 import {

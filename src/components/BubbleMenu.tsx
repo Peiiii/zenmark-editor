@@ -20,7 +20,7 @@ export default ({ editor }: { editor: Editor }) => {
     Actions.Italic,
     Actions.Strikethrough,
     // Actions.CodeView,
-    Actions.MarkPenLine,
+    // Actions.MarkPenLine,
     // Actions.H1,
     // Actions.H2,
     // Actions.ListUnordered,
