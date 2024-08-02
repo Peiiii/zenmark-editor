@@ -3,7 +3,9 @@ import { Action, SuggestionItem } from "@/actions/types";
 import Fuse from "fuse.js";
 import pinyin from "pinyin";
 
-const SUGGESTION_ACTIONS: Action[] = [
+const SUGGESTION_ACTIONS: (Omit<Action, "id"> & {
+  id?: string;
+})[] = [
   Actions.H1,
   Actions.H2,
   Actions.OrderedList,
@@ -14,21 +16,26 @@ const SUGGESTION_ACTIONS: Action[] = [
 ];
 
 const getSuggestionItems = (query: { query: string }): SuggestionItem[] => {
-  const actionList = SUGGESTION_ACTIONS.filter(
+  const actionList: SuggestionItem[] = SUGGESTION_ACTIONS.filter(
     (action) => action.command && (action.title || action.id)
-  ).map((item) => ({
-    ...item,
-    id: item.id || item.title,
-    titlePinyin: item.title
-      ? pinyin(item.title, { style: pinyin.STYLE_NORMAL }).flat().join("")
-      : "",
-    descriptionPinyin: item.description
-      ? pinyin(item.description, { style: pinyin.STYLE_NORMAL }).flat().join("")
-      : "",
-    namePinyin: item.name
-      ? pinyin(item.name, { style: pinyin.STYLE_NORMAL }).flat().join("")
-      : "",
-  }));
+  ).map(
+    (item) =>
+      ({
+        ...item,
+        id: item.id || item.title,
+        titlePinyin: item.title
+          ? pinyin(item.title, { style: pinyin.STYLE_NORMAL }).flat().join("")
+          : "",
+        descriptionPinyin: item.description
+          ? pinyin(item.description, { style: pinyin.STYLE_NORMAL })
+              .flat()
+              .join("")
+          : "",
+        namePinyin: item.name
+          ? pinyin(item.name, { style: pinyin.STYLE_NORMAL }).flat().join("")
+          : "",
+      } as SuggestionItem)
+  );
   const options = {
     includeScore: true,
     keys: [

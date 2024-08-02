@@ -153,6 +153,7 @@ export const Paragraph = {
   },
 };
 export const BulletList = {
+  id: "bulletList",
   name: "bulletList",
   icon: AiOutlineUnorderedList,
   title: i18n.get({
@@ -166,6 +167,7 @@ export const BulletList = {
   },
 };
 export const OrderedList = {
+  id: "orderedList",
   name: "orderedList",
   icon: AiOutlineOrderedList,
   title: i18n.get({
