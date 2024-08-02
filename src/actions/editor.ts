@@ -152,7 +152,7 @@ export const Paragraph = {
       .run();
   },
 };
-export const ListUnordered = {
+export const BulletList = {
   name: "bulletList",
   icon: AiOutlineUnorderedList,
   title: i18n.get({
@@ -161,8 +161,11 @@ export const ListUnordered = {
   }),
   action: (editor) => editor.chain().focus().toggleBulletList().run(),
   isActive: (editor) => editor.isActive("bulletList"),
+  command: ({ editor, range }) => {
+    editor.chain().focus().deleteRange(range).setNode("bulletList").run();
+  },
 };
-export const ListOrdered = {
+export const OrderedList = {
   name: "orderedList",
   icon: AiOutlineOrderedList,
   title: i18n.get({
@@ -171,6 +174,9 @@ export const ListOrdered = {
   }),
   action: (editor) => editor.chain().focus().toggleOrderedList().run(),
   isActive: (editor) => editor.isActive("orderedList"),
+  command: ({ editor, range }) => {
+    editor.chain().focus().deleteRange(range).setNode("orderedList").run();
+  },
 };
 export const ListCheck2 = {
   name: "taskList",
@@ -287,7 +293,7 @@ export const AlignCenter: Action = {
   }),
   action: (editor: Editor) => {
     console.log("editor:", editor);
-    
+
     editor.chain().focus().setTextAlign("center").run();
   },
   isActive: (editor) => editor.isActive({ textAlign: "center" }),
@@ -448,8 +454,8 @@ export const Actions = {
   H1,
   H2,
   Paragraph,
-  ListOrdered,
-  ListUnordered,
+  OrderedList,
+  BulletList,
   ListCheck2,
   CodeBlock,
   DoubleQuotes1,

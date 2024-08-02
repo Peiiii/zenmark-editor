@@ -1,27 +1,34 @@
 import { Actions } from "@/actions/editor";
-import { SuggestionItem } from "@/actions/types";
+import { Action, SuggestionItem } from "@/actions/types";
 import Fuse from "fuse.js";
 import pinyin from "pinyin";
 
+const SUGGESTION_ACTIONS: Action[] = [
+  Actions.H1,
+  Actions.H2,
+  Actions.OrderedList,
+  Actions.BulletList,
+  Actions.ListCheck2,
+  Actions.CodeBlock,
+  Actions.DoubleQuotes1,
+];
+
 const getSuggestionItems = (query: { query: string }): SuggestionItem[] => {
-  const actionList = Object.keys(Actions)
-    .map((name) => Actions[name])
-    .filter((action) => action.command && (action.title || action.id))
-    .map((item) => ({
-      ...item,
-      id: item.id || item.title,
-      titlePinyin: item.title
-        ? pinyin(item.title, { style: pinyin.STYLE_NORMAL }).flat().join("")
-        : "",
-      descriptionPinyin: item.description
-        ? pinyin(item.description, { style: pinyin.STYLE_NORMAL })
-            .flat()
-            .join("")
-        : "",
-      namePinyin: item.name
-        ? pinyin(item.name, { style: pinyin.STYLE_NORMAL }).flat().join("")
-        : "",
-    }));
+  const actionList = SUGGESTION_ACTIONS.filter(
+    (action) => action.command && (action.title || action.id)
+  ).map((item) => ({
+    ...item,
+    id: item.id || item.title,
+    titlePinyin: item.title
+      ? pinyin(item.title, { style: pinyin.STYLE_NORMAL }).flat().join("")
+      : "",
+    descriptionPinyin: item.description
+      ? pinyin(item.description, { style: pinyin.STYLE_NORMAL }).flat().join("")
+      : "",
+    namePinyin: item.name
+      ? pinyin(item.name, { style: pinyin.STYLE_NORMAL }).flat().join("")
+      : "",
+  }));
   const options = {
     includeScore: true,
     keys: [

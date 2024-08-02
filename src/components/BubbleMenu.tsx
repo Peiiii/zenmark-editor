@@ -1,4 +1,5 @@
 import { BubbleMenu, Editor } from "@tiptap/react";
+import { css } from "@emotion/css";
 import { Fragment, useEffect } from "react";
 // import "../css/bubble-menu.scss";
 
@@ -23,8 +24,8 @@ export default ({ editor }: { editor: Editor }) => {
     // Actions.MarkPenLine,
     // Actions.H1,
     // Actions.H2,
-    // Actions.ListUnordered,
-    // Actions.ListOrdered,
+    // Actions.BulletList,
+    // Actions.OrderedList,
     // Actions.ListCheck2,
     // Actions.CodeBoxLine,
     // Actions.DoubleQuotes1,
@@ -52,22 +53,32 @@ export default ({ editor }: { editor: Editor }) => {
       tippyOptions={{ duration: 100 }}
       editor={editor}
     >
-      {items.map((item, index) => {
-        if (Array.isArray(item)) {
-          // return <MenuItemSelect key={index} items={item} editor={editor} />;
-          return <PopMenu key={index} items={item} editor={editor} />;
-        } else {
-          return (
-            <Fragment key={index}>
-              {item.type === "divider" ? (
-                <div className="divider" />
-              ) : (
-                <MenuItem editor={editor} {...item} />
-              )}
-            </Fragment>
-          );
-        }
-      })}
+      <div
+        className={css`
+          display: flex;
+        `}
+        onMouseDown={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+        }}
+      >
+        {items.map((item, index) => {
+          if (Array.isArray(item)) {
+            // return <MenuItemSelect key={index} items={item} editor={editor} />;
+            return <PopMenu key={index} items={item} editor={editor} />;
+          } else {
+            return (
+              <Fragment key={index}>
+                {item.type === "divider" ? (
+                  <div className="divider" />
+                ) : (
+                  <MenuItem editor={editor} {...item} />
+                )}
+              </Fragment>
+            );
+          }
+        })}
+      </div>
     </BubbleMenu>
   );
 };
