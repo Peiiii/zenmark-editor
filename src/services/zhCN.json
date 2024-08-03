@@ -32,6 +32,8 @@
   "action.EditLink": "编辑链接",
   "action.LinkURL": "链接地址",
   "action.ImageURL": "图片地址",
-  "editor.StartOfLinePlaceholder": "      输入 / 选择命令",
+  "editor.StartOfLinePlaceholder": "输入 / 选择命令",
+  "editor.ListPlaceholder": "   输入列表项",
+  "editor.TaskListPlaceholder": "      输入待办事项",
   "editor.HeadingPlaceholder": "输入标题"
 }

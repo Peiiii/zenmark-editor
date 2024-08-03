@@ -144,6 +144,19 @@ export default ({
               defaultValue: "Type a heading",
             });
           }
+
+          if (["bulletList", "orderedList"].includes(node.type.name)) {
+            return i18n.get({
+              key: "editor.ListPlaceholder",
+              defaultValue: "   Type a list item",
+            });
+          }
+          if (["taskList"].includes(node.type.name)) {
+            return i18n.get({
+              key: "editor.TaskListPlaceholder",
+              defaultValue: "      Type a task",
+            });
+          }
           return i18n.get({
             key: "editor.StartOfLinePlaceholder",
             defaultValue: "type / for commands?",
