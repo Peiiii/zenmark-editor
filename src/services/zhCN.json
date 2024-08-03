@@ -7,7 +7,7 @@
   "action.H1": "标题1",
   "action.H2": "标题2",
   "action.Paragraph": "段落",
-  "action.BulletList": "项目符号列表",
+  "action.BulletList": "无序列表",
   "action.OrderedList": "编号列表",
   "action.TaskList": "任务列表",
   "action.CodeBlock": "代码块",
