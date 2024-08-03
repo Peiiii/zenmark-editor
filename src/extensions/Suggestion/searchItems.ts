@@ -10,7 +10,7 @@ const SUGGESTION_ACTIONS: (Omit<Action, "id"> & {
   Actions.H2,
   Actions.OrderedList,
   Actions.BulletList,
-  Actions.ListCheck2,
+  Actions.TaskList,
   Actions.CodeBlock,
   Actions.DoubleQuotes1,
 ];

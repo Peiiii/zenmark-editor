@@ -26,7 +26,7 @@ export default ({ editor }: { editor: Editor }) => {
     // Actions.H2,
     // Actions.BulletList,
     // Actions.OrderedList,
-    // Actions.ListCheck2,
+    // Actions.TaskList,
     // Actions.CodeBoxLine,
     // Actions.DoubleQuotes1,
     Actions.EditLink,
@@ -50,7 +50,13 @@ export default ({ editor }: { editor: Editor }) => {
   return (
     <BubbleMenu
       className="bubble-menu"
-      tippyOptions={{ duration: 100 }}
+      tippyOptions={{
+        duration: 100,
+        placement: "bottom",
+        popperOptions: {
+          placement: "bottom",
+        },
+      }}
       editor={editor}
     >
       <div

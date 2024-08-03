@@ -20,7 +20,7 @@ export default ({ editor }) => {
     // Actions.Paragraph,
     Actions.BulletList,
     Actions.OrderedList,
-    Actions.ListCheck2,
+    Actions.TaskList,
     Actions.CodeBlock,
     Actions.Divider,
     Actions.DoubleQuotes1,

@@ -162,9 +162,8 @@ export const BulletList = {
   }),
   action: (editor) => editor.chain().focus().toggleBulletList().run(),
   isActive: (editor) => editor.isActive("bulletList"),
-  command: ({ editor, range }) => {
-    editor.chain().focus().deleteRange(range).setNode("bulletList").run();
-  },
+  command: ({ editor, range }) =>
+    editor.chain().focus().deleteRange(range).toggleBulletList().run(),
 };
 export const OrderedList = {
   id: "orderedList",
@@ -177,10 +176,10 @@ export const OrderedList = {
   action: (editor) => editor.chain().focus().toggleOrderedList().run(),
   isActive: (editor) => editor.isActive("orderedList"),
   command: ({ editor, range }) => {
-    editor.chain().focus().deleteRange(range).setNode("orderedList").run();
+    editor.chain().focus().deleteRange(range).toggleOrderedList().run();
   },
 };
-export const ListCheck2 = {
+export const TaskList = {
   name: "taskList",
   icon: AiOutlineCheckSquare,
   title: i18n.get({
@@ -190,7 +189,7 @@ export const ListCheck2 = {
   action: (editor) => editor.chain().focus().toggleTaskList().run(),
   isActive: (editor) => editor.isActive("taskList"),
   command: ({ editor, range }) => {
-    editor.chain().focus().deleteRange(range).setNode("taskList").run();
+    editor.chain().focus().deleteRange(range).toggleTaskList().run();
   },
 };
 export const CodeBlock = {
@@ -458,7 +457,7 @@ export const Actions = {
   Paragraph,
   OrderedList,
   BulletList,
-  ListCheck2,
+  TaskList,
   CodeBlock,
   DoubleQuotes1,
   Separator,
