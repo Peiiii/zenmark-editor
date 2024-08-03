@@ -1,0 +1,61 @@
+.ProseMirror {
+  ul li {
+    list-style-type: disc;
+  }
+
+  li ul li {
+    list-style-type: circle;
+  }
+
+  li li ul li {
+    list-style-type: square;
+  }
+
+  li li li ul li {
+    list-style-type: disc;
+  }
+
+  li li li li ul li {
+    list-style-type: circle;
+  }
+
+  li li li li li ul li {
+    list-style-type: square;
+  }
+
+  ol li {
+    list-style-type: decimal;
+  }
+
+  li ol li {
+    list-style-type: lower-alpha;
+  }
+
+  li li ol li {
+    list-style-type: lower-roman;
+  }
+
+  li li li ol li {
+    list-style-type: decimal;
+  }
+
+  li li li li ol li {
+    list-style-type: lower-alpha;
+  }
+
+  li li li li li ol li {
+    list-style-type: lower-roman;
+  }
+
+  //   ol ol,
+  //   ul ol {
+  //     list-style-type: lower-roman !important;
+  //   }
+
+  //   ul ul ol,
+  //   ul ol ol,
+  //   ol ul ol,
+  //   ol ol ol {
+  //     list-style-type: lower-alpha !important;
+  //   }
+}

@@ -1,5 +1,5 @@
 .ProseMirror {
-  >*+* {
+  > * + * {
     margin-top: 0.75em;
   }
 
@@ -58,7 +58,7 @@
 
   h5 {
     display: block;
-    font-size: .83em;
+    font-size: 0.83em;
     margin-top: 1.67em;
     margin-bottom: 1.67em;
     margin-left: 0;
@@ -68,7 +68,7 @@
 
   h6 {
     display: block;
-    font-size: .67em;
+    font-size: 0.67em;
     margin-top: 2.33em;
     margin-bottom: 2.33em;
     margin-left: 0;
@@ -143,8 +143,6 @@
     }
   }
 
-
-
   hr {
     margin: 1rem 0;
   }
@@ -170,31 +168,31 @@
     }
   }
 
-  li>ol {
+  li > ol {
     counter-reset: list;
     margin: 0;
   }
 
-  li>ol>li {
+  li > ol > li {
     list-style: none;
     position: relative;
   }
 
-  li>ol>li:before {
+  li > ol > li:before {
     counter-increment: list;
-    content: counter(list, lower-alpha) ". ";
+    // content: counter(list, lower-alpha) ". ";
     position: absolute;
     left: -1.4em;
   }
 
-  li>ol>li>ol {
+  li > ol > li > ol {
     list-style: none;
     position: relative;
   }
 
-  li>ol>li>ol>li:before {
+  li > ol > li > ol > li:before {
     counter-increment: list;
-    content: counter(list, lower-roman) ". ";
+    // content: counter(list, lower-roman) ". ";
     position: absolute;
     left: -1.4em;
   }
@@ -209,7 +207,7 @@
       // padding-top: 0.5rem;
       margin-left: 8px;
 
-      >label {
+      > label {
         flex: 0 0 auto;
         margin-right: 0.5rem;
         user-select: none;
@@ -221,7 +219,7 @@
         // margin: 0 !important;
       }
 
-      >div {
+      > div {
         flex: 1 1 auto;
       }
     }
@@ -229,6 +227,5 @@
     input[type="checkbox"] {
       cursor: pointer;
     }
-
   }
 }

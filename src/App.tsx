@@ -271,7 +271,7 @@ export default ({
         </div>
       )}
       <div className="editor-middle scroll scroll-8">
-        <div className="editor-inner">
+        <div className="editor-inner markdown-body">
           {editor && editable && <BubbleMenu editor={editor} />}
           {/* {editor && <FloatingMenu editor={editor} />} */}
           <div className="editor-content-wrapper  scroll scroll-7">

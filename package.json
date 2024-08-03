@@ -101,6 +101,7 @@
     "yjs": "^13.5.44"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.13",
     "@types/node": "^20.5.9",
     "@types/pinyin": "^2.10.2",
     "@types/react": "^18.0.26",
