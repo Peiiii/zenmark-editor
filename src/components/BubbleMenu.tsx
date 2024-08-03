@@ -52,10 +52,6 @@ export default ({ editor }: { editor: Editor }) => {
       className="bubble-menu"
       tippyOptions={{
         duration: 100,
-        placement: "bottom",
-        popperOptions: {
-          placement: "bottom",
-        },
       }}
       editor={editor}
     >
