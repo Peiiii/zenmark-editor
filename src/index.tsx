@@ -6,7 +6,7 @@ import { EventKeys } from "@/tokens/eventKeys";
 const plugin = {
   activate: (context: any) => {
     console.log("React:", React, "useCallback:", useCallback);
-    context.componentService.register("tiptap-editor", ({ fid,uri }) => {
+    const EditorRenderer =({ fid,uri }) => {
       // console.log("[inside]React:", React, "useCallback:", useCallback);
       // const a = useState(0);
       fid = fid || uri;
@@ -25,7 +25,9 @@ const plugin = {
         [fid]
       );
       return <App readContent={readContent} writeContent={writeContent} />;
-    });
+    }
+    context.componentService.register("tiptap-editor", EditorRenderer, true);
+    context.componentService.register("markdown-editor", EditorRenderer, true);
     context.serviceBus.invoke("openerService.register", {
       match: [".md", ".mpd", ".markdown"],
       init: (fid: string) => {
@@ -33,7 +35,7 @@ const plugin = {
           id: fid,
           title: fid,
           viewData: {
-            type: "tiptap-editor",
+            type: "markdown-editor",
             props: {
               // fid,
               uri: fid,
