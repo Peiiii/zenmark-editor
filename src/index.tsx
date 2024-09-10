@@ -28,6 +28,8 @@ const plugin = {
     }
     context.componentService.register("milkdown-editor", EditorRenderer, true);
     context.componentService.register("markdown-editor", EditorRenderer, true);
+    context.componentService.register("veditor", EditorRenderer, true);
+    context.componentService.register("tiptap-editor", EditorRenderer, true);
     context.serviceBus.invoke("openerService.register", {
       match: [".md", ".mpd", ".markdown"],
       init: (fid: string) => {

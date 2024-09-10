@@ -10,6 +10,7 @@
     "build:lib": "tsc && vite --config lib.vite.config.ts build",
     "preview": "vite preview --host --port 3000",
     "deploy": "yarn build && yarn oss:upload",
+    "upload:lib": "ossutil64 cp -r -u build/lib/tiptap-editor oss://apps-eiooie-com/tiptap-editor/lib -c ./.ossutilconfig.local",
     "deploy:lib": "yarn build:lib && ossutil64 cp -r -u build/lib/tiptap-editor oss://apps-eiooie-com/tiptap-editor/lib -c ./.ossutilconfig.local",
     "oss:upload": "ossutil64 cp -r -u build/tiptap-editor oss://apps-eiooie-com/tiptap-editor -c ./.ossutilconfig.local && ossutil64 cp -r -u build/wc/tiptap-editor oss://apps-eiooie-com/wc/tiptap-editor  -c ./.ossutilconfig.local",
     "git:update": "git add . && git commit -m 'update' && git push",
