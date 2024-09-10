@@ -26,7 +26,7 @@ const plugin = {
       );
       return <App readContent={readContent} writeContent={writeContent} />;
     }
-    context.componentService.register("tiptap-editor", EditorRenderer, true);
+    context.componentService.register("milkdown-editor", EditorRenderer, true);
     context.componentService.register("markdown-editor", EditorRenderer, true);
     context.serviceBus.invoke("openerService.register", {
       match: [".md", ".mpd", ".markdown"],
