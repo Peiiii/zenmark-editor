@@ -10,9 +10,7 @@ export default ({ node, updateAttributes, extension }) => {
     attrs: { language, ...rest },
   } = node;
   const [copied, setCopied] = useState(false);
-  // console.log("node:", node);
   const code = node.content.content[0]?.text;
-  // console.log("code:",code)
   useEffect(() => {
     if (copied) {
       setTimeout(() => {
@@ -33,11 +31,11 @@ export default ({ node, updateAttributes, extension }) => {
           />
           <div className="right hover-visible">
             {copied ? (
-              <span className="copied-text" style={{ color: "gray" }}>
+              <div className="copied-text" style={{ color: "gray" }}>
                 Copied!
-              </span>
+              </div>
             ) : (
-              <button
+              <div
                 className="copy-button"
                 onClick={() => {
                   copyToClipboard(code);
@@ -45,7 +43,7 @@ export default ({ node, updateAttributes, extension }) => {
                 }}
               >
                 Copy
-              </button>
+              </div>
             )}
           </div>
         </div>
