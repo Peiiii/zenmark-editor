@@ -45,7 +45,6 @@
         border: none;
         color: gray;
         font-size: 0.8em;
-        transition: color 0.3s ease;
 
         &:hover {
           color: #007bff;
@@ -55,7 +54,6 @@
       .copied-text {
         font-size: 0.8em;
         color: #28a745;
-        animation: fadeInOut 3s ease-in-out;
       }
     }
   }

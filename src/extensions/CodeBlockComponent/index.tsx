@@ -32,7 +32,7 @@ export default ({ node, updateAttributes, extension }) => {
           <div className="right hover-visible">
             {copied ? (
               <div className="copied-text" style={{ color: "gray" }}>
-                Copied!
+                ✅
               </div>
             ) : (
               <div
@@ -42,7 +42,7 @@ export default ({ node, updateAttributes, extension }) => {
                   setCopied(true);
                 }}
               >
-                Copy
+                📋
               </div>
             )}
           </div>
