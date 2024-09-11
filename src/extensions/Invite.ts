@@ -17,5 +17,4 @@ export const Invite = Extension.create({
             }
         } as any;
     },
-
 })

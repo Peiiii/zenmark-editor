@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-import "../css/CodeBlockComponent.scss";
+import "../../css/CodeBlockComponent.scss";
 
-import { NodeViewContent, NodeViewWrapper } from "@tiptap/react";
 import { copyToClipboard } from "@/common/copyToClipboard";
+import LanguageSelect from "@/extensions/CodeBlockComponent/LanguageSelect";
+import { NodeViewContent, NodeViewWrapper } from "@tiptap/react";
 
 export default ({ node, updateAttributes, extension }) => {
   const {
     attrs: { language, ...rest },
   } = node;
-  const value = language || "null";
   const [copied, setCopied] = useState(false);
   // console.log("node:", node);
   const code = node.content.content[0]?.text;
@@ -24,31 +24,18 @@ export default ({ node, updateAttributes, extension }) => {
     <NodeViewWrapper className="code-block hover-action">
       <pre>
         <div className="bar">
-          <select
-            className="language-select"
-            contentEditable={false}
-            style={{ width: `${value.length / 2 + 2}em` }}
-            // defaultValue={defaultLanguage}
-            value={value}
-            onChange={(event) =>
-              updateAttributes({ language: event.target.value })
-            }
-          >
-            <option className="language-option" value="null">
-              auto
-            </option>
-            <option className="language-option" disabled>
-              —
-            </option>
-            {extension.options.lowlight.listLanguages().map((lang, index) => (
-              <option className="language-option" key={index} value={lang}>
-                {lang}
-              </option>
-            ))}
-          </select>
+          <LanguageSelect
+            value={language || "auto"}
+            onChange={(e) => {
+              updateAttributes({ language: e.target.value });
+            }}
+            languages={extension.options.lowlight.listLanguages()}
+          />
           <div className="right hover-visible">
             {copied ? (
-              <span className="copied-text" style={{ color: "gray" }}>Copied!</span>
+              <span className="copied-text" style={{ color: "gray" }}>
+                Copied!
+              </span>
             ) : (
               <button
                 className="copy-button"
@@ -56,7 +43,9 @@ export default ({ node, updateAttributes, extension }) => {
                   copyToClipboard(code);
                   setCopied(true);
                 }}
-              >Copy</button>
+              >
+                Copy
+              </button>
             )}
           </div>
         </div>
