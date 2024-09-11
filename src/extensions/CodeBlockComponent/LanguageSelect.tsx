@@ -13,14 +13,14 @@ const LanguageSelect: React.FC<LanguageSelectProps> = ({
 }) => {
   const minWidth = 4; // 最小宽度为 4em
   const width = value
-    ? `${Math.max(value.length/2 + 4, minWidth)}em`
+    ? `${Math.max(value.length / 2 + 4, minWidth)}em`
     : `${minWidth}em`;
 
   return (
     <select
-      className="border border-gray-300 text-gray-500 rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+      className="appearance-none border-none text-gray-500 bg-transparent rounded-md px-3 py-2 text-sm focus:outline-none cursor-pointer"
       contentEditable={false}
-      style={{ width }}
+      style={{ width, fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}
       value={value}
       onChange={onChange}
     >
