@@ -57,8 +57,6 @@ export default ({
   writeContent?: (s: string) => Promise<void>;
   subscribeContent?: (cb: (s: string) => void) => () => void;
 }) => {
-  console.log("[tiptap-editor] version: 2023-12-28");
-
   // const [status, setStatus] = useState("connecting");
   // const [currentUser, setCurrentUser] = useState(getInitialUser);
   const [editable, setEditable] = useState(true);
