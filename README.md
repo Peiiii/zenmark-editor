@@ -1,6 +1,6 @@
 # Zenmark
 
-✍️ Zenmark is an open-source WYSIWYG Markdown editor inspired by Typora, offering a smooth writing experience with rich features.
+✍️ Zenmark is an open-source WYSIWYG Markdown editor based on Tiptap, offering a smooth writing experience with rich features.
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
@@ -9,61 +9,45 @@ English | [简体中文](./README_zh-CN.md)
 ## ✨ Features
 
 - 🎯 **WYSIWYG**: Real-time Markdown preview
-- 📝 **Smart Editing**: Keyboard shortcuts and command palette
-- 🎨 **Code Highlighting**: Syntax highlighting for multiple languages
+- 📝 **Smart Editing**: Keyboard shortcuts
+- 🎨 **Code Highlighting**: Syntax highlighting powered by highlight.js
 - 📊 **Table Editing**: Intuitive table editing experience
 - ✅ **Task Lists**: Interactive task lists
-- 🔢 **Math Formulas**: LaTeX math formula support
-- 🖼️ **Image Management**: Drag-and-drop image upload
-- 🔌 **Extensible**: Plugin-based architecture
+- 🔢 **Math Formulas**: LaTeX math formula support with KaTeX
 - 🌍 **i18n**: Multi-language interface
-- 💾 **Auto Save**: Automatic document saving
+- 🤝 **Collaboration**: Real-time collaboration support with Yjs
+- 🎨 **Theming**: Light and dark theme support
+- 🔌 **Extensible**: Based on Tiptap's powerful extension system
 
 ## 🚀 Getting Started
 
 ### Use as a Component
 
 ```bash
-npm install zenmark
+npm install zenmark-editor
 ```
 
 ```jsx
-import { Zenmark } from 'zenmark';
+import { ZenmarkEditor } from 'zenmark-editor';
 
 function App() {
-  return <Zenmark defaultValue="# Hello Zenmark!" />;
+  return (
+    <ZenmarkEditor
+      readContent={() => Promise.resolve('# Hello Zenmark!')}
+      writeContent={(content) => Promise.resolve()}
+      subscribeContent={(cb) => () => {}}
+    />
+  );
 }
 ```
 
 ## 📖 Documentation
 
-### Basic Configuration
+### Props
 
-```jsx
-<Zenmark
-  theme="light" // Theme: 'light' | 'dark' | 'auto'
-  language="en-US" // Language: 'en-US' | 'zh-CN'
-  autosave={true} // Enable auto save
-  onChange={(markdown) => console.log(markdown)} // Content change callback
-/>
-```
-
-### Plugin System
-
-Zenmark supports feature extension through plugins:
-
-```jsx
-import { Zenmark, createPlugin } from 'zenmark';
-
-const myPlugin = createPlugin({
-  name: 'my-plugin',
-  // Plugin configuration...
-});
-
-function App() {
-  return <Zenmark plugins={[myPlugin]} />;
-}
-```
+- `readContent`: () => Promise<string> - Function to read the initial content
+- `writeContent`: (content: string) => Promise<void> - Function to handle content updates
+- `subscribeContent`: (callback: (content: string) => void) => () => void - Function to subscribe to content changes
 
 ## 📄 License
 

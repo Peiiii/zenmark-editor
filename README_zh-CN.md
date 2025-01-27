@@ -1,6 +1,6 @@
 # Zenmark
 
-✍️ Zenmark 是一个受 Typora 启发的开源所见即所得 Markdown 编辑器，提供流畅的写作体验和丰富的功能。
+✍️ Zenmark 是一个基于 Tiptap 的开源所见即所得 Markdown 编辑器，提供流畅的写作体验和丰富的功能。
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
@@ -9,61 +9,45 @@
 ## ✨ 特性
 
 - 🎯 **所见即所得**: 实时 Markdown 预览
-- 📝 **智能编辑**: 键盘快捷键和命令面板
-- 🎨 **代码高亮**: 支持多种语言的语法高亮
+- 📝 **智能编辑**: 键盘快捷键
+- 🎨 **代码高亮**: 基于 highlight.js 的语法高亮
 - 📊 **表格编辑**: 直观的表格编辑体验
 - ✅ **任务列表**: 交互式任务列表
-- 🔢 **数学公式**: 支持 LaTeX 数学公式
-- 🖼️ **图片管理**: 拖拽上传图片
-- 🔌 **可扩展**: 基于插件的架构
+- 🔢 **数学公式**: 基于 KaTeX 的 LaTeX 数学公式支持
 - 🌍 **国际化**: 多语言界面
-- 💾 **自动保存**: 自动保存文档
+- 🤝 **协作**: 基于 Yjs 的实时协作支持
+- 🎨 **主题**: 支持亮色和暗色主题
+- 🔌 **可扩展**: 基于 Tiptap 强大的扩展系统
 
 ## 🚀 快速开始
 
 ### 作为组件使用
 
 ```bash
-npm install zenmark
+npm install zenmark-editor
 ```
 
 ```jsx
-import { Zenmark } from 'zenmark';
+import { ZenmarkEditor } from 'zenmark-editor';
 
 function App() {
-  return <Zenmark defaultValue="# Hello Zenmark!" />;
+  return (
+    <ZenmarkEditor
+      readContent={() => Promise.resolve('# Hello Zenmark!')}
+      writeContent={(content) => Promise.resolve()}
+      subscribeContent={(cb) => () => {}}
+    />
+  );
 }
 ```
 
 ## 📖 文档
 
-### 基础配置
+### 属性
 
-```jsx
-<Zenmark
-  theme="light" // 主题: 'light' | 'dark' | 'auto'
-  language="zh-CN" // 语言: 'en-US' | 'zh-CN'
-  autosave={true} // 启用自动保存
-  onChange={(markdown) => console.log(markdown)} // 内容变更回调
-/>
-```
-
-### 插件系统
-
-Zenmark 支持通过插件扩展功能：
-
-```jsx
-import { Zenmark, createPlugin } from 'zenmark';
-
-const myPlugin = createPlugin({
-  name: 'my-plugin',
-  // 插件配置...
-});
-
-function App() {
-  return <Zenmark plugins={[myPlugin]} />;
-}
-```
+- `readContent`: () => Promise<string> - 读取初始内容的函数
+- `writeContent`: (content: string) => Promise<void> - 处理内容更新的函数
+- `subscribeContent`: (callback: (content: string) => void) => () => void - 订阅内容变更的函数
 
 ## 📄 许可证
 
