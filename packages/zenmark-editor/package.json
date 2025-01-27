@@ -1,13 +1,16 @@
 {
-  "name": "tiptap-editor",
-  "private": true,
-  "version": "0.0.0",
+  "name": "zenmark-editor",
+  "version": "0.0.0-alpha.0",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/es/index.js",
+  "files": [
+    "dist"
+  ],
+  "types": "./dist/es/index.d.ts",
+  "typings": "./dist/es/index.d.ts",
   "scripts": {
     "dev": "vite --host --port 3000",
-    "build": "yarn build:app && yarn build:wc",
-    "build:app": "tsc && vite build",
-    "build:wc": "tsc && vite --config wc.vite.config.ts build",
-    "build:lib": "tsc && vite --config lib.vite.config.ts build",
+    "build": "tsc && vite --config lib.vite.config.ts build",
     "preview": "vite preview --host --port 3000",
     "deploy": "yarn build && yarn oss:upload",
     "upload:lib": "ossutil64 cp -r -u build/lib/tiptap-editor oss://apps-eiooie-com/tiptap-editor/lib -c ./.ossutilconfig.local",
@@ -16,7 +19,7 @@
     "git:update": "git add . && git commit -m 'update' && git push",
     "update": "yarn git:update  &&  yarn deploy:lib && yarn deploy"
   },
-  "dependencies": {
+  "peerDependencies": {
     "@benrbray/prosemirror-math": "^0.2.2",
     "@emotion/css": "^11.13.0",
     "@mdx-js/mdx": "^3.0.0",
@@ -100,8 +103,7 @@
     "y-prosemirror": "^1.2.0",
     "y-webrtc": "^10.2.3",
     "yaml": "^2.3.4",
-    "yjs": "^13.5.44",
-    "zenmark-editor": "workspace:*"
+    "yjs": "^13.5.44"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.13",
@@ -112,10 +114,12 @@
     "@vitejs/plugin-react": "^3.0.0",
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.38",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
     "sass": "^1.57.1",
     "tailwindcss": "^3.4.3",
     "typescript": "^4.9.3",
     "vite": "^4.0.0",
-    "vite-plugin-css-injected-by-js": "^2.2.0"
+    "vite-plugin-css-injected-by-js": "^2.2.0",
+    "vite-plugin-dts": "^4.5.0"
   }
 }

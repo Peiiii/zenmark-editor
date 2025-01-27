@@ -1,10 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
-// import { TableTooltip } from "@/extensions/MyTable/TableWidget";
+import { ZenmarkEditor } from "zenmark-editor";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <App />
+    <ZenmarkEditor />
   </React.StrictMode>
 );

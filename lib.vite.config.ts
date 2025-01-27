@@ -46,24 +46,40 @@ export default defineConfig({
     lib: {
       entry: "src/index.tsx",
       name: "tiptap-editor",
-      formats: ["es", "umd"],
+      formats: ["es", "umd", "cjs"],
     },
     // minify: false,
     rollupOptions: {
       external: ["react", "react-dom"],
       input: "src/index.tsx",
 
-      output: {
-        globals: {
-          react: "React",
-          "react-dom": "ReactDOM",
+      output: [
+        {
+          globals: {
+            react: "React",
+            "react-dom": "ReactDOM",
+          },
+          format: "systemjs",
         },
-        format: "systemjs",
-        // manualChunks: {
-        //   vendor: ['react', 'react-dom'],
-        //   ...renderChunks(dependencies),
-        // },
-      },
+        {
+          format: "es",
+          dir: "build/lib/tiptap-editor/es"
+        },
+        {
+          format: "umd",
+          dir: "build/lib/tiptap-editor/umd",
+          name: "tiptap-editor"
+        },
+        {
+          format: "cjs",
+          dir: "build/lib/tiptap-editor/cjs",
+          name: "tiptap-editor"
+        }
+      ]
+      // manualChunks: {
+      //   vendor: ['react', 'react-dom'],
+      //   ...renderChunks(dependencies),
+      // },
     },
   },
 });

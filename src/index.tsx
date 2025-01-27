@@ -1,12 +1,11 @@
 import React, { useCallback, useState } from "react";
-import App from "./App";
-import xbook from "@/xbook";
+import { ZenmarkEditor, xbook } from "zenmark-editor";
 import { EventKeys } from "@/tokens/eventKeys";
 
 const plugin = {
   activate: (context: any) => {
     console.log("React:", React, "useCallback:", useCallback);
-    const EditorRenderer =({ fid,uri }) => {
+    const EditorRenderer = ({ fid, uri }) => {
       // console.log("[inside]React:", React, "useCallback:", useCallback);
       // const a = useState(0);
       fid = fid || uri;
@@ -24,8 +23,10 @@ const plugin = {
         },
         [fid]
       );
-      return <App readContent={readContent} writeContent={writeContent} />;
-    }
+      return (
+        <ZenmarkEditor readContent={readContent} writeContent={writeContent} />
+      );
+    };
     context.componentService.register("milkdown-editor", EditorRenderer, true);
     context.componentService.register("markdown-editor", EditorRenderer, true);
     context.componentService.register("vditor", EditorRenderer, true);
@@ -55,5 +56,5 @@ const plugin = {
 
 export default {
   plugin,
-  Component: App,
+  Component: ZenmarkEditor,
 };
