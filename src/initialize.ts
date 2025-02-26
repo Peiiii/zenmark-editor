@@ -1,112 +1,101 @@
-let initialContent = `
----
-title: home
----
+export const initialContent = `
+## Markdown编辑器完整功能展示
 
-# 测试
----
-
-## 列表测试
-- 第一项
-  - 1.1
-  - 1.2
-- 第二项
-  - 2.1
-  - 2.2
-
-## 有序列表测试
-1. 第一项
-
-  1. 第一项
-  2. 第二项
-2. 第二项
-
-  1. 第一项
-  2. 第二项
-
----
-
-- [ ] dd
-
-* [ ] 吃饭
-- [x] 睡觉
-- [] 打豆豆
-
-\`\`\`
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-  </head>
-  <body>
-    <h1>Hello, world!</h1>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-  </body>
-</html>
-\`\`\`
-`;
-if (import.meta.env.PROD) initialContent = `# `;
-export { initialContent };
-
-export const initialContent2 = `# **第一个 Markdown 文档**
-
----
-
+# 一级标题
 ## 二级标题
-
 ### 三级标题
-
 #### 四级标题
 
-##### 五级标题
+---
 
-###### 六级标题
+## 文本格式化
 
-**加粗** *斜体* ~~删除线~~
+- **加粗文字** 和 *斜体文字*
+- ~~删除线文本~~ 与 ==高亮标记==
+- \`行内代码\` 示例
 
-- 一级无序列表
-  - 二级无序列表
-    - 三级无序列表
+---
 
-1. 一级有序列表
-   1. 二级有序列表
-      1. 三级有序列表
+## 列表展示
 
-> 在浏览器支持 ES 模块之前，JavaScript 并没有提供原生机制让开发者以模块化的方式进行开发。这也正是我们对 “打包” 这个概念熟悉的原因：使用工具抓取、处理并将我们的源码模块串联成可以在浏览器中运行的文件。
+### 无序列表
+- 第一层项目
+  - 第二层项目
+    - 第三层项目
 
-| **name** | **age** | **blog** |
-| :--- | :---: | ---: |
-| *LearnShare* | 12 | [LearnShare](http://xianbai.me/) |
-| **Mike** | 32 | [Mike](http://mike.me/) |
+### 有序列表
+1. 第一项
+   1. 子项A
+   2. 子项B
+2. 第二项
 
-这是一个行内公式：$\\int_0^\\infty \\mathrm{e}^{-x}]\\,\\mathrm{d}x$ ， 公式块也是支持的：
+---
 
+## 代码块展示
 
-$$
-\\sqrt[n]{1+x+x^2+\\ldots }
-$$
-- [ ] vite 以当前工作目录作为根目录启动开发服务器。
-
-- [ ] 你也可以通过 vite serve some/sub/dir 来指定一个替代的根目录。
-
-- [ ] 注意 Vite 同时会解析项目根目录下的 [**配置文件（即**](https://cn.vitejs.dev/config/#configuring-vite) vite.config.js）
-
-- [ ] 因此如果根目录被改变了，你需要将配置文件移动到新的根目录下。
-
-\`\`\`json
-{
-  "scripts": {
-    "dev": "vite", // 启动开发服务器，别名：vite dev，vite serve
-    "build": "vite build", // 为生产环境构建产物
-    "preview": "vite preview" // 本地预览生产构建产物
-  }
+### JavaScript代码
+\`\`\`javascript
+const greet = (name) => {
+  console.log(\`Hello, \${name}!\`);
 }
+
+greet("World");
 \`\`\`
 
-![玉山银行数字化（上）：构建台湾地区第一个银行自建的“微服务架构”核心系统](https://static001.infoq.cn/resource/image/12/4a/12584834cf3183549f3fe81547bc204a.jpg?x-oss-process=image/crop,y_1,w_1279,h_718/resize,w_613,h_345)
+### Python代码
+\`\`\`python
+def fibonacci(n):
+    a, b = 0, 1
+    while a < n:
+        print(a, end=' ')
+        a, b = b, a+b
+    print()
+
+fibonacci(1000)
+\`\`\`
+
+---
+
+## 表格展示（修改行列功能暂未实现）
+
+| 功能       | 描述                | 支持情况 |
+|------------|---------------------|----------|
+| 基础格式   | 加粗、斜体等        | ✅       |
+| 列表       | 有序、无序          | ✅       |
+| 代码高亮   | 多语言支持          | ✅       |
+| 图片       | 本地和远程          | ✅       |
+| 数学公式   | LaTeX语法           | ✅       |
+
+---
+
+## 特殊内容
+
+### 数学公式
+行内公式：$E=mc^2$
+
+块级公式：
+
+$$
+\int_a^b f(x)\,dx = F(b) - F(a)
+$$
+
+### 任务列表
+- [x] 完成基础功能开发
+- [ ] 编写文档
+- [ ] 添加单元测试
+
+---
+
+## 引用区块
+
+> 普通引用内容
+>
+>> 嵌套引用内容
+>
+> \`\`\`python
+> # 引用中的代码示例
+> print("Hello World")
+> \`\`\`
 
 `;
 
