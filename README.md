@@ -6,6 +6,12 @@
 
 English | [简体中文](./README_zh-CN.md)
 
+## 🌐 Demo
+
+[Live Demo](https://apps.eiooie.com/tiptap-editor/)
+
+![Screenshot](screenshots/demo.jpeg)
+
 ## ✨ Features
 
 - 🎯 **WYSIWYG**: Real-time Markdown preview

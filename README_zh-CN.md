@@ -6,6 +6,12 @@
 
 [English](./README.md) | 简体中文
 
+## 🌐 在线演示
+
+[在线 Demo](https://apps.eiooie.com/tiptap-editor/)
+
+![截图](screenshots/demo.jpeg)
+
 ## ✨ 特性
 
 - 🎯 **所见即所得**: 实时 Markdown 预览
@@ -18,6 +24,7 @@
 - 🤝 **协作**: 基于 Yjs 的实时协作支持
 - 🎨 **主题**: 支持亮色和暗色主题
 - 🔌 **可扩展**: 基于 Tiptap 强大的扩展系统
+
 
 ## 🚀 快速开始
 
