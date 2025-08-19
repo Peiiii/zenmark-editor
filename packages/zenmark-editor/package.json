@@ -1,6 +1,6 @@
 {
   "name": "zenmark-editor",
-  "version": "0.0.0-alpha.1",
+  "version": "0.0.0",
   "main": "./dist/cjs/index.js",
   "module": "./dist/es/index.js",
   "files": [
@@ -11,11 +11,12 @@
   "scripts": {
     "dev": "vite --host --port 3000",
     "build": "tsc && vite --config lib.vite.config.ts build",
+    "build:lib": "tsc && vite --config lib.vite.config.ts build",
     "preview": "vite preview --host --port 3000",
     "deploy": "yarn build && yarn oss:upload",
-    "upload:lib": "ossutil64 cp -r -u build/lib/tiptap-editor oss://apps-eiooie-com/tiptap-editor/lib -c ./.ossutilconfig.local",
-    "deploy:lib": "yarn build:lib && ossutil64 cp -r -u build/lib/tiptap-editor oss://apps-eiooie-com/tiptap-editor/lib -c ./.ossutilconfig.local",
-    "oss:upload": "ossutil64 cp -r -u build/tiptap-editor oss://apps-eiooie-com/tiptap-editor -c ./.ossutilconfig.local && ossutil64 cp -r -u build/wc/tiptap-editor oss://apps-eiooie-com/wc/tiptap-editor  -c ./.ossutilconfig.local",
+    "upload:lib": "ossutil64 cp -r -u build/lib/tiptap-editor oss://write-dimstack-com/zenmark-editor/lib -c ./.ossutilconfig.local",
+    "deploy:lib": "yarn build:lib && ossutil64 cp -r -u build/lib/tiptap-editor oss://write-dimstack-com/zenmark-editor/lib -c ./.ossutilconfig.local",
+    "oss:upload": "ossutil64 cp -r -u build/tiptap-editor oss://write-dimstack-com/zenmark-editor -c ./.ossutilconfig.local && ossutil64 cp -r -u build/wc/tiptap-editor oss://write-dimstack-com/zenmark-editor/wc  -c ./.ossutilconfig.local",
     "git:update": "git add . && git commit -m 'update' && git push",
     "update": "yarn git:update  &&  yarn deploy:lib && yarn deploy"
   },
@@ -26,6 +27,7 @@
     "@radix-ui/react-popover": "^1.1.1",
     "@radix-ui/react-select": "^2.1.1",
     "@radix-ui/react-tooltip": "^1.1.2",
+    "@tiptap/core": "^2.0.0-beta.209",
     "@tiptap/extension-character-count": "^2.0.0-beta.209",
     "@tiptap/extension-code": "^2.0.0-beta.209",
     "@tiptap/extension-code-block-lowlight": "^2.0.0-beta.209",
@@ -121,5 +123,11 @@
     "vite": "^4.0.0",
     "vite-plugin-css-injected-by-js": "^2.2.0",
     "vite-plugin-dts": "^4.5.0"
+  },
+  "dependencies": {
+    "markdown-it": "^14.1.0",
+    "prosemirror-inputrules": "^1.5.0",
+    "prosemirror-markdown": "^1.13.2",
+    "vfile": "^6.0.3"
   }
 }
