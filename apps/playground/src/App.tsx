@@ -1,92 +1,50 @@
-import { useMemo, useState } from "react";
+import { useLocalStorageString } from "./hooks/useLocalStorage";
+import { useContentSync } from "./hooks/useContentSync";
+import { DEFAULT_MARKDOWN, STORAGE_KEYS } from "./constants";
 import { ZenmarkEditor } from "zenmark-editor";
-import "./App.css";
 
-// Minimal markdown sample to start with in the playground
-const defaultMarkdown = `# Zenmark Playground
-
-Type here or click "Push To Editor" to load the content into the editor.
-
-- This app helps you develop and debug zenmark-editor
-- Click Save inside the editor to trigger writeContent and sync back here
-`;
-
-/**
- * Simple playground wrapper which:
- * - Holds a markdown string on the left
- * - Pushes it into the editor via subscribeContent/readContent
- * - Receives "save" events from the editor via writeContent and keeps the left textarea in sync
- */
 export default function App() {
-  const [content, setContent] = useState<string>(defaultMarkdown);
-  const [listeners, setListeners] = useState<Array<(content: string) => void>>(
-    []
+  const [content, setContent] = useLocalStorageString(
+    STORAGE_KEYS.CONTENT,
+    DEFAULT_MARKDOWN
   );
 
-  const onExternalPush = (next: string) => {
+  const { readContent, writeContent, subscribeContent, pushToSubscribers } =
+    useContentSync(content);
+
+  const handleContentChange = (next: string) => {
     setContent(next);
-    // push to all subscribers (the editor registers one)
-    listeners.forEach((l) => l(next));
-  };
-
-  const readContent = useMemo(() => {
-    return () => Promise.resolve(content);
-  }, [content]);
-
-  const writeContent = (next: string) => {
-    // Called when user hits "Save" in the editor
-    onExternalPush(next);
-    return Promise.resolve();
-  };
-
-  const subscribeContent = (cb: (s: string) => void) => {
-    setListeners((arr) => [...arr, cb]);
-    return () => setListeners((arr) => arr.filter((x) => x !== cb));
+    pushToSubscribers(next);
   };
 
   return (
-    <>
-      <div className="panel left">
-        <div className="controls">
-          <button onClick={() => onExternalPush(defaultMarkdown)}>
-            Reset
-          </button>
-          <button
-            onClick={() =>
-              onExternalPush(`# Quick Test
-
-Some inline math: $E=mc^2$
-
-Tasks:
-- [ ] Try bold
-- [x] Try italic
-
-Table:
-
-| A | B |
-|---|---|
-| 1 | 2 |
-`)
-            }
-          >
-            Load Sample
-          </button>
-          <button onClick={() => onExternalPush(content)}>Push To Editor</button>
+    <div className="h-screen w-screen overflow-hidden bg-background text-foreground">
+      <div className="flex h-full w-full">
+        <div className="w-1/2 flex flex-col border-r min-w-0">
+          <div className="p-4 border-b flex-shrink-0">
+            <h1 className="text-lg font-semibold">Markdown</h1>
+          </div>
+          <textarea
+            className="flex-1 w-full resize-none border-0 bg-transparent p-4 text-sm font-mono focus:outline-none focus:ring-0 min-h-0"
+            value={content}
+            onChange={(e) => handleContentChange(e.target.value)}
+            spellCheck={false}
+            placeholder="Type Markdown here…"
+          />
         </div>
-        <textarea
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          spellCheck={false}
-        />
+        <div className="w-1/2 flex flex-col min-w-0">
+          <div className="p-4 border-b flex-shrink-0">
+            <h1 className="text-lg font-semibold">Preview</h1>
+          </div>
+          <div className="flex-1 overflow-hidden min-h-0">
+            <ZenmarkEditor
+              readContent={readContent}
+              writeContent={writeContent}
+              subscribeContent={subscribeContent}
+            />
+          </div>
+        </div>
       </div>
-      <div className="panel" style={{ flex: 2 }}>
-        <ZenmarkEditor
-          readContent={readContent}
-          writeContent={writeContent}
-          subscribeContent={subscribeContent}
-        />
-      </div>
-    </>
+    </div>
   );
 }
-

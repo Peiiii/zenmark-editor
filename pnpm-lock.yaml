@@ -398,12 +398,21 @@ importers:
 
   apps/playground:
     dependencies:
+      class-variance-authority:
+        specifier: ^0.7.0
+        version: 0.7.1
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
       react:
         specifier: ^18.3.1
         version: 18.3.1
       react-dom:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
+      tailwind-merge:
+        specifier: ^2.3.0
+        version: 2.6.0
       zenmark-editor:
         specifier: workspace:*
         version: link:../../packages/zenmark-editor
@@ -411,6 +420,9 @@ importers:
       '@eslint/js':
         specifier: ^9.17.0
         version: 9.19.0
+      '@tailwindcss/typography':
+        specifier: ^0.5.13
+        version: 0.5.16(tailwindcss@3.4.17)
       '@types/react':
         specifier: ^18.3.18
         version: 18.3.18
@@ -420,6 +432,9 @@ importers:
       '@vitejs/plugin-react':
         specifier: ^4.3.4
         version: 4.3.4(vite@6.0.11(@types/node@20.17.16)(jiti@1.21.7)(sass@1.83.4)(yaml@2.7.0))
+      autoprefixer:
+        specifier: ^10.4.19
+        version: 10.4.20(postcss@8.5.1)
       eslint:
         specifier: ^9.17.0
         version: 9.19.0(jiti@1.21.7)
@@ -432,6 +447,15 @@ importers:
       globals:
         specifier: ^15.14.0
         version: 15.14.0
+      postcss:
+        specifier: ^8.4.38
+        version: 8.5.1
+      tailwindcss:
+        specifier: ^3.4.3
+        version: 3.4.17
+      tailwindcss-animate:
+        specifier: ^1.0.7
+        version: 1.0.7(tailwindcss@3.4.17)
       typescript:
         specifier: ~5.6.2
         version: 5.6.3

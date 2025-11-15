@@ -3,8 +3,9 @@
 用于本地开发/调试 `zenmark-editor` 的最小示例应用。
 
 包含：
-- 左侧 Markdown 文本区，可编辑并一键推送到编辑器
-- 右侧是 `ZenmarkEditor` 组件，会在保存时回写左侧文本
+- 顶部工具栏：示例选择（EN/ZH/Quick）、Auto Sync、换行、左侧宽度调节、导入/导出/复制等
+- 左侧 Markdown 文本区：支持自动同步到编辑器（可关），字数统计，清空
+- 右侧是 `ZenmarkEditor` 组件：在编辑器内按 `Cmd/Ctrl + S` 保存会回写左侧文本
 
 启动与构建：
 - 安装依赖：`pnpm install`
