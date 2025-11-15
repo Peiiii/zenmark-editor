@@ -4,10 +4,6 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite --host --port 5000",
-    "build": "yarn build:app && yarn build:wc",
-    "build:app": "tsc && vite build",
-    "build:wc": "tsc && vite --config wc.vite.config.ts build",
-    "build:lib": "tsc && vite --config lib.vite.config.ts build",
     "preview": "vite preview --host --port 3000",
     "playground:dev": "bash -lc 'pnpm --filter zenmark-editor run watch & pnpm --filter playground dev'",
     "playground:build": "pnpm --filter zenmark-editor build && pnpm --filter playground build",

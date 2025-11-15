@@ -1,6 +1,6 @@
 {
   "name": "zenmark-editor",
-  "version": "0.0.1",
+  "version": "0.1.5",
   "main": "./dist/cjs/index.js",
   "module": "./dist/es/index.js",
   "files": [
@@ -8,6 +8,9 @@
   ],
   "types": "./dist/es/index.d.ts",
   "typings": "./dist/es/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "dev": "vite --host --port 3000",
     "build": "tsc && vite --config lib.vite.config.ts build",
