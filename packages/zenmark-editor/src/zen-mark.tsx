@@ -11,7 +11,6 @@ import "./styles";
 
 import { ExpandMenuBar } from "@/actions/page";
 import MenuItem from "@/components/MenuItem";
-import { EventKeys } from "@/tokens/eventKeys";
 import MathBlock from "@/extensions/MathBlock";
 import MathInline from "@/extensions/MathInline";
 import MyTable from "@/extensions/MyTable";
@@ -20,7 +19,7 @@ import MyTableRow from "@/extensions/MyTableRow";
 import { Underline } from "@/extensions/Underline";
 import { Markdown } from "@/extensions/tiptap-markdown";
 import { initialContent } from "@/initialize";
-import { device } from "@/xbook/common/device";
+import { device } from "@/utils/device";
 import Focus from "@tiptap/extension-focus";
 import HorizontalRule from "@tiptap/extension-horizontal-rule";
 import Link from "@tiptap/extension-link";
@@ -32,15 +31,14 @@ import TaskItem from "@tiptap/extension-task-item";
 import TaskList from "@tiptap/extension-task-list";
 import TextAlign from "@tiptap/extension-text-align";
 import { AiOutlineEdit } from "react-icons/ai";
-import xbook from "xbook";
 import { MessageContainer } from "./common/utils";
+import { useLocalStorage } from "./utils/useLocalStorage";
 import BubbleMenu from "./components/BubbleMenu";
 import MenuBar from "./components/MenuBar";
 import { CodeBlockHighlight } from "./extensions/CodeBlockHighlight";
 import { ColorHighlighter } from "./extensions/ColorHighlighter";
 import { Iframe } from "./extensions/Iframe";
 import { Invite } from "./extensions/Invite";
-import { SaveFile } from "./extensions/SaveFile";
 import { SmilieReplacer } from "./extensions/SmilieReplacer";
 import { Suggestion } from "./extensions/Suggestion";
 import { i18n } from "@/services/i18n";
@@ -124,12 +122,6 @@ export const ZenmarkEditor = ({
       SmilieReplacer,
       CodeBlockHighlight,
       // CodeBlockLowlight,
-      SaveFile.configure({
-        saveContent: undefined,
-        onFileSaved: () => {
-          xbook.eventBus.emit(EventKeys.FileSaved);
-        },
-      }),
       Invite,
       Suggestion,
       Iframe,
@@ -235,14 +227,10 @@ export const ZenmarkEditor = ({
   //   }
   // }, [currentUser]);
 
-  const [collapsed, setCollapsed] = xbook.cacheService
-    .space("tiptap-editor", "localStorage")
-    .useLocalStorage("collapsed", device.isMobile() ? true : false);
-
-  useEffect(() => {
-    xbook.serviceBus.expose("collapseMenuBar", () => setCollapsed(true));
-    xbook.serviceBus.expose("expandMenuBar", () => setCollapsed(false));
-  }, [setCollapsed]);
+  const [collapsed, setCollapsed] = useLocalStorage<boolean>(
+    "tiptap-editor:collapsed",
+    device.isMobile()
+  );
 
   return (
     <div
@@ -266,14 +254,21 @@ export const ZenmarkEditor = ({
             )}
           </div>
         )}
-        {editor && <MenuBar editor={editor} />}
+        {editor && <MenuBar editor={editor} onCollapse={() => setCollapsed(true)} />}
       </div>
       {editor && collapsed && showToolBarDropdownButton && (
         <div className="sticky-widget">
           <div className="sticky-widget-left" />
           <div className="sticky-widget-right">
             <div className="sticky-widget-inner">
-              <MenuItem editor={editor} {...ExpandMenuBar} />
+              <MenuItem 
+                editor={editor} 
+                {...ExpandMenuBar} 
+                action={() => {
+                  setCollapsed(false);
+                  return true;
+                }}
+              />
             </div>
           </div>
         </div>

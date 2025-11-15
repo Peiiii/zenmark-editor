@@ -1,5 +1,3 @@
-import { EventKeys } from "@/tokens/eventKeys";
-import xbook from "@/xbook";
 import { Extension } from "@tiptap/core";
 import {
   defaultMarkdownSerializer,

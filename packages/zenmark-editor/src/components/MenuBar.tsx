@@ -5,9 +5,8 @@ import React, { Fragment } from "react";
 import MenuItem from "./MenuItem";
 import { Actions } from "../actions/editor";
 import {FcCollapse} from "react-icons/fc"
-import xbook from "xbook"
 
-export default ({ editor }) => {
+export default ({ editor, onCollapse }: { editor: any; onCollapse?: () => void }) => {
   const items: any[] = [
     Actions.Bold,
     Actions.Italic,
@@ -38,7 +37,6 @@ export default ({ editor }) => {
     // Actions.GoBackLine,
     // Actions.GoForwardLine,
     Actions.Divider,
-    Actions.SaveFile,
     // Actions.Invite,
   ];
 
@@ -59,7 +57,7 @@ export default ({ editor }) => {
       <div className="editor__header-middle"/>
       <div className="editor__header-right">
         <MenuItem name="collapseMenuBar" editor={editor} title="collapse" icon={FcCollapse} action={()=>{
-          xbook.serviceBus.invoke("collapseMenuBar")
+          onCollapse?.();
         }}/>
       </div>
     </div>
