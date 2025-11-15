@@ -1,6 +1,6 @@
 {
   "name": "zenmark-editor",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A Markdown editor built on Tiptap/ProseMirror with a simple React API.",
   "license": "MIT",
   "main": "./dist/cjs/index.js",
@@ -12,12 +12,14 @@
   "publishConfig": {
     "access": "public"
   },
+  "style": "./dist/es/style.css",
   "exports": {
     ".": {
       "types": "./dist/es/index.d.ts",
       "import": "./dist/es/index.js",
       "require": "./dist/cjs/index.js"
     },
+    "./style.css": "./dist/es/style.css",
     "./package.json": "./package.json"
   },
   "sideEffects": [

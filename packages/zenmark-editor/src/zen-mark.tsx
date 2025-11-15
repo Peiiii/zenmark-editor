@@ -7,6 +7,9 @@ import Typography from "@tiptap/extension-typography";
 import { AnyExtension, EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { useEffect, useRef, useState } from "react";
+// Important: import core editor styles here so bundlers cannot tree-shake them.
+// Keeping this import local prevents losing styles when an aggregator file is optimized away.
+import "./css/editor.scss";
 import "./styles";
 
 import { ExpandMenuBar } from "@/actions/page";

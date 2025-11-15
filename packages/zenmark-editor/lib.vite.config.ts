@@ -1,7 +1,6 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 // import { dependencies } from "./package.json";
-import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
 import dts from "vite-plugin-dts";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 
@@ -28,7 +27,9 @@ const { resolve } = require("path");
 export default defineConfig({
   plugins: [
     react(), 
-    cssInjectedByJsPlugin(), 
+    // Extract CSS instead of injecting it at runtime.
+    // This makes styles predictable across host apps (SSR, strict CSP, CSS ordering),
+    // and allows consumers to import a stable CSS file: `import "zenmark-editor/style.css"`
     dts({
       rollupTypes: true,
       tsconfigPath: './tsconfig.json',
@@ -52,6 +53,8 @@ export default defineConfig({
     "process.env": {},
   },
   build: {
+    // Generate a single CSS file so consumers can import `zenmark-editor/style.css`.
+    cssCodeSplit: false,
     lib: {
       entry: "src/index.tsx",
       name: "zenmark-editor",
