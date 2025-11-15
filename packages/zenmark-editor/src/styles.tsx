@@ -1,23 +1,18 @@
-// import "./css/global.scss";
-import "./css/App.scss";
-import "./css/editor.scss";
-import "./css/force-title.scss";
-import "./css/task-list.scss";
-import "./css/extension-code.scss";
-import "./css/CharacterCount.scss";
-// import "./css/Suggestion.scss";
-import "./css/menus.scss";
-import "./css/Iframe.scss";
-import "./css/MathDisplay.scss";
-import "./css/Table.scss";
-import "./css/Focus.scss";
-import "./css/scroll.scss";
+// NOTE:
+// Instead of relying on vite-plugin-css-injected-by-js (which is unreliable across
+// multiple library outputs), we inline our styles at runtime for ESM/CJS/UMD.
+// This module exposes a single, reusable injector function.
+import { ZENMARK_STYLE_ID } from "./styles/constants";
+import { getZenmarkCss } from "./styles/bundle";
 
-// themes
-import "./css/themes/basic.scss";
-import "./css/themes/prose-mirror-lists.scss";
-// import "./css/themes/github-markdown.scss"
-// import "./css/themes/github-markdown-tailwindcss.css";
-// import "./css/themes/themeable-light.scss";
+export function ensureZenmarkStylesInjected() {
+  if (typeof document === "undefined") return;
+  // Avoid duplicate injection
+  if (document.getElementById(ZENMARK_STYLE_ID)) return;
+  const css = getZenmarkCss();
 
-import "./css/global.scss";
+  const style = document.createElement("style");
+  style.id = ZENMARK_STYLE_ID;
+  style.textContent = css;
+  document.head.appendChild(style);
+}

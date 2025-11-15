@@ -55,7 +55,9 @@ export default defineConfig({
     lib: {
       entry: "src/index.tsx",
       name: "zenmark-editor",
-      formats: ["es", "umd", "cjs"],
+      // Ensure UMD is generated first so css-injected-by-js captures CSS
+      // and reuses it for subsequent outputs (ES/CJS).
+      formats: ["umd", "es", "cjs"],
     },
     // minify: false,
     rollupOptions: {
@@ -65,15 +67,15 @@ export default defineConfig({
       input: "src/index.tsx",
       output: [
         {
-          format: "es",
-          dir: "dist/es",
-          entryFileNames: 'index.js',
-        },
-        {
           format: "umd",
           dir: "dist/umd",
           entryFileNames: 'index.js',
           name: "zenmark-editor",
+        },
+        {
+          format: "es",
+          dir: "dist/es",
+          entryFileNames: 'index.js',
         },
         {
           format: "cjs",

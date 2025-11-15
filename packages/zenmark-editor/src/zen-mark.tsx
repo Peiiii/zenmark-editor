@@ -7,7 +7,7 @@ import Typography from "@tiptap/extension-typography";
 import { AnyExtension, EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { useEffect, useRef, useState } from "react";
-import "./styles";
+import { ensureZenmarkStylesInjected } from "./styles";
 
 import { ExpandMenuBar } from "@/actions/page";
 import MenuItem from "@/components/MenuItem";
@@ -77,6 +77,8 @@ export const ZenmarkEditor = ({
   onChange,
   onKeyDown,
 }: ZenmarkEditorProps) => {
+  // Ensure styles are available when the editor mounts (robust for ESM/CJS/UMD)
+  ensureZenmarkStylesInjected();
   // const [status, setStatus] = useState("connecting");
   // const [currentUser, setCurrentUser] = useState(getInitialUser);
   const [editable, setEditable] = useState(true);
