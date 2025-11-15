@@ -314,7 +314,7 @@ importers:
         version: 18.3.1(react@18.3.1)
       zenmark-editor:
         specifier: ^0.0.0-alpha.0
-        version: 0.0.0-alpha.0(f3c7859a1bd84f8295d2c954d8351e85)
+        version: 0.0.0-alpha.0(ra2a45rhn6yzuy26qdwxznflfq)
     devDependencies:
       '@eslint/js':
         specifier: ^9.17.0
@@ -396,11 +396,57 @@ importers:
         specifier: ^6.0.5
         version: 6.0.11(@types/node@20.17.16)(jiti@1.21.7)(sass@1.83.4)(yaml@2.7.0)
 
+  apps/playground:
+    dependencies:
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.3.1
+        version: 18.3.1(react@18.3.1)
+      zenmark-editor:
+        specifier: workspace:*
+        version: link:../../packages/zenmark-editor
+    devDependencies:
+      '@eslint/js':
+        specifier: ^9.17.0
+        version: 9.19.0
+      '@types/react':
+        specifier: ^18.3.18
+        version: 18.3.18
+      '@types/react-dom':
+        specifier: ^18.3.5
+        version: 18.3.5(@types/react@18.3.18)
+      '@vitejs/plugin-react':
+        specifier: ^4.3.4
+        version: 4.3.4(vite@6.0.11(@types/node@20.17.16)(jiti@1.21.7)(sass@1.83.4)(yaml@2.7.0))
+      eslint:
+        specifier: ^9.17.0
+        version: 9.19.0(jiti@1.21.7)
+      eslint-plugin-react-hooks:
+        specifier: ^5.0.0
+        version: 5.1.0(eslint@9.19.0(jiti@1.21.7))
+      eslint-plugin-react-refresh:
+        specifier: ^0.4.16
+        version: 0.4.18(eslint@9.19.0(jiti@1.21.7))
+      globals:
+        specifier: ^15.14.0
+        version: 15.14.0
+      typescript:
+        specifier: ~5.6.2
+        version: 5.6.3
+      typescript-eslint:
+        specifier: ^8.18.2
+        version: 8.21.0(eslint@9.19.0(jiti@1.21.7))(typescript@5.6.3)
+      vite:
+        specifier: ^6.0.5
+        version: 6.0.11(@types/node@20.17.16)(jiti@1.21.7)(sass@1.83.4)(yaml@2.7.0)
+
   packages/zenmark-editor:
     dependencies:
       '@benrbray/prosemirror-math':
         specifier: ^0.2.2
-        version: 0.2.2(katex@0.13.24)(prosemirror-commands@1.6.2)(prosemirror-gapcursor@1.3.2)(prosemirror-history@1.4.1)(prosemirror-inputrules@1.4.0)(prosemirror-keymap@1.2.2)(prosemirror-model@1.24.1)(prosemirror-state@1.4.3)(prosemirror-transform@1.10.2)(prosemirror-view@1.37.2)
+        version: 0.2.2(katex@0.13.24)(prosemirror-commands@1.6.2)(prosemirror-gapcursor@1.3.2)(prosemirror-history@1.4.1)(prosemirror-inputrules@1.5.0)(prosemirror-keymap@1.2.2)(prosemirror-model@1.24.1)(prosemirror-state@1.4.3)(prosemirror-transform@1.10.2)(prosemirror-view@1.37.2)
       '@emotion/css':
         specifier: ^11.13.0
         version: 11.13.5
@@ -4276,19 +4322,6 @@ snapshots:
       '@babel/helper-string-parser': 7.25.9
       '@babel/helper-validator-identifier': 7.25.9
 
-  '@benrbray/prosemirror-math@0.2.2(katex@0.13.24)(prosemirror-commands@1.6.2)(prosemirror-gapcursor@1.3.2)(prosemirror-history@1.4.1)(prosemirror-inputrules@1.4.0)(prosemirror-keymap@1.2.2)(prosemirror-model@1.24.1)(prosemirror-state@1.4.3)(prosemirror-transform@1.10.2)(prosemirror-view@1.37.2)':
-    dependencies:
-      katex: 0.13.24
-      prosemirror-commands: 1.6.2
-      prosemirror-gapcursor: 1.3.2
-      prosemirror-history: 1.4.1
-      prosemirror-inputrules: 1.4.0
-      prosemirror-keymap: 1.2.2
-      prosemirror-model: 1.24.1
-      prosemirror-state: 1.4.3
-      prosemirror-transform: 1.10.2
-      prosemirror-view: 1.37.2
-
   '@benrbray/prosemirror-math@0.2.2(katex@0.13.24)(prosemirror-commands@1.6.2)(prosemirror-gapcursor@1.3.2)(prosemirror-history@1.4.1)(prosemirror-inputrules@1.5.0)(prosemirror-keymap@1.2.2)(prosemirror-model@1.24.1)(prosemirror-state@1.4.3)(prosemirror-transform@1.10.2)(prosemirror-view@1.37.2)':
     dependencies:
       katex: 0.13.24
@@ -7920,7 +7953,7 @@ snapshots:
 
   yocto-queue@0.1.0: {}
 
-  zenmark-editor@0.0.0-alpha.0(f3c7859a1bd84f8295d2c954d8351e85):
+  zenmark-editor@0.0.0-alpha.0(ra2a45rhn6yzuy26qdwxznflfq):
     dependencies:
       '@benrbray/prosemirror-math': 0.2.2(katex@0.13.24)(prosemirror-commands@1.6.2)(prosemirror-gapcursor@1.3.2)(prosemirror-history@1.4.1)(prosemirror-inputrules@1.5.0)(prosemirror-keymap@1.2.2)(prosemirror-model@1.25.3)(prosemirror-state@1.4.3)(prosemirror-transform@1.10.2)(prosemirror-view@1.37.2)
       '@emotion/css': 11.13.5

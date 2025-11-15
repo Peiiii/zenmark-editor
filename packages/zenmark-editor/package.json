@@ -12,6 +12,7 @@
     "dev": "vite --host --port 3000",
     "build": "tsc && vite --config lib.vite.config.ts build",
     "build:lib": "tsc && vite --config lib.vite.config.ts build",
+    "watch": "bash -lc 'tsc -w & vite --config lib.vite.config.ts build --watch'",
     "preview": "vite preview --host --port 3000",
     "deploy": "yarn build && yarn oss:upload",
     "upload:lib": "ossutil64 cp -r -u build/lib/tiptap-editor oss://write-dimstack-com/zenmark-editor/lib -c ./.ossutilconfig.local",
