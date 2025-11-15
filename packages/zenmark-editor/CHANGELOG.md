@@ -1,5 +1,12 @@
 # zenmark-editor
 
+## 0.1.0
+
+### Minor Changes
+
+- 0004919: refactor api
+- 0004919: release
+
 ## 0.0.2
 
 ### Patch Changes
