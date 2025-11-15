@@ -7,8 +7,6 @@
   "access": "public",
   "baseBranch": "master",
   "updateInternalDependencies": "patch",
-  "ignore": ["playground", "example", "example-local"],
-  "packages": [
-    "packages/*"
-  ]
+  "packages": ["packages/*", "apps/*"],
+  "ignore": ["example", "playground"]
 }
