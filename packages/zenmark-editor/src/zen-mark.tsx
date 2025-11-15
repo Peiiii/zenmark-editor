@@ -33,8 +33,10 @@ import TextAlign from "@tiptap/extension-text-align";
 import { AiOutlineEdit } from "react-icons/ai";
 import { MessageContainer } from "./common/utils";
 import { useLocalStorage } from "./utils/useLocalStorage";
+import { createKeyboardEvent } from "./utils/keyboard";
 import BubbleMenu from "./components/BubbleMenu";
 import MenuBar from "./components/MenuBar";
+import type React from "react";
 import { CodeBlockHighlight } from "./extensions/CodeBlockHighlight";
 import { ColorHighlighter } from "./extensions/ColorHighlighter";
 import { Iframe } from "./extensions/Iframe";
@@ -46,14 +48,34 @@ import { i18n } from "@/services/i18n";
 
 // const ydoc = new Y.Doc();
 // const provider = buildWebrtcProvider(ydoc);
+
+export type KeyboardEventHandler = (event: {
+  keyCode: number;
+  code: string;
+  key: string;
+  ctrlKey: boolean;
+  shiftKey: boolean;
+  altKey: boolean;
+  metaKey: boolean;
+  preventDefault: () => void;
+  stopPropagation: () => void;
+}) => void | boolean;
+
 export interface ZenmarkEditorProps {
   value: string;
   onChange: (content: string) => void;
+  /**
+   * Called when a key is pressed in the editor.
+   * Return `true` to prevent the default behavior.
+   * Similar to Monaco Editor's `onKeyDown`.
+   */
+  onKeyDown?: KeyboardEventHandler;
 }
 
 export const ZenmarkEditor = ({
   value,
   onChange,
+  onKeyDown,
 }: ZenmarkEditorProps) => {
   // const [status, setStatus] = useState("connecting");
   // const [currentUser, setCurrentUser] = useState(getInitialUser);
@@ -168,6 +190,21 @@ export const ZenmarkEditor = ({
       const markdown = editor.storage.markdown?.getMarkdown() || editor.getHTML();
       onChange(markdown);
     },
+    editorProps: {
+      handleKeyDown: (view, event) => {
+        if (onKeyDown) {
+          // ProseMirror event is a native KeyboardEvent
+          const keyboardEvent = createKeyboardEvent(event as globalThis.KeyboardEvent);
+          const result = onKeyDown(keyboardEvent);
+          if (result === true) {
+            event.preventDefault();
+            event.stopPropagation();
+            return true;
+          }
+        }
+        return false;
+      },
+    },
   });
 
   useEffect(() => {
@@ -235,6 +272,19 @@ export const ZenmarkEditor = ({
   return (
     <div
       className="editor"
+      // Capture keydown at the React capture phase so consumers (onKeyDown)
+      // can reliably intercept combos like Cmd/Ctrl+S before ProseMirror/Tiptap
+      // keymaps see them. If the consumer returns true, we stop propagation
+      // to prevent the editor or browser default from handling it.
+      onKeyDownCapture={(e: React.KeyboardEvent) => {
+        if (!onKeyDown) return;
+        const keyboardEvent = createKeyboardEvent(e.nativeEvent);
+        const handled = onKeyDown(keyboardEvent);
+        if (handled === true) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      }}
       onClick={() => {
         if (editable && collapsed && !showToolBarDropdownButton) {
           setShowToolBarDropdownButton(true);

@@ -1,4 +1,4 @@
-export type ExampleId = "basic" | "save-demo";
+export type ExampleId = "basic" | "save-demo" | "keyboard-event";
 
 export interface Example {
   id: ExampleId;
