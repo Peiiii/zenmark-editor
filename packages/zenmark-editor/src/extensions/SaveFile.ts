@@ -79,10 +79,14 @@ export const SaveFile = Extension.create({
           //   markdownSerializer.serialize(editor.state.doc)
           // );
           if (this.options.saveContent) {
-            this.options.saveContent(m).then(() => {
-              // message.success("File saved");
+            const result = this.options.saveContent(m);
+            if (result instanceof Promise) {
+              result.then(() => {
+                this.options.onFileSaved?.();
+              });
+            } else {
               this.options.onFileSaved?.();
-            });
+            }
           }
         },
     } as any;

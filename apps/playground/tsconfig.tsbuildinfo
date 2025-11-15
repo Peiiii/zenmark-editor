@@ -1,1 +1,1 @@
-{"root":["./src/app.tsx","./src/constants.ts","./src/main.tsx","./src/vite-env.d.ts","./src/hooks/usecontentsync.ts","./src/hooks/uselocalstorage.ts","./src/lib/utils.ts"],"version":"5.6.3"}
+{"root":["./src/app.tsx","./src/constants.ts","./src/main.tsx","./src/vite-env.d.ts","./src/components/tabs.tsx","./src/examples/basicexample.tsx","./src/examples/savedemoexample.tsx","./src/examples/index.tsx","./src/examples/types.ts","./src/hooks/uselocalstorage.ts","./src/lib/utils.ts"],"version":"5.6.3"}

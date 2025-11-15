@@ -6,7 +6,7 @@ import Placeholder from "@tiptap/extension-placeholder";
 import Typography from "@tiptap/extension-typography";
 import { AnyExtension, EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./styles";
 
 import { ExpandMenuBar } from "@/actions/page";
@@ -48,20 +48,21 @@ import { i18n } from "@/services/i18n";
 
 // const ydoc = new Y.Doc();
 // const provider = buildWebrtcProvider(ydoc);
+export interface ZenmarkEditorProps {
+  value: string;
+  onChange: (content: string) => void;
+}
+
 export const ZenmarkEditor = ({
-  readContent,
-  writeContent,
-  subscribeContent,
-}: {
-  readContent?: () => Promise<string>;
-  writeContent?: (s: string) => Promise<void>;
-  subscribeContent?: (cb: (s: string) => void) => () => void;
-}) => {
+  value,
+  onChange,
+}: ZenmarkEditorProps) => {
   // const [status, setStatus] = useState("connecting");
   // const [currentUser, setCurrentUser] = useState(getInitialUser);
   const [editable, setEditable] = useState(true);
   const [showToolBarDropdownButton, setShowToolBarDropdownButton] =
     useState(false);
+  const isUpdatingRef = useRef(false);
 
   const editor = useEditor({
     editable,
@@ -124,7 +125,7 @@ export const ZenmarkEditor = ({
       CodeBlockHighlight,
       // CodeBlockLowlight,
       SaveFile.configure({
-        saveContent: writeContent,
+        saveContent: undefined,
         onFileSaved: () => {
           xbook.eventBus.emit(EventKeys.FileSaved);
         },
@@ -169,30 +170,26 @@ export const ZenmarkEditor = ({
       //   provider: provider,
       // }),
     ] as AnyExtension[],
-    content: initialContent,
+    content: value || initialContent,
+    onUpdate: ({ editor }) => {
+      if (isUpdatingRef.current) return;
+      const markdown = editor.storage.markdown?.getMarkdown() || editor.getHTML();
+      onChange(markdown);
+    },
   });
-  useEffect(() => {
-    // return window.addEventListener(
-    //   "message",
-    //   (event) => {
-    //     console.log(event);
-    //     const { content } = JSON.parse(event.data);
-    //     editor?.commands.setContent(content);
-    //   },
-    //   false
-    // );
-    if (readContent && editor) {
-      readContent().then((content) => editor.commands.setContent(content));
-    }
-  }, [editor, readContent]);
 
   useEffect(() => {
-    if (subscribeContent) {
-      return subscribeContent((content) => {
-        editor?.commands.setContent(content);
-      });
+    if (!editor) return;
+    
+    const currentMarkdown = editor.storage.markdown?.getMarkdown() || editor.getHTML();
+    if (currentMarkdown !== value && value !== undefined) {
+      isUpdatingRef.current = true;
+      editor.commands.setContent(value || '', false);
+      setTimeout(() => {
+        isUpdatingRef.current = false;
+      }, 0);
     }
-  }, [editor, subscribeContent]);
+  }, [editor, value]);
 
   useEffect(() => {
     if (editor) {

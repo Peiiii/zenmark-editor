@@ -11,4 +11,5 @@ Enjoy editing!`;
 
 export const STORAGE_KEYS = {
   CONTENT: "playground:content",
+  EXAMPLE_ID: "playground:exampleId",
 } as const;
