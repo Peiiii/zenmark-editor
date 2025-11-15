@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { ZenmarkEditor } from "zenmark-editor";
 import { cn } from "../lib/utils";
+import { QuickActions } from "../components/QuickActions";
+import { PresetSelector } from "../components/PresetSelector";
 
 interface SaveRecord {
   id: string;
@@ -110,42 +112,74 @@ export function SaveDemoExample() {
   const wordCount = getWordCount(content);
   const lineCount = content.split("\n").length;
 
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(content);
+    } catch {
+    }
+  };
+
+  const handleClear = () => {
+    if (confirm("确定要清空内容吗？")) {
+      setContent("");
+    }
+  };
+
   return (
     <div className="flex h-full w-full">
       <div className="w-2/3 flex flex-col border-r min-w-0">
-        <div className="p-4 border-b flex-shrink-0 flex items-center justify-between">
-          <h1 className="text-lg font-semibold">Editor with Auto-Save</h1>
-          <div className="flex items-center gap-3">
-            <div
-              className={cn(
-                "flex items-center gap-2 text-sm",
-                saveStatus === "saving" && "text-yellow-500",
-                saveStatus === "saved" && "text-green-500",
-                saveStatus === "error" && "text-red-500",
-                saveStatus === "idle" && "text-muted-foreground"
-              )}
-            >
+        <div className="p-4 border-b flex-shrink-0 space-y-3">
+          <div className="flex items-center justify-between">
+            <h1 className="text-lg font-semibold">Editor with Auto-Save</h1>
+            <div className="flex items-center gap-3">
               <div
                 className={cn(
-                  "h-2 w-2 rounded-full",
-                  saveStatus === "saving" && "bg-yellow-500 animate-pulse",
-                  saveStatus === "saved" && "bg-green-500",
-                  saveStatus === "error" && "bg-red-500",
-                  saveStatus === "idle" && "bg-muted-foreground"
+                  "flex items-center gap-2 text-sm",
+                  saveStatus === "saving" && "text-yellow-500",
+                  saveStatus === "saved" && "text-green-500",
+                  saveStatus === "error" && "text-red-500",
+                  saveStatus === "idle" && "text-muted-foreground"
                 )}
-              />
-              <span>
-                {saveStatus === "saving" && "保存中..."}
-                {saveStatus === "saved" && "已保存"}
-                {saveStatus === "error" && "保存失败"}
-                {saveStatus === "idle" && "就绪"}
-              </span>
+              >
+                <div
+                  className={cn(
+                    "h-2 w-2 rounded-full",
+                    saveStatus === "saving" && "bg-yellow-500 animate-pulse",
+                    saveStatus === "saved" && "bg-green-500",
+                    saveStatus === "error" && "bg-red-500",
+                    saveStatus === "idle" && "bg-muted-foreground"
+                  )}
+                />
+                <span>
+                  {saveStatus === "saving" && "保存中..."}
+                  {saveStatus === "saved" && "已保存"}
+                  {saveStatus === "error" && "保存失败"}
+                  {saveStatus === "idle" && "就绪"}
+                </span>
+              </div>
+              {lastSaveTime && (
+                <span className="text-xs text-muted-foreground">
+                  {formatTime(lastSaveTime)}
+                </span>
+              )}
             </div>
-            {lastSaveTime && (
-              <span className="text-xs text-muted-foreground">
-                {formatTime(lastSaveTime)}
-              </span>
-            )}
+          </div>
+          <div className="flex items-center justify-between">
+            <PresetSelector onSelect={setContent} />
+            <QuickActions
+              actions={[
+                {
+                  label: "复制",
+                  onClick: handleCopy,
+                  variant: "outline",
+                },
+                {
+                  label: "清空",
+                  onClick: handleClear,
+                  variant: "outline",
+                },
+              ]}
+            />
           </div>
         </div>
         <div className="flex-1 overflow-hidden min-h-0">
