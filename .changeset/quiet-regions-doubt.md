@@ -1,0 +1,5 @@
+---
+"zenmark-editor": minor
+---
+
+release

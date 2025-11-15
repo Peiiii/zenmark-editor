@@ -18,7 +18,11 @@
     "oss:upload": "ossutil64 cp -r -u build/tiptap-editor oss://write-dimstack-com/zenmark-editor -c ./.ossutilconfig.local && ossutil64 cp -r -u build/wc/tiptap-editor oss://write-dimstack-com/zenmark-editor/wc  -c ./.ossutilconfig.local",
     "git:update": "git add . && git commit -m 'update' && git push",
     "update": "yarn git:update  &&  yarn deploy:lib && yarn deploy",
-    "update:app": "yarn git:update  &&  yarn deploy:app"
+    "update:app": "yarn git:update  &&  yarn deploy:app",
+    "changeset": "changeset",
+    "version": "changeset version",
+    "release": "pnpm -r --filter ./packages/* build && changeset publish || pnpm -r --filter ./packages/* exec npm pack",
+    "release:one": "node scripts/ensure-changeset.js && pnpm version && git add -A && git commit -m \"chore(release): version\" || true && pnpm -r --filter ./packages/* build && changeset publish"
   },
   "dependencies": {
     "@benrbray/prosemirror-math": "^0.2.2",
@@ -108,6 +112,7 @@
     "zenmark-editor": "workspace:*"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.27.7",
     "@tailwindcss/typography": "^0.5.13",
     "@types/node": "^20.5.9",
     "@types/pinyin": "^2.10.2",
