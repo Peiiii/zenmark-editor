@@ -22,7 +22,7 @@
     "changeset": "changeset",
     "version": "changeset version",
     "release": "pnpm -r --filter ./packages/* build && changeset publish || pnpm -r --filter ./packages/* exec npm pack",
-    "release:one": "node scripts/ensure-changeset.js && pnpm version && git add -A && git commit -m \"chore(release): version\" || true && pnpm -r --filter ./packages/* build && changeset publish"
+    "release:one": "node scripts/ensure-changeset.js && pnpm version && git add -A && git commit -m \"chore(release): version\" || true && pnpm -r --filter ./packages/* build && changeset publish || pnpm -r --filter ./packages/* exec npm pack"
   },
   "dependencies": {
     "@benrbray/prosemirror-math": "^0.2.2",
