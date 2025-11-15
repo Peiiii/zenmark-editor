@@ -1,5 +1,11 @@
 # zenmark-editor
 
+## 0.1.1
+
+### Patch Changes
+
+- Auto release.
+
 ## 0.1.0
 
 ### Minor Changes

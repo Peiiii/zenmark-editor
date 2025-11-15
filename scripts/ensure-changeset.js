@@ -12,7 +12,18 @@ const changesetDir = path.join(repoRoot, '.changeset');
 function hasPendingChangeset() {
   if (!fs.existsSync(changesetDir)) return false;
   const files = fs.readdirSync(changesetDir);
-  return files.some((f) => f.endsWith('.md'));
+  // Only treat real changeset md files (with frontmatter '---'), ignore README.md
+  return files.some((f) => {
+    if (!f.endsWith('.md')) return false;
+    if (f.toLowerCase() === 'readme.md') return false;
+    try {
+      const p = path.join(changesetDir, f);
+      const content = fs.readFileSync(p, 'utf8').trimStart();
+      return content.startsWith('---');
+    } catch {
+      return false;
+    }
+  });
 }
 
 function getPackageName() {
@@ -46,4 +57,3 @@ function createPatchChangeset(pkgName) {
     process.exit(1);
   }
 })();
-
