@@ -1,3 +1,5 @@
+/* bring in editor styles from the package for local verification */
+@import "zenmark-editor/style.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -94,4 +96,3 @@
     accent-color: hsl(var(--primary));
   }
 }
-

@@ -1,0 +1,3 @@
+/* Re-export built CSS for bundlers that don't follow package.exports for CSS */
+@import "./dist/es/style.css";
+
