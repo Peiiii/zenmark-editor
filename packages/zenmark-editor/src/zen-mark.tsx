@@ -6,7 +6,7 @@ import Placeholder from "@tiptap/extension-placeholder";
 import Typography from "@tiptap/extension-typography";
 import { AnyExtension, EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { ensureZenmarkStylesInjected } from "./styles";
 
 import { ExpandMenuBar } from "@/actions/page";
@@ -21,6 +21,7 @@ import { Markdown } from "@/extensions/tiptap-markdown";
 import { initialContent } from "@/initialize";
 import { device } from "@/utils/device";
 import Focus from "@tiptap/extension-focus";
+import BubbleMenuExtension from "@tiptap/extension-bubble-menu";
 import HorizontalRule from "@tiptap/extension-horizontal-rule";
 import Link from "@tiptap/extension-link";
 import ListKeymap from "@tiptap/extension-list-keymap";
@@ -44,6 +45,8 @@ import { Invite } from "./extensions/Invite";
 import { SmilieReplacer } from "./extensions/SmilieReplacer";
 import { Suggestion } from "./extensions/Suggestion";
 import { i18n } from "@/services/i18n";
+import { CellSelection } from "@tiptap/pm/tables";
+import { createPortal } from "react-dom";
 // import { TableTooltip } from "@/extensions/MyTable/TableWidget";
 
 // const ydoc = new Y.Doc();
@@ -86,6 +89,14 @@ export const ZenmarkEditor = ({
     useState(false);
   const isUpdatingRef = useRef(false);
 
+  // Bubble menu element for @tiptap/extension-bubble-menu
+  const bubbleMenuEl = useMemo(() => {
+    if (typeof document === "undefined") return null as unknown as HTMLDivElement;
+    const el = document.createElement("div");
+    el.className = "bubble-menu";
+    return el;
+  }, []);
+
   const editor = useEditor({
     editable,
     extensions: [
@@ -97,6 +108,42 @@ export const ZenmarkEditor = ({
         // code: false,
       }),
       Markdown,
+      // Use Tiptap v3 BubbleMenu extension to control visibility/position,
+      // and render our React content into the provided element via a portal.
+      BubbleMenuExtension.configure({
+        element: bubbleMenuEl!,
+        shouldShow: ({ state, view }) => {
+          const { selection } = state;
+          if (selection instanceof CellSelection) return false;
+          const { from, to } = selection;
+          if (from === to) return false;
+          try {
+            const domAtPos = view.domAtPos(from);
+            const node = domAtPos.node as HTMLElement;
+            if (node) {
+              const isTableSelector =
+                node.closest?.('[class*="table-selector-"]') ||
+                node.closest?.(".table-row-column-menu") ||
+                (node.classList &&
+                  (Array.from(node.classList).some((cls: string) =>
+                    cls.startsWith("table-selector-")
+                  ) ||
+                    node.classList.contains("table-row-column-menu")));
+              if (isTableSelector) return false;
+              const parent = node.parentElement;
+              if (parent) {
+                const isParentTableSelector =
+                  parent.closest?.('[class*="table-selector-"]') ||
+                  parent.closest?.(".table-row-column-menu");
+                if (isParentTableSelector) return false;
+              }
+            }
+          } catch {
+            return true;
+          }
+          return true;
+        },
+      }),
       // Code.configure({
       //   HTMLAttributes: {
       //     "data-mark":"code"
@@ -208,6 +255,19 @@ export const ZenmarkEditor = ({
       },
     },
   });
+
+  // Ensure bubble menu element exists in DOM for tippy positioning
+  useEffect(() => {
+    if (!bubbleMenuEl) return;
+    document.body.appendChild(bubbleMenuEl);
+    return () => {
+      try {
+        bubbleMenuEl.remove();
+      } catch {
+        // ignore
+      }
+    };
+  }, [bubbleMenuEl]);
 
   useEffect(() => {
     if (!editor) return;
@@ -327,7 +387,7 @@ export const ZenmarkEditor = ({
       )}
       <div className="editor-middle scroll scroll-8">
         <div className="editor-inner">
-          {editor && editable && <BubbleMenu editor={editor} />}
+          {editor && editable && bubbleMenuEl && createPortal(<BubbleMenu editor={editor} />, bubbleMenuEl)}
           {/* {editor && <FloatingMenu editor={editor} />} */}
           <div className="editor-content-wrapper  scroll scroll-7">
             <div className="editor-content-extra-left" />
