@@ -14,7 +14,8 @@
     "oss:upload": "ossutil64 cp -r -u build/tiptap-editor oss://write-dimstack-com/zenmark-editor -c ./.ossutilconfig.local && ossutil64 cp -r -u build/wc/tiptap-editor oss://write-dimstack-com/zenmark-editor/wc  -c ./.ossutilconfig.local",
     "git:update": "git add . && git commit -m 'update' && git push",
     "update": "yarn git:update  &&  yarn deploy:lib && yarn deploy",
-    "update:app": "yarn git:update  &&  yarn deploy:app"
+    "update:app": "yarn git:update  &&  yarn deploy:app",
+    "release": "pnpm --filter zenmark-editor release"
   },
   "dependencies": {
     "@benrbray/prosemirror-math": "^0.2.2",
