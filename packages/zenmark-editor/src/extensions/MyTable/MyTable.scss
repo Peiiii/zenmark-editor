@@ -48,28 +48,96 @@
 }
 
 .bg-blue-200 {
-    background-color: lightblue;
+    background-color: rgba(59, 130, 246, 0.1);
+    transition: background-color 0.2s ease;
 }
 
 .hover:bg-blue-400 {
     &:hover {
-        background-color: blue;
+        background-color: rgba(59, 130, 246, 0.3);
     }
 }
 
 .absolute {
     position: absolute;
+    z-index: 10;
 }
 
 .cursor-pointer {
     cursor: pointer;
 }
 
+table {
+    position: relative;
+}
+
+.tableWrapper {
+    position: relative;
+    
+    &:hover {
+        .bg-blue-200 {
+            opacity: 1 !important;
+        }
+    }
+    
+    .bg-blue-200 {
+        opacity: 0;
+        transition: opacity 0.2s ease;
+    }
+}
+
+.table-row-column-menu {
+    animation: fadeIn 0.15s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.table-action-btn {
+    padding: 4px 8px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: transparent;
+    font-size: 12px;
+    transition: background-color 0.15s ease;
+    
+    &:hover {
+        background-color: #f3f4f6;
+    }
+    
+    &:active {
+        background-color: #e5e7eb;
+    }
+    
+    &.danger {
+        color: #ef4444;
+        
+        &:hover {
+            background-color: #fee2e2;
+        }
+    }
+}
+
+.table-action-divider {
+    width: 1px;
+    background-color: #e5e7eb;
+    margin: 4px 0;
+}
 
 th,
 td {
+    position: relative;
+    
     &.selected {
-        opacity: 0.5 !important;
-        background-color: #1a73e8 !important;
+        background-color: rgba(59, 130, 246, 0.15) !important;
     }
 }

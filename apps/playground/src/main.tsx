@@ -2,7 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './globals.css'
 // Bring in editor styles during local dev to ensure correct appearance
-import { ensureZenmarkStylesInjected } from 'zenmark-editor/src/styles.tsx'
+import { ensureZenmarkStylesInjected } from 'zenmark-editor'
 import App from './App.tsx'
 
 ensureZenmarkStylesInjected()

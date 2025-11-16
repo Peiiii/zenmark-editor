@@ -24,26 +24,15 @@ import { DecorationSet } from "@tiptap/pm/view";
 // import { useInstance } from "@milkdown/react";
 // import { $ctx, $prose } from "@milkdown/utils";
 
-import type { ComponentType, FC, ReactNode, ReactPortal } from "react";
+import type { ComponentType, FC } from "react";
 import {
   createContext,
-  useContext,
-  useEffect,
   useMemo,
-  useRef,
-  useState,
 } from "react";
 import {
   getCellsInColumn,
   getCellsInRow,
-  selectCol,
-  selectNodeCol,
-  selectNodeRow,
-  selectNodeTable,
-  selectRow,
-  selectTable,
 } from "@/extensions/MyTable/utils";
-import ReactDOM from "react-dom";
 import { createRoot } from "react-dom/client";
 import "./MyTable.scss";
 import React from "react";
@@ -51,6 +40,14 @@ import { Editor } from "@tiptap/core";
 import { TooltipProvider } from "@/extensions/MyTable/TooltipProvider";
 import xbook from "@/xbook";
 import { useStateFromPipe } from "@/extensions/MyTable/hooks/use-state-from-pipe";
+import { useTableActionMenu } from "./hooks/useTableActionMenu";
+import { TableActionMenu } from "./components/TableActionMenu";
+import {
+  getSelectorClassName,
+  handleDragStart,
+  handleDragOver,
+  handleDrop,
+} from "./utils/tableSelectorUtils";
 export const editorContext = createContext<Editor>(
   undefined as unknown as Editor
 );
@@ -64,102 +61,59 @@ export const tableTooltipContext = createContext<TooltipProvider | undefined>(
 
 // export const tableTooltip = tooltipFactory("TABLE");
 
-const TableSelectorWidget: FC = ({ spec }: any) => {
-  // const { spec } = useWidgetViewContext();
+const TableSelectorWidget: FC<{ spec?: { type: string; index?: number } }> = ({
+  spec = { type: "top-left" },
+}) => {
   const type = spec?.type;
   const index = spec?.index ?? 0;
-  // console.log("spec:", spec);
   const editor = useStateFromPipe<Editor>("editor");
-  const tooltip = useStateFromPipe(
+  const tooltip = useStateFromPipe<TooltipProvider | undefined>(
     "tableTooltip",
     undefined as unknown as TooltipProvider
   );
-  // console.log("tableTooltip:", tooltip);
-  //   const [loading, getEditor] = useInstance();
-  // editor.commands.addColumnAfter();
-  const common = "cursor-pointer absolute bg-blue-200 hover:bg-blue-400";
 
-  const className = useMemo(() => {
-    if (type === "left") return "w-2 h-full -left-3.5 top-0";
+  const {
+    showMenu,
+    menuPosition,
+    menuRef,
+    selectorRef,
+    handleSelectorClick,
+    closeMenu,
+  } = useTableActionMenu({
+    type: type as "left" | "top" | "top-left",
+    index,
+    editor,
+    tooltip,
+  });
 
-    if (type === "top") return "right-px h-2 left-0 -top-3.5";
-
-    return "h-3 w-3 -left-4 -top-4 rounded-full";
-  }, [type]);
+  const className = useMemo(
+    () => `${getSelectorClassName(type)} table-selector-${type}-${index}`,
+    [type, index]
+  );
 
   return (
+    <>
     <div
       draggable={type !== "top-left"}
-      className={[className, common].join(" ")}
-      onClick={(e) => {
-        e.stopPropagation();
-        // if (loading) return;
-
-        const rect = (e.target as HTMLElement).getBoundingClientRect();
-        tooltip?.getInstance()?.setProps({
-          getReferenceClientRect: () => rect,
-        });
-        tooltip?.show();
-        // console.log("top-left clicked");
-        if (type === "left")
-          editor?.view.dispatch(selectNodeRow(index)(editor?.state.tr));
-        else if (type === "top")
-          editor?.view.dispatch(selectNodeCol(index)(editor?.state.tr));
-        else editor?.view.dispatch(selectNodeTable(editor?.state.tr));
-        // getEditor().action((ctx) => {
-        //   const tooltip = ctx.get(tableTooltipCtx.key);
-        //   const rect = (e.target as HTMLElement).getBoundingClientRect();
-        //   tooltip?.getInstance()?.setProps({
-        //     getReferenceClientRect: () => rect,
-        //   });
-        //   tooltip?.show();
-        //   const commands = ctx.get(commandsCtx);
-
-        //   if (type === "left") commands.call(selectRowCommand.key, index);
-        //   else if (type === "top") commands.call(selectColCommand.key, index);
-        //   else commands.call(selectTableCommand.key);
-        // });
-      }}
-      onDragStart={(e) => {
-        e.stopPropagation();
-
-        const data = { index: spec?.index, type: spec?.type };
-        e.dataTransfer.setData(
-          "application/milkdown-table-sort",
-          JSON.stringify(data)
-        );
-        e.dataTransfer.effectAllowed = "move";
-      }}
-      onDragOver={(e) => {
-        e.stopPropagation();
-        e.preventDefault();
-        e.dataTransfer.dropEffect = "move";
-      }}
-      onDrop={(e) => {
-        if (type === "top-left") return;
-        const i = spec?.index;
-        // if (loading || i == null) return;
-        const data = e.dataTransfer.getData("application/milkdown-table-sort");
-        try {
-          const { index, type } = JSON.parse(data);
-
-          //   getEditor().action((ctx) => {
-          //     const commands = ctx.get(commandsCtx);
-          //     const options = {
-          //       from: Number(index),
-          //       to: i,
-          //     };
-
-          //     commands.call(
-          //       type === "left" ? moveRowCommand.key : moveColCommand.key,
-          //       options
-          //     );
-          //   });
-        } catch {
-          // ignore data from other source
-        }
-      }}
-    />
+        className={className}
+        ref={selectorRef}
+        onClick={handleSelectorClick}
+        onDragStart={(e) => handleDragStart(e, spec)}
+        onDragOver={handleDragOver}
+        onDrop={(e) => handleDrop(e, type, spec?.index)}
+      />
+      {showMenu &&
+        editor &&
+        menuPosition &&
+        (type === "left" || type === "top") && (
+          <TableActionMenu
+            type={type as "left" | "top"}
+            editor={editor}
+            position={menuPosition}
+            onClose={closeMenu}
+          />
+        )}
+    </>
   );
 };
 const createWidgetViewFactory =

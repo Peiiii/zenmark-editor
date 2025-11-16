@@ -3,6 +3,7 @@ import { TableView } from "@/extensions/MyTable/TableView";
 import { tableSelectorPlugin } from "@/extensions/MyTable/TableWidget";
 import { TableTooltipPlugin } from "@/extensions/MyTable/plugins/table-tooltip-plugin";
 import { ViewStateUpdatePlugin } from "@/extensions/MyTable/plugins/view-state-update-plugin";
+import { TableKeyboardPlugin } from "@/extensions/MyTable/plugins/table-keyboard-plugin";
 import Table from "@tiptap/extension-table";
 import { ReactNodeViewRenderer } from "@tiptap/react";
 import { Plugin } from "@tiptap/pm/state";
@@ -59,6 +60,7 @@ export default Table.extend({
       }),
       ViewStateUpdatePlugin(this.editor),
       TableTooltipPlugin(),
+      TableKeyboardPlugin(),
       tableSelectorPlugin(this.editor as any),
     ];
   },

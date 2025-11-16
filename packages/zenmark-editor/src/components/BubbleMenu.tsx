@@ -1,6 +1,7 @@
 import { BubbleMenu, Editor } from "@tiptap/react";
 import { css } from "@emotion/css";
 import { Fragment, useEffect } from "react";
+import { CellSelection } from "@tiptap/pm/tables";
 // import "../css/bubble-menu.scss";
 
 import { Action } from "@/actions/types";
@@ -54,6 +55,50 @@ export default ({ editor }: { editor: Editor }) => {
         duration: 100,
       }}
       editor={editor}
+      shouldShow={({ view, state }) => {
+        const { selection } = state;
+        
+        if (selection instanceof CellSelection) {
+          return false;
+        }
+        
+        const { from, to } = selection;
+        if (from === to) {
+          return false;
+        }
+        
+        try {
+          const domAtPos = view.domAtPos(from);
+          const node = domAtPos.node as HTMLElement;
+          
+          if (node) {
+            const isTableSelector = 
+              node.closest?.('[class*="table-selector-"]') ||
+              node.closest?.(".table-row-column-menu") ||
+              (node.classList && (
+                Array.from(node.classList).some((cls: string) => cls.startsWith("table-selector-")) ||
+                node.classList.contains("table-row-column-menu")
+              ));
+            if (isTableSelector) {
+              return false;
+            }
+            
+            const parent = node.parentElement;
+            if (parent) {
+              const isParentTableSelector = 
+                parent.closest?.('[class*="table-selector-"]') ||
+                parent.closest?.(".table-row-column-menu");
+              if (isParentTableSelector) {
+                return false;
+              }
+            }
+          }
+        } catch (e) {
+          return true;
+        }
+        
+        return true;
+      }}
     >
       <div
         className={css`
