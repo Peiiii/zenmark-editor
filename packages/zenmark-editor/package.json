@@ -1,6 +1,6 @@
 {
   "name": "zenmark-editor",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "main": "./dist/cjs/index.js",
   "module": "./dist/es/index.js",
   "types": "./dist/es/index.d.ts",
@@ -36,7 +36,8 @@
     "deploy:lib": "yarn build:lib && ossutil64 cp -r -u build/lib/tiptap-editor oss://write-dimstack-com/zenmark-editor/lib -c ./.ossutilconfig.local",
     "oss:upload": "ossutil64 cp -r -u build/tiptap-editor oss://write-dimstack-com/zenmark-editor -c ./.ossutilconfig.local && ossutil64 cp -r -u build/wc/tiptap-editor oss://write-dimstack-com/zenmark-editor/wc  -c ./.ossutilconfig.local",
     "git:update": "git add . && git commit -m 'update' && git push",
-    "update": "yarn git:update  &&  yarn deploy:lib && yarn deploy"
+    "update": "yarn git:update  &&  yarn deploy:lib && yarn deploy",
+    "release": "bumpp && pnpm build && pnpm publish"
   },
   "peerDependencies": {
     "@benrbray/prosemirror-math": "^0.2.2",
