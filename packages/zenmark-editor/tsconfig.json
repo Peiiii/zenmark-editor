@@ -22,7 +22,19 @@
     "paths": {
       "@/*": ["./src/*"],
       "xbook/*": ["./src/xbook/*"],
-      "xbook": ["./src/xbook"]
+      "xbook": ["./src/xbook"],
+      "prosemirror-model": ["@tiptap/pm/model"],
+      "prosemirror-view": ["@tiptap/pm/view"],
+      "prosemirror-state": ["@tiptap/pm/state"],
+      "prosemirror-commands": ["@tiptap/pm/commands"],
+      "prosemirror-transform": ["@tiptap/pm/transform"],
+      "prosemirror-history": ["@tiptap/pm/history"],
+      "prosemirror-keymap": ["@tiptap/pm/keymap"],
+      "prosemirror-inputrules": ["@tiptap/pm/inputrules"],
+      "prosemirror-schema-list": ["@tiptap/pm/schema-list"],
+      "prosemirror-dropcursor": ["@tiptap/pm/dropcursor"],
+      "prosemirror-gapcursor": ["@tiptap/pm/gapcursor"],
+      "prosemirror-markdown": ["@tiptap/pm/markdown"]
     }
   },
   "include": ["src"]

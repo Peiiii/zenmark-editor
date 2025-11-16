@@ -1,5 +1,5 @@
 import { Mark } from "@tiptap/core";
-import { defaultMarkdownSerializer } from "prosemirror-markdown";
+import { defaultMarkdownSerializer } from "@tiptap/pm/markdown";
 
 
 const Bold = Mark.create({

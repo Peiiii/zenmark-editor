@@ -1,24 +1,8 @@
-import "../css/FloatingMenu.scss";
-import {  FloatingMenu } from '@tiptap/react'
-import React, { Fragment } from 'react'
+import React from "react";
 
-import MenuItem from './MenuItem'
-import { Actions } from "../actions/editor";
-
-export default ({ editor }) => {
-  const items = [
-    Actions.Bold,
-    Actions.Italic,
-    Actions.Strikethrough,
-  ]
-
-  return (
-    <FloatingMenu className="floating-menu" tippyOptions={{ duration: 100 }}  editor={editor}>
-     {items.map((item:any, index) => (
-        <Fragment key={index}>
-          {item.type === 'divider' ? <div className="divider" /> : <MenuItem editor={editor} {...item} />}
-        </Fragment>
-      ))}
-  </FloatingMenu>
-  )
+// Placeholder for Tiptap v3. The built-in FloatingMenu React component was removed.
+// Our editor doesn't use this component by default (see zen-mark.tsx), so we keep
+// a no-op to avoid breaking imports if enabled later.
+export default function FloatingMenu() {
+  return null;
 }

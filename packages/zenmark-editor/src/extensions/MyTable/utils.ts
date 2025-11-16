@@ -12,7 +12,7 @@ import {
 } from "@tiptap/pm/state";
 import type { TableRect } from "@tiptap/pm/tables";
 import { CellSelection, TableMap } from "@tiptap/pm/tables";
-import { findParentNode } from "@tiptap/react";
+import { findParentNode } from "@tiptap/core";
 // import { findParentNode } from "@tiptap/react";
 // cloneTr;
 // import {
@@ -136,7 +136,9 @@ export const selectTable = (tr: Transaction) => {
     const last = cells[cells.length - 1];
     if (last) {
       const $lastCell = tr.doc.resolve(last.pos);
-      return cloneTr(tr.setSelection(new CellSelection($lastCell, $firstCell)));
+      return cloneTr(
+        (tr.setSelection(new (CellSelection as any)($lastCell as any, $firstCell as any)) as any)
+      );
     }
   }
   return tr;
@@ -149,15 +151,18 @@ export const selectNodeTable = (tr: Transaction) => {
     const last = cells[cells.length - 1];
     if (last) {
       const $lastCell = tr.doc.resolve(last.pos);
-      const cellSelection = new CellSelection($lastCell, $firstCell);
+      const cellSelection = new (CellSelection as any)(
+        $lastCell as any,
+        $firstCell as any
+      ) as any;
       return cloneTr(
-        tr.setSelection(
-          new MultiNodeSelection(
-            tr,
-            cellSelection.$anchorCell,
-            cellSelection.$headCell
+        (tr.setSelection(
+          new (MultiNodeSelection as any)(
+            tr as any,
+            (cellSelection as any).$anchorCell,
+            (cellSelection as any).$headCell
           )
-        )
+        ) as any)
       );
     }
   }
@@ -188,18 +193,21 @@ export const selectNodeTable = (tr: Transaction) => {
 //   return tr;
 // }
 
-class MultiNodeSelection extends CellSelection {
-  constructor(tr, $anchorCell, $headCell = $anchorCell) {
-    super($anchorCell, $headCell);
-    this.ranges = this.ranges.map((cellRange) => {
-      const nodeSelection = NodeSelection.create(
-        tr.doc,
-        cellRange.$from.pos - 1
-      );
-      // console.log()
-      return new SelectionRange(nodeSelection.$from, nodeSelection.$to);
-    });
-  }
+  class MultiNodeSelection extends CellSelection {
+    constructor(tr, $anchorCell, $headCell = $anchorCell) {
+      super($anchorCell, $headCell);
+      this.ranges = (this.ranges as any).map((cellRange: any) => {
+        const nodeSelection = NodeSelection.create(
+          tr.doc as any,
+          cellRange.$from.pos - 1
+        ) as any;
+        // console.log()
+        return new (SelectionRange as any)(
+          (nodeSelection as any).$from,
+          (nodeSelection as any).$to
+        );
+      }) as any;
+    }
   // eq(other) {
   //   return (
   //     other instanceof MultiNodeSelection &&
@@ -244,9 +252,9 @@ export const selectLine =
         );
         const $firstCell = tr.doc.resolve(table.start + firstCell);
         return cloneTr(
-          tr.setSelection(
-            createCellSelection($lastCell, $firstCell) as unknown as Selection
-          )
+          (tr.setSelection(
+            createCellSelection($lastCell as any, $firstCell as any) as any
+          ) as any)
         );
       }
     }
@@ -294,15 +302,15 @@ export const selectNodeLine =
           table.node
         );
         const $firstCell = tr.doc.resolve(table.start + firstCell);
-        const cellSelection = createCellSelection($lastCell, $firstCell);
+        const cellSelection = (createCellSelection as any)($lastCell as any, $firstCell as any) as any;
         return cloneTr(
-          tr.setSelection(
-            new MultiNodeSelection(
-              tr,
-              cellSelection.$anchorCell,
-              cellSelection.$headCell
+          (tr.setSelection(
+            new (MultiNodeSelection as any)(
+              tr as any,
+              (cellSelection as any).$anchorCell,
+              (cellSelection as any).$headCell
             )
-          )
+          ) as any)
         );
       }
     }

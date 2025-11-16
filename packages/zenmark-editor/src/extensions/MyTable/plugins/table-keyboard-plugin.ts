@@ -1,6 +1,6 @@
 import { Plugin, PluginKey } from "@tiptap/pm/state";
 import { CellSelection, TableMap } from "@tiptap/pm/tables";
-import { findParentNode } from "@tiptap/react";
+import { findParentNode } from "@tiptap/core";
 
 export const TableKeyboardPlugin = () => {
   return new Plugin({
@@ -57,8 +57,8 @@ export const TableKeyboardPlugin = () => {
               const nextCellPos = table.start + tableMap.positionAt(nextRow, nextCol, isInTable);
               const $nextCell = doc.resolve(nextCellPos);
               view.dispatch(
-                view.state.tr.setSelection(
-                  CellSelection.create(doc, $nextCell.pos)
+                (view.state.tr as any).setSelection(
+                  CellSelection.create(doc as any, $nextCell.pos) as any
                 )
               );
               return true;
@@ -104,8 +104,8 @@ export const TableKeyboardPlugin = () => {
                 const nextCellPos = table.start + tableMap.positionAt(nextRow, nextCol, isInTable);
                 const $nextCell = doc.resolve(nextCellPos);
                 view.dispatch(
-                  view.state.tr.setSelection(
-                    CellSelection.create(doc, $nextCell.pos)
+                  (view.state.tr as any).setSelection(
+                    CellSelection.create(doc as any, $nextCell.pos) as any
                   )
                 );
                 return true;
@@ -119,4 +119,3 @@ export const TableKeyboardPlugin = () => {
     },
   });
 };
-

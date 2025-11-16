@@ -12,6 +12,19 @@ const zenmarkEditorSrc = resolve(__dirname, '../../packages/zenmark-editor/src')
 export default defineConfig({
   plugins: [react()],
   resolve: {
+    dedupe: [
+      'prosemirror-model',
+      'prosemirror-view',
+      'prosemirror-state',
+      'prosemirror-transform',
+      'prosemirror-commands',
+      'prosemirror-history',
+      'prosemirror-keymap',
+      'prosemirror-inputrules',
+      'prosemirror-schema-list',
+      'prosemirror-tables',
+      'prosemirror-markdown',
+    ],
     alias: [
       {
         find: 'zenmark-editor',
@@ -32,4 +45,3 @@ export default defineConfig({
     ],
   },
 })
-

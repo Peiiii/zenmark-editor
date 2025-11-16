@@ -1,7 +1,7 @@
 /* eslint-disable */
 import { Node, mergeAttributes } from "@tiptap/core";
 
-import { inputRules } from "prosemirror-inputrules";
+import { inputRules } from "@tiptap/pm/inputrules";
 
 import {
   REGEX_BLOCK_MATH_DOLLARS,
@@ -36,7 +36,8 @@ export default Node.create({
 
   addProseMirrorPlugins() {
     const inputRulePlugin = inputRules({
-      rules: [makeBlockMathInputRule(REGEX_BLOCK_MATH_DOLLARS, this.type)],
+      // Cast NodeType to any to avoid TS type differences between @tiptap/pm and prosemirror deps
+      rules: [makeBlockMathInputRule(REGEX_BLOCK_MATH_DOLLARS, this.type as any)],
     });
 
     return [mathPlugin, inputRulePlugin];

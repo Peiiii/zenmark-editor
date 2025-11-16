@@ -4,10 +4,10 @@ import { tableSelectorPlugin } from "@/extensions/MyTable/TableWidget";
 import { TableTooltipPlugin } from "@/extensions/MyTable/plugins/table-tooltip-plugin";
 import { ViewStateUpdatePlugin } from "@/extensions/MyTable/plugins/view-state-update-plugin";
 import { TableKeyboardPlugin } from "@/extensions/MyTable/plugins/table-keyboard-plugin";
-import Table from "@tiptap/extension-table";
+import { Table } from "@tiptap/extension-table";
 import { ReactNodeViewRenderer } from "@tiptap/react";
 import { Plugin } from "@tiptap/pm/state";
-import { Decoration, DecorationSet } from "prosemirror-view";
+import { Decoration, DecorationSet } from "@tiptap/pm/view";
 export default Table.extend({
   // addNodeView() {
   //   // return ReactNodeViewRenderer(TableComponent)
@@ -21,7 +21,7 @@ export default Table.extend({
           decorations(state) {
             const { ranges } = state.selection;
             // console.log("ranges: ", ranges);
-            if (!ranges.length) return DecorationSet.empty;
+            if (!ranges.length) return DecorationSet.empty as any;
             const decs: Decoration[] = [];
             for (let i = 0; i < ranges.length; i++) {
               const { $from, $to } = ranges[i];
@@ -54,7 +54,7 @@ export default Table.extend({
                 );
               }
             }
-            return DecorationSet.create(state.doc, decs);
+            return DecorationSet.create(state.doc as any, decs) as any;
           },
         },
       }),

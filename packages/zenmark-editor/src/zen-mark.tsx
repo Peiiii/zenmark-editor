@@ -189,7 +189,7 @@ export const ZenmarkEditor = ({
     content: value || initialContent,
     onUpdate: ({ editor }) => {
       if (isUpdatingRef.current) return;
-      const markdown = editor.storage.markdown?.getMarkdown() || editor.getHTML();
+      const markdown = (editor.storage as any).markdown?.getMarkdown() || editor.getHTML();
       onChange(markdown);
     },
     editorProps: {
@@ -212,10 +212,10 @@ export const ZenmarkEditor = ({
   useEffect(() => {
     if (!editor) return;
     
-    const currentMarkdown = editor.storage.markdown?.getMarkdown() || editor.getHTML();
+    const currentMarkdown = (editor.storage as any).markdown?.getMarkdown() || editor.getHTML();
     if (currentMarkdown !== value && value !== undefined) {
       isUpdatingRef.current = true;
-      editor.commands.setContent(value || '', false);
+      editor.commands.setContent(value || '', { emitUpdate: false } as any);
       setTimeout(() => {
         isUpdatingRef.current = false;
       }, 0);

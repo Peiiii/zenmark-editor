@@ -10,4 +10,4 @@ export class MarkdownSerializerState extends BaseMarkdownSerializerState {
     markString(mark: any, open: any, parent: any, index: any): string;
     normalizeInline(inline: any): any;
 }
-import { MarkdownSerializerState as BaseMarkdownSerializerState } from "prosemirror-markdown";
+import { MarkdownSerializerState as BaseMarkdownSerializerState } from "@tiptap/pm/markdown";

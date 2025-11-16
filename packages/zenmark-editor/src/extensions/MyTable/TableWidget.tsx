@@ -186,7 +186,7 @@ export const tableSelectorPlugin = (editor: Editor) =>
             );
           });
 
-          return DecorationSet.create(tr.doc, decorations);
+          return DecorationSet.create(tr.doc as any, decorations) as any;
         },
       },
       props: {

@@ -1,22 +1,21 @@
-import { Editor, Extension, Node } from "@tiptap/react";
-import { EditorState, Plugin, PluginView } from "@tiptap/pm/state";
-import { EditorView } from "@tiptap/pm/view";
+import { Editor, Extension } from "@tiptap/core";
+import { Plugin, PluginView } from "@tiptap/pm/state";
 
 class MyCustomView implements PluginView {
-  view: EditorView;
+  view: any;
   editor: Editor;
-  constructor({ view, editor }: { view: EditorView; editor: Editor }) {
+  constructor({ view, editor }: { view: any; editor: Editor }) {
     this.view = view;
     this.editor = editor;
     // this.dom=
   }
-  update(view: EditorView, prevState: EditorState) {}
+  update(view: any, prevState: any) {}
   destroy?: (() => void) | undefined;
 }
 const MyCustomPlugin = ({ editor }) => {
   return new Plugin({
     name: "my-custom-extension",
-    view(view) {
+    view(view: any) {
       return new MyCustomView({ view, editor });
     },
   });
