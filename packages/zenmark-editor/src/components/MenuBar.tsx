@@ -21,6 +21,7 @@ export default ({ editor, onCollapse }: { editor: any; onCollapse?: () => void }
     Actions.OrderedList,
     Actions.TaskList,
     Actions.CodeBlock,
+    Actions.InsertTable,
     Actions.Divider,
     Actions.DoubleQuotes1,
     Actions.Separator,

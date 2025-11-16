@@ -29,6 +29,7 @@
   "action.AddTableColumnRight": "Add Table Column Right",
   "action.AddTableRowUp": "Add Table Row Up",
   "action.AddTableRowDown": "Add Table Row Down",
+  "action.InsertTable": "Insert Table",
   "action.EditLink": "Edit Link",
   "action.LinkURL": "URL",
   "action.ImageURL": "URL"

@@ -29,6 +29,7 @@
   "action.AddTableColumnRight": "在右侧添加表列",
   "action.AddTableRowUp": "在上方添加表行",
   "action.AddTableRowDown": "在下方添加表行",
+  "action.InsertTable": "插入表格",
   "action.EditLink": "编辑链接",
   "action.LinkURL": "链接地址",
   "action.ImageURL": "图片地址",

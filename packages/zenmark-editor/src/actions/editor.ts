@@ -28,6 +28,7 @@ import { FaRemoveFormat } from "react-icons/fa";
 import { LuHeading1, LuHeading2 } from "react-icons/lu";
 import { PiFrameCorners } from "react-icons/pi";
 import { VscHorizontalRule } from "react-icons/vsc";
+import { BiTable } from "react-icons/bi";
 
 export const Bold: Action = {
   name: "bold",
@@ -372,6 +373,31 @@ export const Iframe: Action = {
   },
 };
 
+export const InsertTable: Action = {
+  name: "insertTable",
+  icon: BiTable,
+  title: i18n.get({
+    key: "action.InsertTable",
+    defaultValue: "Insert Table",
+  }),
+  description: "3 x 3",
+  action: (editor: Editor) =>
+    editor
+      .chain()
+      .focus()
+      // default to a small table with a header row
+      .insertTable({ rows: 3, cols: 3, withHeaderRow: true })
+      .run(),
+  command: ({ editor, range }) => {
+    editor
+      .chain()
+      .focus()
+      .deleteRange(range)
+      .insertTable({ rows: 3, cols: 3, withHeaderRow: true })
+      .run();
+  },
+};
+
 export const AddTableColumnBefore: Action = {
   name: "addColumnBefore",
   icon: AiOutlineArrowLeft,
@@ -473,6 +499,7 @@ export const Actions = {
   SaveFile,
   Invite,
   Iframe,
+  InsertTable,
   AddTableColumnBefore,
   AddTableColumnAfter,
   AddTableRowBefore,

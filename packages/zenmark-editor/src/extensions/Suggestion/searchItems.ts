@@ -13,6 +13,7 @@ const SUGGESTION_ACTIONS: (Omit<Action, "id"> & {
   Actions.TaskList,
   Actions.CodeBlock,
   Actions.DoubleQuotes1,
+  Actions.InsertTable,
 ];
 
 const getSuggestionItems = (query: { query: string }): SuggestionItem[] => {
