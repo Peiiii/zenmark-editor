@@ -1,6 +1,7 @@
 import { Editor} from "@tiptap/react";
 import { css } from "@emotion/css";
 import React, { Fragment, useEffect, useMemo, useRef, useState } from "react";
+import { getEditorHeaderRect, getSelectionRect } from "../utils/bubble";
 import { CellSelection } from "@tiptap/pm/tables";
 // import "../css/bubble-menu.scss";
 
@@ -67,24 +68,7 @@ function getSelectionClientRect(editor: Editor): DOMRect | null {
   const { state, view } = editor;
   const { from, to } = state.selection as any;
   try {
-    const start = view.coordsAtPos(from);
-    const end = view.coordsAtPos(to);
-    const top = Math.min(start.top, end.top);
-    const bottom = Math.max(start.bottom ?? start.top, end.bottom ?? end.top);
-    const left = (start.left + end.left) / 2;
-    const height = Math.max(0, bottom - top);
-    return new DOMRect(left, top, 0, height);
-  } catch {
-    return null;
-  }
-}
-
-function getEditorHeaderRect(editor: Editor): DOMRect | null {
-  const root = (editor.view.dom.closest?.(".editor") as HTMLElement) || editor.view.dom.parentElement;
-  const header = root?.querySelector?.(".editor-header") as HTMLElement | null;
-  if (!header) return null;
-  try {
-    return header.getBoundingClientRect();
+    return getSelectionRect(view, from, to);
   } catch {
     return null;
   }
@@ -139,7 +123,7 @@ export default ({ editor }: { editor: Editor }) => {
         return;
       }
       // Decide placement to avoid overlapping the header if needed
-      const headerRect = getEditorHeaderRect(editor);
+      const headerRect = getEditorHeaderRect(editor.view as any);
       const el = menuRef.current;
       const menuH = el?.offsetHeight || 36;
       const offset = 8;

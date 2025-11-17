@@ -1,8 +1,8 @@
 import { Editor } from '@tiptap/react'
-import { posToDOMRect } from '@tiptap/core'
 import React, { PropsWithChildren, useEffect, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { CellSelection } from '@tiptap/pm/tables'
+import { clampX, centerX, getScrollableAncestors, getSelectionRect, rectVisibleInAll } from '../utils/bubble'
 
 type Props = PropsWithChildren<{ editor: Editor }>
 
@@ -35,26 +35,6 @@ export default function SelectionBubble({ editor, children }: Props) {
     if (!editor || !getEl) return
     const view: any = editor.view as any
 
-    const getScrollableAncestors = (el: Element | null): (HTMLElement | Window)[] => {
-      const list: (HTMLElement | Window)[] = []
-      let cur: Element | null = el
-      while (cur) {
-        const parent = cur.parentElement
-        if (!parent) break
-        const style = window.getComputedStyle(parent)
-        const overflowY = style.overflowY
-        const overflowX = style.overflowX
-        const overflow = style.overflow
-        const scrollable = /(auto|scroll|overlay)/.test(`${overflow}${overflowX}${overflowY}`)
-        if (scrollable && (parent.scrollHeight > parent.clientHeight || parent.scrollWidth > parent.clientWidth)) {
-          list.push(parent)
-        }
-        cur = parent
-      }
-      if (list.length === 0) list.push(window)
-      return list
-    }
-
     const update = () => {
       const el = getEl!
       const state = editor.state
@@ -74,7 +54,7 @@ export default function SelectionBubble({ editor, children }: Props) {
       // Compute selection rect
       let rect: DOMRect
       try {
-        rect = posToDOMRect(view, selection.from, selection.to)
+        rect = getSelectionRect(view, selection.from, selection.to)
       } catch {
         el.style.visibility = 'hidden'
         el.style.opacity = '0'
@@ -83,18 +63,7 @@ export default function SelectionBubble({ editor, children }: Props) {
 
       // Determine visibility within all scrollable ancestors (and viewport)
       const containers = getScrollableAncestors(view.dom)
-      const visibleInAll = containers.every(container => {
-        const containerRect = container instanceof Window
-          ? new DOMRect(0, 0, window.innerWidth, window.innerHeight)
-          : (container as HTMLElement).getBoundingClientRect()
-        const intersects = !(
-          rect.bottom <= containerRect.top ||
-          rect.top >= containerRect.bottom ||
-          rect.right <= containerRect.left ||
-          rect.left >= containerRect.right
-        )
-        return intersects
-      })
+      const visibleInAll = rectVisibleInAll(rect, containers)
 
       if (!visibleInAll) {
         el.style.visibility = 'hidden'
@@ -103,12 +72,10 @@ export default function SelectionBubble({ editor, children }: Props) {
       }
 
       // Position near selection center
-      const centerX = rect.left + rect.width / 2
-      let x = Math.round(centerX)
+      let x = Math.round(centerX(rect))
       let y = Math.round(rect.top)
       // Clamp X inside viewport with small padding
-      const pad = 8
-      x = Math.max(pad, Math.min(window.innerWidth - pad, x))
+      x = clampX(x, 8)
 
       el.style.left = `${x}px`
       el.style.top = `${y}px`
