@@ -11,7 +11,6 @@ import {
   AiOutlineArrowUp,
   AiOutlineBold,
   AiOutlineCheckSquare,
-  AiOutlineCode,
   AiOutlineFileImage,
   AiOutlineHighlight,
   AiOutlineItalic,
@@ -22,7 +21,7 @@ import {
   AiOutlineUnorderedList,
   AiOutlineUserAdd,
 } from "react-icons/ai";
-import { BiAlignJustify, BiCodeBlock, BiParagraph } from "react-icons/bi";
+import { BiAlignJustify, BiCode, BiCodeBlock, BiParagraph } from "react-icons/bi";
 import { BsBlockquoteLeft, BsTextWrap } from "react-icons/bs";
 import { FaRemoveFormat } from "react-icons/fa";
 import { LuHeading1, LuHeading2 } from "react-icons/lu";
@@ -72,7 +71,7 @@ export const Strikethrough = {
 };
 export const CodeView = {
   name: "code",
-  icon: AiOutlineCode,
+  icon: BiCode,
   title: i18n.get({
     key: "action.CodeView",
     defaultValue: "Code",
