@@ -70,8 +70,21 @@ function getSelectionClientRect(editor: Editor): DOMRect | null {
     const start = view.coordsAtPos(from);
     const end = view.coordsAtPos(to);
     const top = Math.min(start.top, end.top);
+    const bottom = Math.max(start.bottom ?? start.top, end.bottom ?? end.top);
     const left = (start.left + end.left) / 2;
-    return new DOMRect(left, top, 0, 0);
+    const height = Math.max(0, bottom - top);
+    return new DOMRect(left, top, 0, height);
+  } catch {
+    return null;
+  }
+}
+
+function getEditorHeaderRect(editor: Editor): DOMRect | null {
+  const root = (editor.view.dom.closest?.(".editor") as HTMLElement) || editor.view.dom.parentElement;
+  const header = root?.querySelector?.(".editor-header") as HTMLElement | null;
+  if (!header) return null;
+  try {
+    return header.getBoundingClientRect();
   } catch {
     return null;
   }
@@ -109,6 +122,7 @@ export default ({ editor }: { editor: Editor }) => {
   // Track visibility and position for a simple fixed-position overlay.
   const [visible, setVisible] = useState(false);
   const [pos, setPos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const [placement, setPlacement] = useState<'top' | 'bottom'>('top');
   const menuRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -124,7 +138,37 @@ export default ({ editor }: { editor: Editor }) => {
         setVisible(false);
         return;
       }
-      setPos({ x: rect.left + window.scrollX, y: rect.top + window.scrollY });
+      // Decide placement to avoid overlapping the header if needed
+      const headerRect = getEditorHeaderRect(editor);
+      const el = menuRef.current;
+      const menuH = el?.offsetHeight || 36;
+      const offset = 8;
+      const topY = rect.top;
+      const bottomY = rect.top + rect.height;
+      const topFitsViewport = topY - offset - menuH >= 0;
+      const bottomFitsViewport = bottomY + offset + menuH <= window.innerHeight;
+
+      let nextPlacement: 'top' | 'bottom' = 'top';
+      if (headerRect) {
+        const bubbleTopIfTop = topY - offset - menuH;
+        const collidesHeader = bubbleTopIfTop < headerRect.bottom;
+        if (collidesHeader && bottomFitsViewport) {
+          nextPlacement = 'bottom';
+        } else if (!topFitsViewport && bottomFitsViewport) {
+          nextPlacement = 'bottom';
+        } else if (topFitsViewport && !bottomFitsViewport) {
+          nextPlacement = 'top';
+        } else if (!topFitsViewport && !bottomFitsViewport) {
+          nextPlacement = topY < window.innerHeight / 2 ? 'bottom' : 'top';
+        }
+      } else {
+        if (!topFitsViewport && bottomFitsViewport) nextPlacement = 'bottom';
+        else if (topFitsViewport && !bottomFitsViewport) nextPlacement = 'top';
+        else if (!topFitsViewport && !bottomFitsViewport) nextPlacement = 'bottom';
+      }
+
+      setPlacement(nextPlacement);
+      setPos({ x: rect.left, y: nextPlacement === 'top' ? topY : bottomY });
       setVisible(true);
     };
 
@@ -156,10 +200,12 @@ export default ({ editor }: { editor: Editor }) => {
       className="bubble-menu"
       style={{
         position: "fixed",
-        top: Math.max(0, pos.y - 8),
+        top: placement === 'top' ? Math.max(0, pos.y - 8) : pos.y + 8,
         left: pos.x,
-        transform: "translate(-50%, -100%)",
-        zIndex: 9999,
+        transform: placement === 'top' ? "translate(-50%, -100%)" : "translate(-50%, 0%)",
+        transformOrigin: placement === 'top' ? '50% 100%' : '50% 0%',
+        transition: 'none',
+        zIndex: 99999,
       }}
       onMouseDown={(e) => {
         // Keep editor focused while interacting with the menu

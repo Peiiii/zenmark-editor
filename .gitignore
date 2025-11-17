@@ -13,6 +13,7 @@ dist
 dist-ssr
 *.local
 build
+vendor/tiptap
 
 # Editor directories and files
 .vscode/*
