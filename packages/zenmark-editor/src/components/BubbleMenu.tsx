@@ -3,6 +3,7 @@ import { css } from "@emotion/css";
 import React, { Fragment, useMemo, useRef } from "react";
 import { useSelectionViewport } from "../hooks/useSelectionViewport";
 import { useBubbleMenuPosition } from "../hooks/useBubbleMenuPosition";
+import { useElementSize } from "../hooks/useElementSize";
 import { DEFAULT_BUBBLE_Z_INDEX } from "../config/ui";
 import { CellSelection } from "@tiptap/pm/tables";
 // import "../css/bubble-menu.scss";
@@ -53,7 +54,8 @@ export default ({ editor }: { editor: Editor }) => {
   const menuRef = useRef<HTMLDivElement | null>(null);
 
   const { rect, visible } = useSelectionViewport(editor);
-  const { pos, placement } = useBubbleMenuPosition(editor, rect, visible, menuRef as any, 8);
+  const { height } = useElementSize(menuRef as any);
+  const { pos, placement } = useBubbleMenuPosition(editor, rect, visible, menuRef as any, 8, height);
 
   if (!visible) return null;
 

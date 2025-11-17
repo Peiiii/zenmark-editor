@@ -26,6 +26,9 @@ export function useSelectionViewport(editor: Editor | null): SelectionViewport {
     if (!view?.dom) return [window] as (HTMLElement | Window)[]
     // Event targets: all scrollable ancestors + window + known project scrollables
     const targets = new Set<HTMLElement | Window>(getScrollableAncestors(view.dom))
+    // Prefer ProseMirror's scrollDOM if available (most accurate)
+    const v: any = view
+    if (v?.scrollDOM) targets.add(v.scrollDOM as HTMLElement)
     targets.add(window)
     const root = (view.dom?.closest?.(EDITOR_ROOT_SELECTOR) as HTMLElement) || view.dom?.parentElement || undefined
     root?.querySelectorAll(PROJECT_SCROLL_SELECTOR).forEach(el => targets.add(el as HTMLElement))
@@ -74,6 +77,9 @@ export function useSelectionViewport(editor: Editor | null): SelectionViewport {
     // Scroll/resize
     scrollers.forEach(t => (t as any).addEventListener?.('scroll', onTick, { passive: true }))
     window.addEventListener('resize', onTick)
+    // Capture scroll anywhere in the document tree as a fallback
+    const doc = (view.dom?.ownerDocument ?? document) as Document
+    doc.addEventListener('scroll', onTick, { capture: true, passive: true } as any)
 
     return () => {
       editor.off('selectionUpdate', onTick)
@@ -82,6 +88,7 @@ export function useSelectionViewport(editor: Editor | null): SelectionViewport {
       editor.off('blur', onTick)
       scrollers.forEach(t => (t as any).removeEventListener?.('scroll', onTick))
       window.removeEventListener('resize', onTick)
+      doc.removeEventListener('scroll', onTick as any, { capture: true } as any)
     }
   }, [editor, view, scrollers])
 

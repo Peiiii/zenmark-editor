@@ -65,6 +65,43 @@ export function decidePlacement(
   return 'top'
 }
 
+export function getPreferredScrollContainer(view: any): HTMLElement | Window {
+  const v: any = view
+  return (
+    v?.scrollDOM ||
+    (view?.dom?.closest?.('.editor-content-wrapper') as HTMLElement) ||
+    (view?.dom?.closest?.('.editor-middle') as HTMLElement) ||
+    window
+  )
+}
+
+export function getContainerRect(container: HTMLElement | Window): DOMRect {
+  return container instanceof Window ? viewportRect() : container.getBoundingClientRect()
+}
+
+export function decidePlacementInContainer(
+  rect: DOMRect,
+  containerRect: DOMRect,
+  headerRect: DOMRect | null,
+  menuHeight: number,
+  offset = DEFAULT_BUBBLE_OFFSET,
+): 'top' | 'bottom' {
+  const topY = rect.top
+  const bottomY = rect.top + rect.height
+  const topFits = topY - offset - menuHeight >= containerRect.top
+  const bottomFits = bottomY + offset + menuHeight <= containerRect.bottom
+
+  if (headerRect) {
+    const bubbleTopIfTop = topY - offset - menuHeight
+    const collidesHeader = bubbleTopIfTop < headerRect.bottom
+    if (collidesHeader && bottomFits) return 'bottom'
+  }
+  if (!topFits && bottomFits) return 'bottom'
+  if (topFits && !bottomFits) return 'top'
+  if (!topFits && !bottomFits) return topY < (containerRect.top + containerRect.height / 2) ? 'bottom' : 'top'
+  return 'top'
+}
+
 // DOM helpers around the editor/view
 export function getEditorRoot(view: any): HTMLElement | null {
   return (view?.dom?.closest?.(EDITOR_ROOT_SELECTOR) as HTMLElement) || view?.dom?.parentElement || null
