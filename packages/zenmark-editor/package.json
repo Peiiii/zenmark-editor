@@ -1,6 +1,6 @@
 {
   "name": "zenmark-editor",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "main": "./dist/cjs/index.js",
   "module": "./dist/es/index.js",
   "types": "./dist/es/index.d.ts",
