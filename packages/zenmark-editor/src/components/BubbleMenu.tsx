@@ -1,7 +1,7 @@
 import { Editor} from "@tiptap/react";
 import { css } from "@emotion/css";
 import React, { Fragment, useEffect, useMemo, useRef, useState } from "react";
-import { getEditorHeaderRect } from "../utils/bubble";
+import { clampX, centerX, getEditorHeaderRect } from "../utils/bubble";
 import { useSelectionViewport } from "../hooks/useSelectionViewport";
 import { CellSelection } from "@tiptap/pm/tables";
 // import "../css/bubble-menu.scss";
@@ -90,7 +90,9 @@ export default ({ editor }: { editor: Editor }) => {
       }
 
       setPlacement(nextPlacement);
-      setPos({ x: rect.left, y: nextPlacement === 'top' ? topY : bottomY });
+      // Center horizontally over the selection, and clamp inside viewport
+      const cx = clampX(Math.round(centerX(rect)), 8);
+      setPos({ x: cx, y: nextPlacement === 'top' ? topY : bottomY });
     };
 
     // Initial render and subscribe to relevant events.
