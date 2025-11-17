@@ -1,7 +1,8 @@
 import { Editor} from "@tiptap/react";
 import { css } from "@emotion/css";
 import React, { Fragment, useEffect, useMemo, useRef, useState } from "react";
-import { getEditorHeaderRect, getSelectionRect } from "../utils/bubble";
+import { getEditorHeaderRect } from "../utils/bubble";
+import { useSelectionViewport } from "../hooks/useSelectionViewport";
 import { CellSelection } from "@tiptap/pm/tables";
 // import "../css/bubble-menu.scss";
 
@@ -17,62 +18,7 @@ const withId = (item: Action | Action[]) => {
   return { ...item, id: item.id || item.name || item.title };
 };
 
-function shouldShowBubbleMenu(editor: Editor): boolean {
-  const { state, view } = editor;
-  const { selection } = state as any;
-
-  if (selection instanceof CellSelection) {
-    return false;
-  }
-
-  const { from, to } = selection;
-  if (from === to) {
-    return false;
-  }
-
-  try {
-    const domAtPos = view.domAtPos(from);
-    const node = (domAtPos as any).node as HTMLElement;
-
-    if (node) {
-      const isTableSelector =
-        node.closest?.('[class*="table-selector-"]') ||
-        node.closest?.(".table-row-column-menu") ||
-        (node.classList &&
-          (Array.from(node.classList).some((cls: string) =>
-            cls.startsWith("table-selector-")
-          ) ||
-            node.classList.contains("table-row-column-menu")));
-      if (isTableSelector) {
-        return false;
-      }
-
-      const parent = node.parentElement;
-      if (parent) {
-        const isParentTableSelector =
-          parent.closest?.('[class*="table-selector-"]') ||
-          parent.closest?.(".table-row-column-menu");
-        if (isParentTableSelector) {
-          return false;
-        }
-      }
-    }
-  } catch (e) {
-    return true;
-  }
-
-  return true;
-}
-
-function getSelectionClientRect(editor: Editor): DOMRect | null {
-  const { state, view } = editor;
-  const { from, to } = state.selection as any;
-  try {
-    return getSelectionRect(view, from, to);
-  } catch {
-    return null;
-  }
-}
+// Selection visibility and geometry are handled by useSelectionViewport
 
 export default ({ editor }: { editor: Editor }) => {
   const items: (Action | Action[])[] = useMemo(
@@ -103,25 +49,17 @@ export default ({ editor }: { editor: Editor }) => {
     []
   );
 
-  // Track visibility and position for a simple fixed-position overlay.
-  const [visible, setVisible] = useState(false);
+  // Track position for a simple fixed-position overlay.
   const [pos, setPos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [placement, setPlacement] = useState<'top' | 'bottom'>('top');
   const menuRef = useRef<HTMLDivElement | null>(null);
 
+  const { rect, visible } = useSelectionViewport(editor);
+
   useEffect(() => {
     if (!editor) return;
     const update = () => {
-      const show = shouldShowBubbleMenu(editor);
-      if (!show) {
-        setVisible(false);
-        return;
-      }
-      const rect = getSelectionClientRect(editor);
-      if (!rect) {
-        setVisible(false);
-        return;
-      }
+      if (!visible || !rect) return;
       // Decide placement to avoid overlapping the header if needed
       const headerRect = getEditorHeaderRect(editor.view as any);
       const el = menuRef.current;
@@ -153,28 +91,12 @@ export default ({ editor }: { editor: Editor }) => {
 
       setPlacement(nextPlacement);
       setPos({ x: rect.left, y: nextPlacement === 'top' ? topY : bottomY });
-      setVisible(true);
     };
 
     // Initial render and subscribe to relevant events.
     update();
-    editor.on("selectionUpdate", update);
-    editor.on("focus", update);
-    editor.on("blur", update);
-    editor.on("transaction", update);
-
-    const onWindow = () => update();
-    window.addEventListener("scroll", onWindow, true);
-    window.addEventListener("resize", onWindow, true);
-    return () => {
-      editor?.off("selectionUpdate", update as any);
-      editor?.off("focus", update as any);
-      editor?.off("blur", update as any);
-      editor?.off("transaction", update as any);
-      window.removeEventListener("scroll", onWindow, true);
-      window.removeEventListener("resize", onWindow, true);
-    };
-  }, [editor]);
+    // Depend on rect/visible so we reposition in lockstep with selection hook
+  }, [editor, rect, visible]);
 
   if (!visible) return null;
 
