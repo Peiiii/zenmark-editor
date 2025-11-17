@@ -1,8 +1,9 @@
 import { Editor} from "@tiptap/react";
 import { css } from "@emotion/css";
-import React, { Fragment, useEffect, useMemo, useRef, useState } from "react";
-import { clampX, centerX, getEditorHeaderRect } from "../utils/bubble";
+import React, { Fragment, useMemo, useRef } from "react";
 import { useSelectionViewport } from "../hooks/useSelectionViewport";
+import { useBubbleMenuPosition } from "../hooks/useBubbleMenuPosition";
+import { DEFAULT_BUBBLE_Z_INDEX } from "../config/ui";
 import { CellSelection } from "@tiptap/pm/tables";
 // import "../css/bubble-menu.scss";
 
@@ -49,56 +50,10 @@ export default ({ editor }: { editor: Editor }) => {
     []
   );
 
-  // Track position for a simple fixed-position overlay.
-  const [pos, setPos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
-  const [placement, setPlacement] = useState<'top' | 'bottom'>('top');
   const menuRef = useRef<HTMLDivElement | null>(null);
 
   const { rect, visible } = useSelectionViewport(editor);
-
-  useEffect(() => {
-    if (!editor) return;
-    const update = () => {
-      if (!visible || !rect) return;
-      // Decide placement to avoid overlapping the header if needed
-      const headerRect = getEditorHeaderRect(editor.view as any);
-      const el = menuRef.current;
-      const menuH = el?.offsetHeight || 36;
-      const offset = 8;
-      const topY = rect.top;
-      const bottomY = rect.top + rect.height;
-      const topFitsViewport = topY - offset - menuH >= 0;
-      const bottomFitsViewport = bottomY + offset + menuH <= window.innerHeight;
-
-      let nextPlacement: 'top' | 'bottom' = 'top';
-      if (headerRect) {
-        const bubbleTopIfTop = topY - offset - menuH;
-        const collidesHeader = bubbleTopIfTop < headerRect.bottom;
-        if (collidesHeader && bottomFitsViewport) {
-          nextPlacement = 'bottom';
-        } else if (!topFitsViewport && bottomFitsViewport) {
-          nextPlacement = 'bottom';
-        } else if (topFitsViewport && !bottomFitsViewport) {
-          nextPlacement = 'top';
-        } else if (!topFitsViewport && !bottomFitsViewport) {
-          nextPlacement = topY < window.innerHeight / 2 ? 'bottom' : 'top';
-        }
-      } else {
-        if (!topFitsViewport && bottomFitsViewport) nextPlacement = 'bottom';
-        else if (topFitsViewport && !bottomFitsViewport) nextPlacement = 'top';
-        else if (!topFitsViewport && !bottomFitsViewport) nextPlacement = 'bottom';
-      }
-
-      setPlacement(nextPlacement);
-      // Center horizontally over the selection, and clamp inside viewport
-      const cx = clampX(Math.round(centerX(rect)), 8);
-      setPos({ x: cx, y: nextPlacement === 'top' ? topY : bottomY });
-    };
-
-    // Initial render and subscribe to relevant events.
-    update();
-    // Depend on rect/visible so we reposition in lockstep with selection hook
-  }, [editor, rect, visible]);
+  const { pos, placement } = useBubbleMenuPosition(editor, rect, visible, menuRef as any, 8);
 
   if (!visible) return null;
 
@@ -113,7 +68,7 @@ export default ({ editor }: { editor: Editor }) => {
         transform: placement === 'top' ? "translate(-50%, -100%)" : "translate(-50%, 0%)",
         transformOrigin: placement === 'top' ? '50% 100%' : '50% 0%',
         transition: 'none',
-        zIndex: 99999,
+        zIndex: DEFAULT_BUBBLE_Z_INDEX,
       }}
       onMouseDown={(e) => {
         // Keep editor focused while interacting with the menu

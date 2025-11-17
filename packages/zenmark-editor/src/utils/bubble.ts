@@ -1,4 +1,9 @@
 import { posToDOMRect } from '@tiptap/core'
+import {
+  DEFAULT_BUBBLE_OFFSET,
+  EDITOR_HEADER_SELECTOR,
+  EDITOR_ROOT_SELECTOR,
+} from '../config/ui'
 
 // Geometry helpers for bubble/selection UI
 
@@ -19,7 +24,7 @@ export function rectIntersects(a: DOMRect, b: DOMRect): boolean {
   )
 }
 
-export function clampX(x: number, pad = 8): number {
+export function clampX(x: number, pad = DEFAULT_BUBBLE_OFFSET): number {
   return Math.max(pad, Math.min(window.innerWidth - pad, x))
 }
 
@@ -27,14 +32,47 @@ export function centerX(rect: DOMRect): number {
   return rect.left + rect.width / 2
 }
 
+export function overlayX(rect: DOMRect, pad = DEFAULT_BUBBLE_OFFSET): number {
+  return clampX(Math.round(centerX(rect)), pad)
+}
+
+export function overlayY(rect: DOMRect, placement: 'top' | 'bottom', offset = 0): number {
+  const base = placement === 'top' ? rect.top : rect.top + rect.height
+  return base + (placement === 'top' ? -offset : offset)
+}
+
+export function decidePlacement(
+  rect: DOMRect,
+  headerRect: DOMRect | null,
+  menuHeight: number,
+  viewportHeight: number,
+  offset = DEFAULT_BUBBLE_OFFSET,
+): 'top' | 'bottom' {
+  const topY = rect.top
+  const bottomY = rect.top + rect.height
+  const topFits = topY - offset - menuHeight >= 0
+  const bottomFits = bottomY + offset + menuHeight <= viewportHeight
+
+  if (headerRect) {
+    const bubbleTopIfTop = topY - offset - menuHeight
+    const collidesHeader = bubbleTopIfTop < headerRect.bottom
+    if (collidesHeader && bottomFits) return 'bottom'
+  }
+
+  if (!topFits && bottomFits) return 'bottom'
+  if (topFits && !bottomFits) return 'top'
+  if (!topFits && !bottomFits) return topY < viewportHeight / 2 ? 'bottom' : 'top'
+  return 'top'
+}
+
 // DOM helpers around the editor/view
 export function getEditorRoot(view: any): HTMLElement | null {
-  return (view?.dom?.closest?.('.editor') as HTMLElement) || view?.dom?.parentElement || null
+  return (view?.dom?.closest?.(EDITOR_ROOT_SELECTOR) as HTMLElement) || view?.dom?.parentElement || null
 }
 
 export function getEditorHeaderRect(view: any): DOMRect | null {
   const root = getEditorRoot(view)
-  const header = root?.querySelector?.('.editor-header') as HTMLElement | null
+  const header = root?.querySelector?.(EDITOR_HEADER_SELECTOR) as HTMLElement | null
   if (!header) return null
   try {
     return header.getBoundingClientRect()
@@ -69,4 +107,3 @@ export function rectVisibleInAll(rect: DOMRect, containers: (HTMLElement | Windo
     return rectIntersects(rect, r)
   })
 }
-

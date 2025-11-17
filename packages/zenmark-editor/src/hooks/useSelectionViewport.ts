@@ -6,6 +6,7 @@ import {
   getSelectionRect,
   rectVisibleInAll,
 } from '../utils/bubble'
+import { EDITOR_ROOT_SELECTOR, PROJECT_SCROLL_SELECTOR } from '../config/ui'
 
 export interface SelectionViewport {
   rect: DOMRect | null
@@ -26,8 +27,8 @@ export function useSelectionViewport(editor: Editor | null): SelectionViewport {
     // Event targets: all scrollable ancestors + window + known project scrollables
     const targets = new Set<HTMLElement | Window>(getScrollableAncestors(view.dom))
     targets.add(window)
-    const root = (view.dom?.closest?.('.editor') as HTMLElement) || view.dom?.parentElement || undefined
-    root?.querySelectorAll('.scroll').forEach(el => targets.add(el as HTMLElement))
+    const root = (view.dom?.closest?.(EDITOR_ROOT_SELECTOR) as HTMLElement) || view.dom?.parentElement || undefined
+    root?.querySelectorAll(PROJECT_SCROLL_SELECTOR).forEach(el => targets.add(el as HTMLElement))
     return Array.from(targets)
   }, [view?.dom])
 

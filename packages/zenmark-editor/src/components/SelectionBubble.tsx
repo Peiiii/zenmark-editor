@@ -2,6 +2,7 @@ import { Editor } from '@tiptap/react'
 import React, { PropsWithChildren, useEffect, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { clampX, centerX } from '../utils/bubble'
+import { BUBBLE_HOST_CLASS, DEFAULT_BUBBLE_OFFSET } from '../config/ui'
 import { useSelectionViewport } from '../hooks/useSelectionViewport'
 
 type Props = PropsWithChildren<{ editor: Editor }>
@@ -14,7 +15,7 @@ export default function SelectionBubble({ editor, children }: Props) {
   const getEl = useMemo(() => {
     if (typeof document === 'undefined') return null
     const el = document.createElement('div')
-    el.className = 'bubble-menu-host'
+    el.className = BUBBLE_HOST_CLASS
     el.style.position = 'static'
     el.style.visibility = 'hidden'
     el.style.opacity = '0'
@@ -44,7 +45,7 @@ export default function SelectionBubble({ editor, children }: Props) {
     // Host only controls visibility; inner bubble handles absolute positioning.
     // We keep calculation here in case we want to expose anchor coords later.
     let x = Math.round(centerX(rect))
-    x = clampX(x, 8)
+    x = clampX(x, DEFAULT_BUBBLE_OFFSET)
     getEl.style.visibility = 'visible'
     getEl.style.opacity = '1'
   }, [getEl, visible, rect])
