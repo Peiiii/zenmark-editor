@@ -11,3 +11,6 @@ export const DEFAULT_BUBBLE_OFFSET = 8
 export const DEFAULT_MENU_HEIGHT = 36
 export const DEFAULT_BUBBLE_Z_INDEX = 99999
 
+// Toolbar toggle offsets (relative to editor container)
+export const TOOLBAR_TOGGLE_OFFSET_TOP = 0
+export const TOOLBAR_TOGGLE_OFFSET_RIGHT = 4

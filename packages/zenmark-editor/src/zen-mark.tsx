@@ -9,8 +9,8 @@ import StarterKit from "@tiptap/starter-kit";
 import { useEffect, useRef, useState } from "react";
 import { ensureZenmarkStylesInjected } from "./styles";
 
-import { ExpandMenuBar } from "@/actions/page";
-import MenuItem from "@/components/MenuItem";
+// import { ExpandMenuBar } from "@/actions/page";
+// import MenuItem from "@/components/MenuItem";
 import MathBlock from "@/extensions/MathBlock";
 import MathInline from "@/extensions/MathInline";
 import MyTable from "@/extensions/MyTable";
@@ -32,11 +32,14 @@ import TaskItem from "@tiptap/extension-task-item";
 import TaskList from "@tiptap/extension-task-list";
 import TextAlign from "@tiptap/extension-text-align";
 import { AiOutlineEdit } from "react-icons/ai";
+import { FcExpand } from "react-icons/fc";
 import { MessageContainer } from "./common/utils";
+import { DEFAULT_BUBBLE_Z_INDEX, DEFAULT_BUBBLE_OFFSET, TOOLBAR_TOGGLE_OFFSET_RIGHT, TOOLBAR_TOGGLE_OFFSET_TOP } from "./config/ui";
 import { useLocalStorage } from "./utils/useLocalStorage";
 import { createKeyboardEvent } from "./utils/keyboard";
 import BubbleMenu from "./components/BubbleMenu";
 import SelectionBubble from "./components/SelectionBubble";
+// import ToolbarToggle from "./components/ToolbarToggle";
 import MenuBar from "./components/MenuBar";
 import type React from "react";
 import { CodeBlockHighlight } from "./extensions/CodeBlockHighlight";
@@ -85,8 +88,7 @@ export const ZenmarkEditor = ({
   // const [status, setStatus] = useState("connecting");
   // const [currentUser, setCurrentUser] = useState(getInitialUser);
   const [editable, setEditable] = useState(true);
-  const [showToolBarDropdownButton, setShowToolBarDropdownButton] =
-    useState(false);
+  // Always show a compact toggle when toolbar is collapsed
   const isUpdatingRef = useRef(false);
 
   // Bubble menu managed by custom SelectionBubble component
@@ -239,19 +241,7 @@ export const ZenmarkEditor = ({
     }
   }, [editable, editor]);
 
-  useEffect(() => {
-    let timeout;
-    if (showToolBarDropdownButton) {
-      timeout = setTimeout(() => {
-        setShowToolBarDropdownButton(false);
-      }, 10000);
-    }
-    return () => {
-      if (timeout) {
-        clearTimeout(timeout);
-      }
-    };
-  }, [showToolBarDropdownButton]);
+  // No timer: toggle button is always visible when collapsed
 
   // useEffect(() => {
   //   // Update status changes
@@ -284,6 +274,7 @@ export const ZenmarkEditor = ({
   return (
     <div
       className="editor"
+      style={{ position: "relative" }}
       // Capture keydown at the React capture phase so consumers (onKeyDown)
       // can reliably intercept combos like Cmd/Ctrl+S before ProseMirror/Tiptap
       // keymaps see them. If the consumer returns true, we stop propagation
@@ -295,11 +286,6 @@ export const ZenmarkEditor = ({
         if (handled === true) {
           e.preventDefault();
           e.stopPropagation();
-        }
-      }}
-      onClick={() => {
-        if (editable && collapsed && !showToolBarDropdownButton) {
-          setShowToolBarDropdownButton(true);
         }
       }}
     >
@@ -318,21 +304,35 @@ export const ZenmarkEditor = ({
         )}
         {editor && <MenuBar editor={editor} onCollapse={() => setCollapsed(true)} />}
       </div>
-      {editor && collapsed && showToolBarDropdownButton && (
-        <div className="sticky-widget">
-          <div className="sticky-widget-left" />
-          <div className="sticky-widget-right">
-            <div className="sticky-widget-inner">
-              <MenuItem 
-                editor={editor} 
-                {...ExpandMenuBar} 
-                action={() => {
-                  setCollapsed(false);
-                  return true;
-                }}
-              />
-            </div>
-          </div>
+      {editor && collapsed && (
+        <div
+          className="editor-toolbar-toggle"
+          style={{
+            position: "absolute",
+            top: TOOLBAR_TOGGLE_OFFSET_TOP,
+            right: TOOLBAR_TOGGLE_OFFSET_RIGHT,
+            zIndex: DEFAULT_BUBBLE_Z_INDEX + 1,
+            pointerEvents: "auto",
+          }}
+        >
+          <button
+            aria-label={i18n.get({ key: 'editor.ExpandToolbar', defaultValue: 'Expand toolbar' })}
+            title={i18n.get({ key: 'editor.ExpandToolbar', defaultValue: 'Expand toolbar' })}
+            onClick={() => setCollapsed(false)}
+            style={{
+              width: 24,
+              height: 24,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              background: 'transparent',
+              border: 'none',
+              cursor: 'pointer',
+              color: 'inherit',
+            }}
+          >
+            <FcExpand size={16} />
+          </button>
         </div>
       )}
       <div className="editor-middle scroll scroll-8">
