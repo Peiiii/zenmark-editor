@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite --host --port 5000",
+    "dev": "pnpm playground:dev",
     "preview": "vite preview --host --port 3000",
     "playground:dev": "bash -lc 'pnpm --filter zenmark-editor run watch & pnpm --filter playground dev'",
     "playground:build": "pnpm --filter zenmark-editor build && pnpm --filter playground build",

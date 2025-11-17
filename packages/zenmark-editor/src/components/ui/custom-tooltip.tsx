@@ -11,13 +11,10 @@ export const CustomTooltip: FC<{ title: ReactNode; children: ReactNode }> = ({
   children,
 }) => {
   return (
-    <TooltipProvider>
+    <TooltipProvider delayDuration={200}>
       <Tooltip>
         <TooltipTrigger asChild>{children}</TooltipTrigger>
-        <TooltipContent
-          className="p-1 text-white bg-gray-800 dark:bg-gray-700 rounded-md text-sm"
-          style={{ zIndex: 999999 }}
-        >
+        <TooltipContent>
           {title}
         </TooltipContent>
       </Tooltip>
