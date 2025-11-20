@@ -5,14 +5,16 @@ import { copyToClipboard } from "@/common/copyToClipboard";
 import LanguageSelect from "@/extensions/CodeBlockComponent/LanguageSelect";
 import { NodeViewContent, NodeViewWrapper } from "@tiptap/react";
 
+// We import mermaid as a module so we get proper typings and can rely on the
+// official config schema, but we still keep the initialization guarded so it
+// only runs in the browser.
+import mermaid from "mermaid";
+
 // Avoid re-initializing mermaid for every node view
 let mermaidInitialized = false;
 
 const initMermaid = () => {
   if (typeof window === "undefined") return;
-  const anyWindow = window as any;
-  const mermaid = anyWindow?.mermaid;
-  if (!mermaid) return;
   if (mermaidInitialized) return;
   mermaid.initialize({
     startOnLoad: false,
@@ -100,10 +102,9 @@ export default ({ node, updateAttributes, extension }) => {
     let cancelled = false;
     const render = async () => {
       try {
-        const id = `mermaid-${node.attrs.id || Math.random().toString(36).slice(2)}`;
+        const id =
+          `mermaid-${node.attrs.id || Math.random().toString(36).slice(2)}`;
         if (typeof window === "undefined") return;
-        const mermaid = (window as any)?.mermaid;
-        if (!mermaid) return;
         const result = await mermaid.render(id, code);
         if (!cancelled) {
           setSvg(result.svg);
@@ -157,7 +158,12 @@ export default ({ node, updateAttributes, extension }) => {
           </div>
         </div>
         <div className="code-wrapper">
-          <NodeViewContent as="code" style={{ whiteSpace: "pre" }} />
+          {/* Render code content inside a <code> tag; NodeViewContent default
+              is a <div>, which is fine here and keeps the generic typing
+              simple. */}
+          <code style={{ whiteSpace: "pre" }}>
+            <NodeViewContent />
+          </code>
         </div>
         {isMermaid && (
           <div
