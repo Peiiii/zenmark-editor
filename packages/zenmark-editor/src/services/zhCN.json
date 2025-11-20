@@ -11,6 +11,7 @@
   "action.OrderedList": "编号列表",
   "action.TaskList": "任务列表",
   "action.CodeBlock": "代码块",
+  "action.MermaidDiagram": "Mermaid 图表",
   "action.Blockquote": "引用",
   "action.HorizontalRule": "水平线",
   "action.HardBreak": "硬换行",

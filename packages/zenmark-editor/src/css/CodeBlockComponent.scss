@@ -77,6 +77,24 @@
     }
   }
 
+  .mermaid-preview-wrapper {
+    padding: 12px;
+    border-radius: 0 0 4px 4px;
+    background-color: #ffffff;
+    overflow-x: auto;
+  }
+
+  .mermaid-preview {
+    display: inline-block;
+    max-width: 100%;
+  }
+
+  .mermaid-error {
+    color: #b91c1c;
+    font-size: 12px;
+    padding-top: 4px;
+  }
+
   // Mixin can be simplified
   div {
     overflow-x: auto;

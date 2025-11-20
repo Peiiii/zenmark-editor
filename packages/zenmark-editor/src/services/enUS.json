@@ -11,6 +11,7 @@
   "action.OrderedList": "Ordered List",
   "action.TaskList": "Task List",
   "action.CodeBlock": "Code Block",
+  "action.MermaidDiagram": "Mermaid Diagram",
   "action.Blockquote": "Blockquote",
   "action.HorizontalRule": "Horizontal Rule",
   "action.HardBreak": "Hard Break",

@@ -205,6 +205,48 @@ export const CodeBlock = {
     editor.chain().focus().deleteRange(range).setNode("codeBlock").run();
   },
 };
+export const MermaidBlock: Action = {
+  name: "mermaid",
+  icon: BiCodeBlock,
+  title: i18n.get({
+    key: "action.MermaidDiagram",
+    defaultValue: "Mermaid Diagram",
+  }),
+  action: (editor: Editor) =>
+    editor
+      .chain()
+      .focus()
+      .insertContent({
+        type: "codeBlock",
+        attrs: { language: "mermaid" },
+        content: [
+          {
+            type: "text",
+            text: "graph LR\nA --> B",
+          },
+        ],
+      })
+      .run(),
+  isActive: (editor) =>
+    editor.isActive("codeBlock", { language: "mermaid" }),
+  command: ({ editor, range }) => {
+    editor
+      .chain()
+      .focus()
+      .deleteRange(range)
+      .insertContent({
+        type: "codeBlock",
+        attrs: { language: "mermaid" },
+        content: [
+          {
+            type: "text",
+            text: "graph LR\nA --> B",
+          },
+        ],
+      })
+      .run();
+  },
+};
 export const DoubleQuotes1 = {
   name: "blockquote",
   icon: BsBlockquoteLeft,
@@ -484,6 +526,7 @@ export const Actions = {
   BulletList,
   TaskList,
   CodeBlock,
+   MermaidBlock,
   DoubleQuotes1,
   Separator,
   TextWrap,

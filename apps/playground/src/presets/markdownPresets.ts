@@ -207,7 +207,125 @@ print(squares)  # [1, 4, 9, 16, 25]
   min-height: 100vh;
 }
 \`\`\``,
+
+  mermaid: `# Mermaid 图表示例
+
+Zenmark Editor 现在支持使用 Mermaid 语法作图。
+
+下面是一些常见图表类型的示例，全部都可以在编辑器中直接编辑源码，并实时看到更新后的图表。
+
+---
+
+## 1. 流程图（Flowchart）
+
+\`\`\`mermaid
+graph LR
+  A[开始] --> B{条件判断}
+  B -->|是| C[处理成功]
+  B -->|否| D[处理失败]
+  C --> E[结束]
+  D --> E[结束]
+\`\`\`
+
+---
+
+## 2. 时序图（Sequence Diagram）
+
+\`\`\`mermaid
+sequenceDiagram
+  participant User as 用户
+  participant Browser as 浏览器
+  participant Server as 服务器
+
+  User->>Browser: 打开编辑页面
+  Browser->>Server: 请求初始内容
+  Server-->>Browser: 返回 Markdown
+  Browser-->>User: 展示 Zenmark Editor
+\`\`\`
+
+---
+
+## 3. 类图（Class Diagram）
+
+\`\`\`mermaid
+classDiagram
+  class Editor {
+    +string content
+    +render(): void
+    +save(): void
+  }
+
+  class MarkdownParser {
+    +parse(text: string): Doc
+  }
+
+  Editor --> MarkdownParser : 使用
+\`\`\`
+
+---
+
+## 4. 状态图（State Diagram）
+
+\`\`\`mermaid
+stateDiagram-v2
+  [*] --> Idle
+  Idle --> Editing : 输入内容
+  Editing --> Saving : 自动保存
+  Saving --> Idle : 保存完成
+  Editing --> [*] : 关闭页面
+\`\`\`
+
+---
+
+## 5. 甘特图（Gantt Diagram）
+
+\`\`\`mermaid
+gantt
+  dateFormat  YYYY-MM-DD
+  title 编辑器功能开发计划
+
+  section 基础功能
+  Markdown 支持      :done,    des1, 2025-01-01,2025-01-05
+  代码高亮           :done,    des2, 2025-01-06,2025-01-10
+
+  section 高级功能
+  数学公式           :active,  des3, 2025-01-11,2025-01-15
+  Mermaid 作图       :         des4, 2025-01-16,2025-01-20
+\`\`\`
+
+---
+
+## 6. 饼图（Pie Chart）
+
+\`\`\`mermaid
+pie showData
+  title 文档内容类型占比
+  "普通文本" : 55
+  "代码"     : 25
+  "公式"     : 10
+  "图表"     : 10
+\`\`\`
+
+---
+
+## 7. 思维导图（Mindmap）
+
+\`\`\`mermaid
+mindmap
+  root((文档内容))
+    子节点 1
+      子节点 1.1
+      子节点 1.2
+    子节点 2
+      子节点 2.1
+      子节点 2.2
+    子节点 3
+      子节点 3.1
+\`\`\`
+
+---
+
+你可以以这些示例为基础，自由修改 mermaid 源码，来验证和展示编辑器的作图能力。`,
 } as const;
 
 export type PresetKey = keyof typeof markdownPresets;
-

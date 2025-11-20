@@ -12,6 +12,7 @@ const presetLabels: Record<PresetKey, string> = {
   article: "文章示例",
   table: "表格演示",
   code: "代码演示",
+  mermaid: "Mermaid 作图",
 };
 
 export function PresetSelector({ onSelect, className }: PresetSelectorProps) {
@@ -32,4 +33,3 @@ export function PresetSelector({ onSelect, className }: PresetSelectorProps) {
     </div>
   );
 }
-
