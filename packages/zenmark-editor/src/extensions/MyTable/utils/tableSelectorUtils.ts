@@ -1,9 +1,9 @@
 export const getSelectorClassName = (type: string): string => {
   const baseClass = "cursor-pointer absolute bg-blue-200 hover:bg-blue-400 transition-opacity";
   
-  if (type === "left") return `${baseClass} w-2 h-full -left-3.5 top-0`;
-  if (type === "top") return `${baseClass} right-px h-2 left-0 -top-3.5`;
-  return `${baseClass} h-3 w-3 -left-4 -top-4 rounded-full`;
+  if (type === "left") return `${baseClass} w-2 h-full -left-3.5 top-0 table-selector-left`;
+  if (type === "top") return `${baseClass} right-px h-2 left-0 -top-3.5 table-selector-top`;
+  return `${baseClass} h-3 w-3 -left-4 -top-4 rounded-full table-selector-top-left`;
 };
 
 export const handleDragStart = (
@@ -36,4 +36,3 @@ export const handleDrop = (
     // ignore data from other source
   }
 };
-

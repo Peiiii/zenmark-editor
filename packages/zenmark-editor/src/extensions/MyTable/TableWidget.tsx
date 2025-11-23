@@ -87,7 +87,8 @@ const TableSelectorWidget: FC<{ spec?: { type: string; index?: number } }> = ({
   });
 
   const className = useMemo(
-    () => `${getSelectorClassName(type)} table-selector-${type}-${index}`,
+    () =>
+      `${getSelectorClassName(type)} table-selector-${type}-${index} table-selector-handle`,
     [type, index]
   );
 
@@ -132,6 +133,7 @@ const createWidgetViewFactory =
         pos,
         (view, getPos) => {
           const dom = document.createElement(as);
+          dom.classList.add("table-selector-anchor");
           const { type, index } = spec;
           root = createRoot(dom).render(
             <editorContext.Provider value={editor}>
