@@ -1,30 +1,5 @@
-/* Basic editor styles */
 $margin-md: 24px;
 $padding-md: 24px;
-
-[data-theme="light"],
-html {
-  --color-bg-base: white;
-  --color-bg-editor: #f3f5f7;
-  --color-bg-editor-header: white;
-  --color-bg-editor-inner: white;
-
-  --color-text-base: #0d0d0d;
-  --color-text-editor: #0d0d0d;
-  --color-text-editor-footer: #0d0d0d;
-}
-
-html[data-theme="dark"] {
-  // 要有层次感
-  --color-bg-base: black;
-  --color-bg-editor: #1a1a1a;
-  --color-bg-editor-header: #262626;
-  --color-bg-editor-inner: #333333;
-
-  --color-text-base: #fff;
-  --color-text-editor: #fff;
-  --color-text-editor-footer: #fff;
-}
 
 .editor {
   display: flex;
@@ -32,11 +7,11 @@ html[data-theme="dark"] {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background-color: var(--color-bg-editor);
-  color: var(--color-text-editor);
+  background-color: hsl(var(--editor-bg));
+  color: hsl(var(--editor-text));
 
   .editor-header {
-    background-color: var(--color-bg-editor-header);
+    background-color: hsl(var(--editor-bg-header));
 
     &.hidden {
       display: none;
@@ -113,11 +88,9 @@ html[data-theme="dark"] {
     padding-bottom: $padding-md;
   }
   .editor-inner {
-    // margin-top: $margin-md;
-    // margin-bottom: $margin-md;
     box-shadow: rgba(0, 0, 0, 0.06) 0px 0px 10px 0px,
       rgba(0, 0, 0, 0.04) 0px 0px 0px 1px;
-    background-color: var(--color-bg-editor-inner);
+    background-color: hsl(var(--editor-bg-inner));
     // border: 3px solid #0d0d0d;
     // border-radius: 0.75rem;
     display: flex;
@@ -177,8 +150,8 @@ html[data-theme="dark"] {
 
     &__footer {
       align-items: center;
-      border-top: 1px solid gainsboro;
-      color: var(--color-text-editor-footer);
+      border-top: 1px solid hsl(var(--border));
+      color: hsl(var(--editor-text-footer));
       display: flex;
       flex: 0 0 auto;
       font-size: 12px;

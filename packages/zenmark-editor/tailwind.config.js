@@ -1,13 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: ["class"],
+  darkMode: ["class", "[data-theme='dark']"],
   content: [
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx,scss}",
   ],
-  // prefix: "ttedit",
   theme: {
     container: {
       center: true,
@@ -50,6 +49,19 @@ module.exports = {
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
+        },
+        editor: {
+          bg: {
+            base: "hsl(var(--editor-bg-base))",
+            DEFAULT: "hsl(var(--editor-bg))",
+            header: "hsl(var(--editor-bg-header))",
+            inner: "hsl(var(--editor-bg-inner))",
+          },
+          text: {
+            base: "hsl(var(--editor-text-base))",
+            DEFAULT: "hsl(var(--editor-text))",
+            footer: "hsl(var(--editor-text-footer))",
+          },
         },
       },
       borderRadius: {

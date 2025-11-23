@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import "../../css/CodeBlockComponent.scss";
 
 import { copyToClipboard } from "@/common/copyToClipboard";
 import LanguageSelect from "@/extensions/CodeBlockComponent/LanguageSelect";

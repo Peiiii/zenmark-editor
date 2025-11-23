@@ -1,70 +1,69 @@
-.w-3 {
+.zenmark-table {
+  .table-control-w-3 {
     width: 0.7rem;
-}
+  }
 
-.h-3 {
+  .table-control-h-3 {
     height: 0.7rem;
-}
+  }
 
-.-top-4 {
+  .table-control-top-4 {
     top: -0.7rem;
-}
+  }
 
-.-left-4 {
+  .table-control-left-4 {
     left: -0.75rem;
-}
+  }
 
-.w-2 {
+  .table-control-w-2 {
     width: 0.5rem;
-}
+  }
 
-.h-full {
+  .table-control-h-full {
     height: 100%;
-}
+  }
 
-.top-0 {
+  .table-control-top-0 {
     top: 1px;
-}
+  }
 
-.-left-3\.5 {
+  .table-control-left-3-5 {
     left: -0.5rem;
-}
+  }
 
-.h-2 {
+  .table-control-h-2 {
     height: 0.5rem;
-}
+  }
 
-.right-px {
+  .table-control-right-px {
     right: -1px;
-}
+  }
 
-.left-0 {
+  .table-control-left-0 {
     left: 0;
-}
+  }
 
-
-.-top-3\.5 {
+  .table-control-top-3-5 {
     top: -0.5rem;
-}
+  }
 
-.bg-blue-200 {
+  .table-control-bg-primary {
     background-color: rgba(59, 130, 246, 0.1);
     transition: background-color 0.2s ease;
-}
 
-.hover:bg-blue-400 {
     &:hover {
-        background-color: rgba(59, 130, 246, 0.3);
+      background-color: rgba(59, 130, 246, 0.3);
     }
-}
+  }
 
-.absolute {
+  .table-control-absolute {
     position: absolute;
     z-index: 10;
-}
+  }
 
-.cursor-pointer {
+  .table-control-cursor-pointer {
     cursor: pointer;
+  }
 }
 
 table {
@@ -102,35 +101,35 @@ table {
 }
 
 .table-action-btn {
-    padding: 4px 8px;
+    padding: 0.25rem 0.5rem;
     border: none;
-    border-radius: 4px;
+    border-radius: 0.25rem;
     cursor: pointer;
     background-color: transparent;
-    font-size: 12px;
+    font-size: 0.75rem;
     transition: background-color 0.15s ease;
     
     &:hover {
-        background-color: #f3f4f6;
+        background-color: hsl(var(--muted));
     }
     
     &:active {
-        background-color: #e5e7eb;
+        background-color: hsl(var(--accent));
     }
     
     &.danger {
-        color: #ef4444;
+        color: hsl(var(--destructive));
         
         &:hover {
-            background-color: #fee2e2;
+            background-color: hsl(var(--destructive) / 0.1);
         }
     }
 }
 
 .table-action-divider {
     width: 1px;
-    background-color: #e5e7eb;
-    margin: 4px 0;
+    background-color: hsl(var(--border));
+    margin: 0.25rem 0;
 }
 
 th,

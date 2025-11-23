@@ -1,0 +1,151 @@
+$font-size-base: 0.9rem;
+$padding-base: 0.2rem 0.5rem;
+$border-radius-base: 0.25rem;
+
+@mixin custom-scrollbar(
+  $width,
+  $track-color,
+  $thumb-color,
+  $thumb-hover-color
+) {
+  &::-webkit-scrollbar {
+    width: $width;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $track-color;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $thumb-color;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: $thumb-hover-color;
+  }
+}
+
+.panel-base {
+  position: relative;
+  border-radius: $border-radius-base;
+  background: hsl(var(--card));
+  color: hsl(var(--card-foreground));
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  font-size: $font-size-base;
+  box-shadow: 0 0 0 1px hsl(var(--border) / 0.5), 0px 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.item-base {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: $font-size-base;
+  font-weight: 500;
+  color: hsl(var(--foreground));
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+
+  &:hover {
+    background: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
+  }
+
+  &.is-selected {
+    background: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
+  }
+}
+
+.suggestion-item {
+  @extend .item-base;
+  width: 12em;
+  flex-grow: 1;
+  flex-shrink: 0;
+  text-align: left;
+  overflow: hidden;
+  padding: $padding-base;
+
+  &:hover {
+    background: hsl(var(--accent) / 0.8);
+    color: hsl(var(--accent-foreground));
+  }
+
+  &.is-selected {
+    background: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
+  }
+
+  .icon-wrapper {
+    align-items: center;
+    display: flex;
+  }
+}
+
+.suggestion-panel {
+  @extend .panel-base;
+  max-height: 15em;
+  overflow-y: auto;
+  flex-wrap: nowrap;
+
+  @include custom-scrollbar(4px, hsl(var(--muted)), hsl(var(--muted-foreground) / 0.5), hsl(var(--muted-foreground)));
+}
+
+.bubble-menu {
+  @extend .panel-base;
+  max-width: 315px;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.bubble-menu .menu-item {
+  @extend .item-base;
+  margin: 0.1rem;
+
+  &.is-active {
+    background: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
+  }
+}
+
+.bubble-menu .menu-item-select {
+  &.expanded {
+    background: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
+  }
+}
+
+.bubble-menu .menu-dropdown {
+  @extend .panel-base;
+}
+
+
+.toolbar {
+  @extend .panel-base;
+  border-radius: 0;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  z-index: 10000;
+}
+
+.toolbar .menu-item {
+  @extend .item-base;
+  margin: 0;
+} 
+
+.sticky-widget .menu-item {
+  @extend .item-base;
+  margin: 0;
+  border-top-left-radius: 0;
+}
+
+.toolbar .menu-item-select {
+  &.expanded {
+    background: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
+  }
+}

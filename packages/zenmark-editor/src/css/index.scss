@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import './variables';
+
+@import './base/_index';
+
+@import './components/_index';
+
+@import './utilities/_index';
+
+@import './themes/_index';
+

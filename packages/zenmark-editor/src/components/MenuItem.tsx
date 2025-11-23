@@ -1,7 +1,7 @@
 import { Action } from "@/actions/types";
 import { CustomTooltip } from "@/components/ui/custom-tooltip";
 import { Editor } from "@tiptap/react";
-import "../css/MenuItem.scss";
+
 
 export default ({
   icon: Icon,

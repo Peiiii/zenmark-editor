@@ -1,5 +1,3 @@
-import "../css/MenuBar.scss";
-
 import React, { Fragment } from "react";
 
 import MenuItem from "./MenuItem";

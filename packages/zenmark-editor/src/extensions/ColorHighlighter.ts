@@ -1,4 +1,3 @@
-import "../css/ColorHighlighter.scss";
 import { Extension } from '@tiptap/core'
 import { Plugin } from '@tiptap/pm/state'
 
