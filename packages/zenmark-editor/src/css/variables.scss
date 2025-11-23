@@ -29,6 +29,32 @@
     --editor-text-base: 0 0% 5.1%;
     --editor-text: 0 0% 5.1%;
     --editor-text-footer: 0 0% 5.1%;
+
+    --code-block-bg: 0 0% 96.1%;
+    --code-block-text: 0 0% 11.8%;
+    --code-block-border: 210 16.1% 83.1%;
+    --code-block-header-bg: 0 0% 96.1%;
+    --code-block-content-bg: 0 0% 11.8%;
+    --code-block-content-text: 60 9.1% 96.1%;
+    --code-block-copy-hover: 217 91.2% 59.8%;
+    --code-block-copy-success: 142 71.4% 45.3%;
+    --code-block-error: 0 84.2% 60.2%;
+
+    --table-border: 210 16.1% 83.1%;
+    --table-header-bg: 210 20% 94.5%;
+    --table-selected-bg: 240 100% 89.2%;
+    --table-resize-handle: 210 100% 83.3%;
+
+    --character-count-text: 210 9.1% 55.7%;
+
+    --divider-bg: 0 0% 0%;
+
+    --iframe-selected-outline: 200 100% 69.4%;
+
+    --force-title-text: 210 16.1% 83.1%;
+
+    --extension-code-bg: 0 0% 38%;
+    --extension-code-text: 0 0% 38%;
   }
 
   [data-theme="dark"],
@@ -60,6 +86,32 @@
     --editor-text-base: 0 0% 100%;
     --editor-text: 0 0% 100%;
     --editor-text-footer: 0 0% 100%;
+
+    --code-block-bg: 0 0% 11.8%;
+    --code-block-text: 0 0% 96.1%;
+    --code-block-border: 0 0% 23.5%;
+    --code-block-header-bg: 0 0% 15.7%;
+    --code-block-content-bg: 0 0% 11.8%;
+    --code-block-content-text: 60 9.1% 96.1%;
+    --code-block-copy-hover: 200 100% 70.6%;
+    --code-block-copy-success: 142 71.4% 45.3%;
+    --code-block-error: 0 84.2% 60.2%;
+
+    --table-border: 0 0% 23.5%;
+    --table-header-bg: 0 0% 15.7%;
+    --table-selected-bg: 240 100% 89.2%;
+    --table-resize-handle: 210 100% 83.3%;
+
+    --character-count-text: 0 0% 58.8%;
+
+    --divider-bg: 0 0% 100%;
+
+    --iframe-selected-outline: 200 100% 69.4%;
+
+    --force-title-text: 0 0% 58.8%;
+
+    --extension-code-bg: 0 0% 38%;
+    --extension-code-text: 0 0% 78.4%;
   }
 }
 

@@ -1,7 +1,7 @@
 .code-block {
   position: relative;
   margin-top: 0.5rem;
-  background-color: #f5f5f5;
+  background-color: hsl(var(--code-block-bg));
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   
@@ -30,7 +30,7 @@
         background-color: gray;
 
         &:hover {
-          background-color: #70cff8;
+          background-color: hsl(var(--code-block-copy-hover));
         }
       }
     }
@@ -47,20 +47,20 @@
         font-size: 0.8em;
 
         &:hover {
-          color: #007bff;
+          color: hsl(var(--code-block-copy-hover));
         }
       }
 
       .copied-text {
         font-size: 0.8em;
-        color: #28a745;
+        color: hsl(var(--code-block-copy-success));
       }
     }
   }
 
   .code-wrapper {
-    background-color: #1e1e1e;
-    color: #f8f8f2;
+    background-color: hsl(var(--code-block-content-bg));
+    color: hsl(var(--code-block-content-text));
     padding: 12px;
     border-radius: 4px;
     font-family: "Source Code Pro", monospace;
@@ -80,7 +80,7 @@
   .mermaid-preview-wrapper {
     padding: 12px;
     border-radius: 0 0 4px 4px;
-    background-color: #ffffff;
+    background-color: hsl(var(--code-block-bg));
     overflow-x: auto;
   }
 
@@ -90,7 +90,7 @@
   }
 
   .mermaid-error {
-    color: #b91c1c;
+    color: hsl(var(--code-block-error));
     font-size: 12px;
     padding-top: 4px;
   }
@@ -133,7 +133,7 @@
 
     .hljs-comment,
     .hljs-quote {
-      color: #616161;
+      color: hsl(var(--extension-code-text) / 0.6);
     }
 
     .hljs-variable,
@@ -170,7 +170,7 @@
 
     .hljs-keyword,
     .hljs-selector-tag {
-      color: #70cff8;
+      color: hsl(var(--code-block-copy-hover));
     }
 
     .hljs-emphasis {

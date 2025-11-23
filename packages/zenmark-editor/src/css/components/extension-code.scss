@@ -1,6 +1,6 @@
 .ProseMirror {
     code {
-        background-color: rgba(#616161, 0.1);
-        color: #616161;
+        background-color: hsl(var(--extension-code-bg) / 0.1);
+        color: hsl(var(--extension-code-text));
     }
 }

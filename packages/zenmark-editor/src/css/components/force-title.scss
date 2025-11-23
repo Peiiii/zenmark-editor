@@ -1,7 +1,7 @@
 .ProseMirror .is-empty::before {
     content: attr(data-placeholder);
     float: left;
-    color: #ced4da;
+    color: hsl(var(--force-title-text));
     pointer-events: none;
     height: 0;
 }

@@ -1,0 +1,24 @@
+@mixin accent-state($opacity: 1) {
+  background: hsl(var(--accent) / $opacity);
+  color: hsl(var(--accent-foreground));
+}
+
+@mixin accent-hover {
+  &:hover {
+    @include accent-state(0.8);
+  }
+}
+
+@mixin accent-active {
+  &.is-active,
+  &.is-selected,
+  &.expanded {
+    @include accent-state;
+  }
+}
+
+@mixin interactive-item {
+  @include accent-hover;
+  @include accent-active;
+}
+

@@ -50,15 +50,7 @@ $border-radius-base: 0.25rem;
   cursor: pointer;
   transition: background 0.2s, color 0.2s;
 
-  &:hover {
-    background: hsl(var(--accent));
-    color: hsl(var(--accent-foreground));
-  }
-
-  &.is-selected {
-    background: hsl(var(--accent));
-    color: hsl(var(--accent-foreground));
-  }
+  @include interactive-item;
 }
 
 .suggestion-item {
@@ -71,14 +63,10 @@ $border-radius-base: 0.25rem;
   padding: $padding-base;
 
   &:hover {
-    background: hsl(var(--accent) / 0.8);
-    color: hsl(var(--accent-foreground));
+    @include accent-state(0.8);
   }
 
-  &.is-selected {
-    background: hsl(var(--accent));
-    color: hsl(var(--accent-foreground));
-  }
+  @include accent-active;
 
   .icon-wrapper {
     align-items: center;
@@ -105,18 +93,10 @@ $border-radius-base: 0.25rem;
 .bubble-menu .menu-item {
   @extend .item-base;
   margin: 0.1rem;
-
-  &.is-active {
-    background: hsl(var(--accent));
-    color: hsl(var(--accent-foreground));
-  }
 }
 
 .bubble-menu .menu-item-select {
-  &.expanded {
-    background: hsl(var(--accent));
-    color: hsl(var(--accent-foreground));
-  }
+  @include accent-active;
 }
 
 .bubble-menu .menu-dropdown {
@@ -145,8 +125,5 @@ $border-radius-base: 0.25rem;
 }
 
 .toolbar .menu-item-select {
-  &.expanded {
-    background: hsl(var(--accent));
-    color: hsl(var(--accent-foreground));
-  }
+  @include accent-active;
 }

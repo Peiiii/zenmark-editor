@@ -7,7 +7,7 @@
     height: auto;
   
     &.ProseMirror-selectednode {
-      outline: 3px solid #68CEF8;
+      outline: 3px solid hsl(var(--iframe-selected-outline));
     }
   
     iframe {
