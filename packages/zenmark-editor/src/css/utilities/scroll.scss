@@ -1,5 +1,3 @@
-// Tutorial => slug.vercel.app/s/scrollbar
-
 @mixin scroll-style($size: 10px,
   $thumb: none,
   $thumb-color: grey,
@@ -7,11 +5,9 @@
   $track-color: transparent,
   $track-radius: 10px) {
 
-  // Respaldo para Firefox
   scrollbar-color: $thumb-color $track-color;
   scrollbar-width: thin;
 
-  // Navegadores basados en webkit
   &::-webkit-scrollbar {
     width: $size;
     height: $size;
@@ -27,10 +23,6 @@
   }
 }
 
-// body {
-//   background-color: #18181b;
-// }
-
 .scroll {
   @include scroll-style(
       $size: var(--scroll-size, 10px),
@@ -43,11 +35,8 @@
       $track-radius: var(--scroll-track-radius, var(--scroll-radius)),
     );
   
-  // Ejemplo 1
   &-1 {
     --scroll-size: 5px;
-    // --scroll-radius: 5px;
-    // --scroll-track: rgb(0 0 0 / 40%);
     --scroll-thumb-color: #dfdfdf;
   }
 
@@ -60,7 +49,6 @@
     }
   }
 
-  // Ejemplo 2
   &-2 {
     --scroll-size: 8px;
     --scroll-radius: 10px;
@@ -68,7 +56,6 @@
     --scroll-thumb-color: rgb(0 0 0 / 80%);
   }
 
-  // Ejemplo 3
   &-3 {
     --scroll-size: 5px;
     --scroll-radius: 10px;
@@ -76,7 +63,6 @@
     --scroll-thumb-color: #fff;
   }
 
-  // Ejemplo 4
   &-4 {
     $bg-mask: rgb(255 255 255 / 25%);
     --scroll-size: 12px;
@@ -90,7 +76,6 @@
     --scroll-thumb-color: #f97316;
   }
   
-  // Ejemplo 5
   &-5 {
     --scroll-size: 6px;
     --scroll-radius: 8px;
@@ -98,7 +83,6 @@
     --scroll-thumb: linear-gradient(45deg, #00aeff, #a68eff);
   }
   
-  // Ejemplo 6
   &-6 {
     $bg-mask: rgb(255 255 255 / 30%);
     --scroll-size: 12px;
@@ -112,7 +96,7 @@
     --scroll-thumb-color: #10b981;
   }
 
-  &-8{
+  &-8 {
     --scroll-size: 8px;
     --scroll-thumb-color: transparent;
     &:hover{
@@ -122,22 +106,8 @@
   }
 }
 
-// Solo demo
 @for $i from 4 through 8 {
   .h#{$i}00 {
     height: #{$i}00px;
   }
 }
-
-// .demo {
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   min-height: 100vh;
-//   padding-right: 40px;
-//   > * {
-//     height: 280px;
-//     overflow-y: auto;
-//     width: 50px;
-//   }
-// }

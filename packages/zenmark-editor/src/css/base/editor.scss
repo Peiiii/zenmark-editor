@@ -29,7 +29,6 @@ $padding-md: 24px;
       align-items: center;
 
       display: flex;
-      // flex: 0 0 auto;
       flex-wrap: wrap;
       padding: 0.25rem;
     }
@@ -59,19 +58,10 @@ $padding-md: 24px;
 
       .sticky-widget-inner {
         position: relative;
-        // height: 40px;
-        // right: -20px;
-        // top: -20px;
         top: -0.25rem;
         height: 1.75rem;
         width: 1.75rem;
         padding: 0.25rem;
-        // border-radius: 50%;
-        .button {
-          // border-radius: 50%;
-          // background-color: !;
-        }
-        // right: 24px;
       }
     }
   }
@@ -91,41 +81,29 @@ $padding-md: 24px;
     box-shadow: rgba(0, 0, 0, 0.06) 0px 0px 10px 0px,
       rgba(0, 0, 0, 0.04) 0px 0px 0px 1px;
     background-color: hsl(var(--editor-bg-inner));
-    // border: 3px solid #0d0d0d;
-    // border-radius: 0.75rem;
     display: flex;
     flex-direction: column;
-    // max-height: 26rem;
     width: 100%;
-    // height: 100%;
     height: fit-content;
-    // flex-grow: 1;
     min-height: 100%;
     max-width: 809.66px;
 
     .editor-content-wrapper {
       display: flex;
       flex-flow: row;
-      // height: 100%;
       flex-grow: 1;
-      // width: 100%;
-      // overflow-y: hidden;
       overflow-x: hidden;
       overflow-y: auto;
       align-items: stretch;
 
       .editor-content-extra-left {
         max-width: 3rem;
-        // flex-shrink: 1;
-        // flex-grow: 1;
         width: 5%;
         min-width: 1em;
       }
 
       .editor-content-extra-right {
         max-width: 3rem;
-        // flex-shrink: 1;
-        // flex-grow: 1;
         width: 5%;
         min-width: 1em;
       }
@@ -135,9 +113,6 @@ $padding-md: 24px;
       padding: 2rem 0 2rem 0;
       flex: 1 1 auto;
       height: fit-content;
-
-      // padding: 1.25rem 1rem;
-      // max-width: 30em;
       max-width: 720px;
       min-width: 0;
       -webkit-overflow-scrolling: touch;
@@ -161,76 +136,5 @@ $padding-md: 24px;
       padding: 0.25rem 0.75rem;
       white-space: nowrap;
     }
-
-    /* Some information about the status */
-    // &__status {
-    //   align-items: center;
-    //   border-radius: 5px;
-    //   display: flex;
-
-    //   &::before {
-    //     background: rgba(#0d0d0d, 0.5);
-    //     border-radius: 50%;
-    //     content: " ";
-    //     display: inline-block;
-    //     flex: 0 0 auto;
-    //     height: 0.5rem;
-    //     margin-right: 0.5rem;
-    //     width: 0.5rem;
-    //   }
-
-    //   &--connecting::before {
-    //     background: #616161;
-    //   }
-
-    //   &--connected::before {
-    //     background: #b9f18d;
-    //   }
-    // }
-
-    // &__name {
-    //   button {
-    //     background: none;
-    //     border: none;
-    //     border-radius: 0.4rem;
-    //     color: #0d0d0d;
-    //     font: inherit;
-    //     font-size: 12px;
-    //     font-weight: 600;
-    //     padding: 0.25rem 0.5rem;
-
-    //     &:hover {
-    //       background-color: #0d0d0d;
-    //       color: #fff;
-    //     }
-    //   }
-    // }
   }
 }
-
-/* Give a remote user a caret */
-// .collaboration-cursor__caret {
-//   border-left: 1px solid #0d0d0d;
-//   border-right: 1px solid #0d0d0d;
-//   margin-left: -1px;
-//   margin-right: -1px;
-//   pointer-events: none;
-//   position: relative;
-//   word-break: normal;
-// }
-
-// /* Render the username above the caret */
-// .collaboration-cursor__label {
-//   border-radius: 3px 3px 3px 0;
-//   color: #0d0d0d;
-//   font-size: 12px;
-//   font-style: normal;
-//   font-weight: 600;
-//   left: -1px;
-//   line-height: normal;
-//   padding: 0.1rem 0.3rem;
-//   position: absolute;
-//   top: -1.4em;
-//   user-select: none;
-//   white-space: nowrap;
-// }

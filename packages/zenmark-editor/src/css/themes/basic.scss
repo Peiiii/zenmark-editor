@@ -114,12 +114,10 @@
   }
 
   pre {
-    // background: #0d0d0d;
     background: #253239;
     border-radius: 0.5rem;
     color: #fff;
     font-family: "JetBrainsMono", monospace;
-    // padding: 0 1rem 0.5rem 1rem;
 
     code {
       background: none;
@@ -180,7 +178,6 @@
 
   li > ol > li:before {
     counter-increment: list;
-    // content: counter(list, lower-alpha) ". ";
     position: absolute;
     left: -1.4em;
   }
@@ -192,7 +189,6 @@
 
   li > ol > li > ol > li:before {
     counter-increment: list;
-    // content: counter(list, lower-roman) ". ";
     position: absolute;
     left: -1.4em;
   }
@@ -204,7 +200,6 @@
     li {
       display: flex;
       align-items: flex-start;
-      // padding-top: 0.5rem;
       margin-left: 8px;
 
       > label {
@@ -215,9 +210,6 @@
         line-height: 1.5;
       }
 
-      p {
-        // margin: 0 !important;
-      }
 
       > div {
         flex: 1 1 auto;
