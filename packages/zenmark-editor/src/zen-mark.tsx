@@ -273,7 +273,7 @@ export const ZenmarkEditor = ({
 
   return (
     <div
-      className="editor"
+      className="zenmark-editor"
       style={{ position: "relative" }}
       // Capture keydown at the React capture phase so consumers (onKeyDown)
       // can reliably intercept combos like Cmd/Ctrl+S before ProseMirror/Tiptap
@@ -289,7 +289,7 @@ export const ZenmarkEditor = ({
         }
       }}
     >
-      <div className={"editor-header" + (collapsed ? " hidden" : "")}>
+      <div className={"zenmark-editor-header" + (collapsed ? " hidden" : "")}>
         {editor && (
           <div style={{ display: "flex", flexFlow: "row-reverse" }}>
             {!editable && (
@@ -306,7 +306,7 @@ export const ZenmarkEditor = ({
       </div>
       {editor && collapsed && (
         <div
-          className="editor-toolbar-toggle"
+          className="zenmark-editor-toolbar-toggle"
           style={{
             position: "absolute",
             top: TOOLBAR_TOGGLE_OFFSET_TOP,
@@ -335,21 +335,21 @@ export const ZenmarkEditor = ({
           </button>
         </div>
       )}
-      <div className="editor-middle scroll scroll-8">
-        <div className="editor-inner">
+      <div className="zenmark-editor-middle scroll scroll-8">
+        <div className="zenmark-editor-inner">
           {editor && editable && (
             <SelectionBubble editor={editor}>
               <BubbleMenu editor={editor} />
             </SelectionBubble>
           )}
           {/* {editor && <FloatingMenu editor={editor} />} */}
-          <div className="editor-content-wrapper  scroll scroll-7">
-            <div className="editor-content-extra-left" />
+          <div className="zenmark-editor-content-wrapper  scroll scroll-7">
+            <div className="zenmark-editor-content-extra-left" />
             <EditorContent
-              className="editor-content scroll scroll-7"
+              className="zenmark-editor-content scroll scroll-7"
               editor={editor}
             />
-            <div className="editor-content-extra-right" />
+            <div className="zenmark-editor-content-extra-right" />
           </div>
           {/* {editor && <div className="character-count">
      {editor!.storage.characterCount.characters()} characters

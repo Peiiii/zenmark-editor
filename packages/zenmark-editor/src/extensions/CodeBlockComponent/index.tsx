@@ -128,7 +128,7 @@ export default ({ node, updateAttributes, extension }) => {
   }, [code, isMermaid]);
 
   return (
-    <NodeViewWrapper className="code-block hover-action">
+    <NodeViewWrapper className="zenmark-code-block zenmark-hover-action">
       <pre>
         <div className="bar">
           <LanguageSelect

@@ -23,12 +23,12 @@ function MenuItemSelect({ items, editor }) {
       style={{
         position: "relative",
       }}
-      className={classNames("menu-item-select", {
+      className={classNames("zenmark-menu-item-select", {
         expanded,
       })}
     >
       <span
-        className={`menu-item ${expanded ? "expanded" : ""}`}
+        className={`zenmark-menu-item ${expanded ? "expanded" : ""}`}
         onClick={() => {
           setExpanded(!expanded);
         }}
@@ -44,7 +44,7 @@ function MenuItemSelect({ items, editor }) {
       > */}
       {expanded && (
         <div
-          className="menu-dropdown"
+          className="zenmark-menu-dropdown"
           style={{
             position: "fixed",
             zIndex: 1000,
@@ -53,7 +53,7 @@ function MenuItemSelect({ items, editor }) {
           {items.map((item, index) => (
             <span
               key={item.id}
-              className={`menu-item ${
+              className={`zenmark-menu-item ${
                 activeIndex === index ? "is-active" : ""
               }`}
               onClick={(e) => {

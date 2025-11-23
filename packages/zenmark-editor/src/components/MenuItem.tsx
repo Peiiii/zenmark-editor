@@ -12,7 +12,7 @@ export default ({
 }: Action & { editor: Editor }) => (
   <CustomTooltip title={title}>
     <span
-      className={`menu-item${isActive && isActive(editor) ? " is-active" : ""}`}
+      className={`zenmark-menu-item${isActive && isActive(editor) ? " is-active" : ""}`}
       onClick={() => {
         action?.(editor);
       }}

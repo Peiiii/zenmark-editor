@@ -116,10 +116,10 @@
 }
 
 @layer base {
-  * {
+  .zenmark-editor * {
     @apply border-border;
   }
-  body {
+  .zenmark-editor {
     @apply bg-background text-foreground;
   }
 }

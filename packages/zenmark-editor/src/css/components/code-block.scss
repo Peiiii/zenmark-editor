@@ -1,4 +1,4 @@
-.code-block {
+.zenmark-code-block {
   position: relative;
   margin-top: 0.5rem;
   background-color: hsl(var(--code-block-bg));
@@ -106,7 +106,7 @@
   }
 }
 
-.hover-action {
+.zenmark-hover-action {
   .hover-visible {
     visibility: hidden;
     transition: visibility 0.2s ease;
@@ -119,7 +119,7 @@
   }
 }
 
-.ProseMirror pre {
+.zenmark-editor .ProseMirror pre {
   padding: 0;
 
   .code-wrapper {

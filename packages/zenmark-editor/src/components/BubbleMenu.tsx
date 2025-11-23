@@ -62,7 +62,7 @@ export default ({ editor }: { editor: Editor }) => {
   return (
     <div
       ref={menuRef}
-      className="bubble-menu"
+      className="zenmark-bubble-menu"
       style={{
         position: "fixed",
         top: placement === 'top' ? Math.max(0, pos.y - 8) : pos.y + 8,
@@ -91,7 +91,7 @@ export default ({ editor }: { editor: Editor }) => {
             return (
               <Fragment key={index}>
                 {item.type === "divider" ? (
-                  <div className="divider" />
+                  <div className="zenmark-divider" />
                 ) : (
                   <MenuItem editor={editor} {...item} />
                 )}

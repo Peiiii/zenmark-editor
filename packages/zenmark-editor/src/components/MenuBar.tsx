@@ -41,21 +41,21 @@ export default ({ editor, onCollapse }: { editor: any; onCollapse?: () => void }
   ];
 
   return (
-    <div className="editor__header toolbar">
-      <div className="editor__header-left">
+    <div className="zenmark-editor__header zenmark-toolbar">
+      <div className="zenmark-editor__header-left">
         {" "}
         {items.map((item, index) => (
           <Fragment key={index}>
             {item.type === "divider" ? (
-              <div className="divider" />
+              <div className="zenmark-divider" />
             ) : (
               <MenuItem editor={editor} {...item} />
             )}
           </Fragment>
         ))}
       </div>
-      <div className="editor__header-middle"/>
-      <div className="editor__header-right">
+      <div className="zenmark-editor__header-middle"/>
+      <div className="zenmark-editor__header-right">
         <MenuItem name="collapseMenuBar" editor={editor} title="collapse" icon={FcCollapse} action={()=>{
           onCollapse?.();
         }}/>

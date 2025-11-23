@@ -4,7 +4,7 @@ export const SuggestionItem = ({ item, isSelected, onSelect, id }) => {
   const { icon: Icon, title } = item;
   return (
     <div
-      className={`suggestion-item ${isSelected ? "is-selected" : ""}`}
+      className={`zenmark-suggestion-item ${isSelected ? "is-selected" : ""}`}
       onClick={onSelect}
     >
       <div className="icon-wrapper">
@@ -25,7 +25,7 @@ export const SuggestionPanel = ({ items, selectedIndex, selectItem }) => {
     selectedItem?.scrollIntoView({ block: "nearest" });
   }, [selectedIndex]);
   return (
-    <div className="suggestion-panel" ref={panelRef}>
+    <div className="zenmark-suggestion-panel" ref={panelRef}>
       {items.map((item, index) => (
         <SuggestionItem
           id={index}

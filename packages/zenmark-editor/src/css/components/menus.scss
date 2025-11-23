@@ -53,7 +53,7 @@ $border-radius-base: 0.25rem;
   @include interactive-item;
 }
 
-.suggestion-item {
+.zenmark-suggestion-item {
   @extend .item-base;
   width: 12em;
   flex-grow: 1;
@@ -74,7 +74,7 @@ $border-radius-base: 0.25rem;
   }
 }
 
-.suggestion-panel {
+.zenmark-suggestion-panel {
   @extend .panel-base;
   max-height: 15em;
   overflow-y: auto;
@@ -83,28 +83,28 @@ $border-radius-base: 0.25rem;
   @include custom-scrollbar(4px, hsl(var(--muted)), hsl(var(--muted-foreground) / 0.5), hsl(var(--muted-foreground)));
 }
 
-.bubble-menu {
+.zenmark-bubble-menu {
   @extend .panel-base;
   max-width: 315px;
   flex-direction: row;
   flex-wrap: wrap;
 }
 
-.bubble-menu .menu-item {
+.zenmark-bubble-menu .zenmark-menu-item {
   @extend .item-base;
   margin: 0.1rem;
 }
 
-.bubble-menu .menu-item-select {
+.zenmark-bubble-menu .zenmark-menu-item-select {
   @include accent-active;
 }
 
-.bubble-menu .menu-dropdown {
+.zenmark-bubble-menu .zenmark-menu-dropdown {
   @extend .panel-base;
 }
 
 
-.toolbar {
+.zenmark-toolbar {
   @extend .panel-base;
   border-radius: 0;
   flex-wrap: nowrap;
@@ -113,17 +113,17 @@ $border-radius-base: 0.25rem;
   box-shadow: none;
 }
 
-.toolbar .menu-item {
+.zenmark-toolbar .zenmark-menu-item {
   @extend .item-base;
   margin: 0;
 } 
 
-.sticky-widget .menu-item {
+.zenmark-sticky-widget .zenmark-menu-item {
   @extend .item-base;
   margin: 0;
   border-top-left-radius: 0;
 }
 
-.toolbar .menu-item-select {
+.zenmark-toolbar .zenmark-menu-item-select {
   @include accent-active;
 }

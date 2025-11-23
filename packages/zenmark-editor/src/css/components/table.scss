@@ -1,4 +1,4 @@
-.ProseMirror {
+.zenmark-editor .ProseMirror {
     table {
         border-collapse: collapse;
         margin: 0.5rem 0 0 0;
@@ -53,12 +53,12 @@
     }
 }
 
-.tableWrapper {
+.zenmark-table-wrapper {
     padding: 1rem 0;
     overflow-x: auto;
 }
 
-.resize-cursor {
+.zenmark-resize-cursor {
     cursor: ew-resize;
     cursor: col-resize;
 }
